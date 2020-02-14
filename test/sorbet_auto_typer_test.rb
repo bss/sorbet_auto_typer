@@ -18,6 +18,7 @@ class SorbetAutoTyperTest < Minitest::Test
 
     SorbetAutoTyper.configure do |c|
       c.output_file = File.join(Dir.pwd, 'tmp', "#{SecureRandom.uuid}.sigs")
+      c.filter_path = Dir.pwd
     end
 
     SorbetAutoTyper.start!
@@ -29,10 +30,45 @@ class SorbetAutoTyperTest < Minitest::Test
   def test_invalid_configuration_raises_error
     SorbetAutoTyper.configure do |c|
       c.output_file = nil
+      c.filter_path = nil
     end
 
     assert_raises SorbetAutoTyper::InvalidConfigurationError do
       SorbetAutoTyper.start!
     end
+  end
+
+  sig { void }
+  def test_starting_tracer_twice_raises_error
+    SorbetAutoTyper.configure do |c|
+      c.output_file = File.join(Dir.pwd, 'tmp', "#{SecureRandom.uuid}.sigs")
+      c.filter_path = Dir.pwd
+    end
+
+    SorbetAutoTyper.start!
+
+    assert_raises SorbetAutoTyper::TracerAlreadyRunning do
+      SorbetAutoTyper.start!
+    end
+  end
+
+  sig { void }
+  def test_end_to_end
+    output_file = File.join(Dir.pwd, 'tmp', "#{SecureRandom.uuid}.sigs")
+    SorbetAutoTyper.configure do |c|
+      c.output_file = output_file
+      c.filter_path = Dir.pwd
+    end
+
+    SorbetAutoTyper.start!
+    HelperClass.bar(27)
+    HelperClass.bar
+    HelperClass.new.foo(false)
+    HelperClass.bar(28)
+    HelperClass.new.foo(true)
+    TypedHelperClass.new.method_with_signature # Should not show up below since it's typed
+    SorbetAutoTyper.stop!
+
+    assert_equal File.read(output_file), File.read(File.join(Dir.pwd, 'test', 'fixtures', 'expected_output.sigs'))
   end
 end

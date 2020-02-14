@@ -1,11 +1,18 @@
 # typed: strict
 require 'json'
 
+IOLike = T.type_alias do
+  T.any(
+    IO,
+    StringIO
+  )
+end
+
 module SorbetAutoTyper
   class Tracer
     extend T::Sig
 
-    sig { params(io_writer: StringIO, filter_path: String).void }
+    sig { params(io_writer: IOLike, filter_path: String).void }
     def initialize(io_writer, filter_path='')
       @io_writer = io_writer
       @filter_path = filter_path
@@ -52,6 +59,7 @@ module SorbetAutoTyper
     sig { void }
     def stop!
       trace_point.disable
+      @io_writer.close
     end
 
     private

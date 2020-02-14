@@ -8,18 +8,30 @@ module SorbetAutoTyper
   class Error < StandardError; end
   class MissingConfigurationError < Error; end
   class InvalidConfigurationError < Error; end
+  class TracerAlreadyRunning < Error; end
 
   class << self
     extend T::Sig
 
     sig { void }
     def start!
-      raise MissingConfigurationError.new if config.nil?
-      raise InvalidConfigurationError.new unless T.must(config).valid?
+      raise MissingConfigurationError.new if !@config
+      raise InvalidConfigurationError.new unless @config.valid?
+      raise TracerAlreadyRunning.new unless @current_tracer.nil?
+
+      output_file = File.open(T.must(@config.output_file), 'w')
+
+      @current_tracer = Tracer.new(output_file, T.must(@config.filter_path))
+      @current_tracer.start!
     end
 
     sig { void }
     def stop!
+      @current_tracer = T.let(@current_tracer, T.nilable(Tracer))
+      unless @current_tracer.nil?
+        @current_tracer.stop!
+        @current_tracer = nil
+      end
     end
 
     sig { params(blk: T.proc.params(arg0: Configuration).void).void }
@@ -31,6 +43,7 @@ module SorbetAutoTyper
 
     sig { void }
     def reset!
+      stop!
       @config = nil
     end
 
