@@ -2,6 +2,7 @@
 require 'sorbet-runtime'
 require "sorbet_auto_typer/version"
 require "sorbet_auto_typer/configuration"
+require "sorbet_auto_typer/tracer"
 
 module SorbetAutoTyper
   class Error < StandardError; end
