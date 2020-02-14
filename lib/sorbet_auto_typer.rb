@@ -1,4 +1,4 @@
-# typed: strong
+# typed: strict
 require "sorbet_auto_typer/version"
 
 module SorbetAutoTyper
