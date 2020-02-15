@@ -1,3 +1,5 @@
+# typed: false
+
 module HelperModule
   module Test
     class << self
