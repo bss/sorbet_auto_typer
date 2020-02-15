@@ -1,7 +1,7 @@
 # typed: ignore
 require "test_helper"
 
-class SorbetAutoTyperTest < Minitest::Test
+class TracerTest < Minitest::Test
   extend T::Sig
 
   def parse_tracer_output(output)
