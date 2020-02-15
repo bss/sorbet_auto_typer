@@ -31,23 +31,3 @@ all_files.each do |source_file|
   puts
   puts
 end
-# grouped_traces = traces.group_by(&:method_file)
-
-# grouped_traces.values.each do |single_file_sigs|
-#   source_file = single_file_sigs.first.method.source_location[0]
-#   code = File.read(source_file)
-#   buffer = Parser::Source::Buffer.new('(example)')
-#   buffer.source = code
-
-#   temp = Parser::CurrentRuby.parse(code)
-#   rewriter = SorbetAutoTyper::SourceRewriter.new(single_file_sigs)
-
-#   # Rewrite the AST, returns a String with the new form.
-#   output = rewriter.rewrite(buffer, temp)
-#   puts "---------------------------------------------------"
-#   puts source_file
-#   puts "---------------------------------------------------"
-#   puts output
-#   puts
-#   puts
-# end
