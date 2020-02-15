@@ -6,3 +6,4 @@ require "minitest/autorun"
 
 require 'fixtures/helper_class'
 require 'fixtures/typed_helper_class'
+require 'fixtures/helper_module'

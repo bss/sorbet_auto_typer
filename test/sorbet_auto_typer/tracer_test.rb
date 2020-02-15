@@ -19,6 +19,7 @@ class SorbetAutoTyperTest < Minitest::Test
     HelperClass.bar(28)
     HelperClass.new.foo(true)
     TypedHelperClass.new.method_with_signature # Should not show up below since it's typed
+    HelperModule::Test.foo
     tracer.stop!
 
     expected_output = [
@@ -95,6 +96,21 @@ class SorbetAutoTyperTest < Minitest::Test
         'method_type' => 'instance',
         'method_name' => 'foo',
         'return_class' => 'Integer',
+      },
+
+      {
+        'type' => 'call',
+        'container' => 'HelperModule::Test',
+        'method_type' => 'module',
+        'method_name' => 'foo',
+        'args' => [],
+      },
+      {
+        'type' => 'return',
+        'container' => 'HelperModule::Test',
+        'method_type' => 'module',
+        'method_name' => 'foo',
+        'return_class' => 'String',
       },
     ]
     actual_output = parse_tracer_output(output.string)

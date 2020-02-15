@@ -10,14 +10,14 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "Automatically generate sorbet type signatures based on a test-suite"
   spec.description   = "This let's you automatically type up your codebase using the test-suite of your project."
-  spec.homepage      = "https://github.com/bss/sorbet-auto-typer"
+  spec.homepage      = "https://github.com/bss/sorbet_auto_typer"
   spec.license       = "MIT"
 
   spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/bss/sorbet-auto-typer"
-  spec.metadata["changelog_uri"] = "https://github.com/bss/sorbet-auto-typer/blob/master/CHANGELOG.md"
+  spec.metadata["source_code_uri"] = "https://github.com/bss/sorbet_auto_typer"
+  spec.metadata["changelog_uri"] = "https://github.com/bss/sorbet_auto_typer/blob/master/CHANGELOG.md"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
@@ -27,7 +27,8 @@ Gem::Specification.new do |spec|
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
-  
+
+  spec.add_dependency 'parser', '~> 2.7'
   spec.add_dependency "sorbet-runtime"
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rake", "~> 10.0"

@@ -20,8 +20,19 @@ module SorbetAutoTyper
         next if !trace.path.start_with?(filter_path)
 
         method = trace.self.method(trace.method_id)
-        method_type = method.receiver.is_a?(Class) ? 'class' : 'instance'
-        container = method.receiver.is_a?(Class) ? method.receiver : method.receiver.class
+        method_type = nil
+        container = nil
+        case method.receiver
+        when Class
+          method_type = 'class'
+          container = method.receiver
+        when Module
+          method_type = 'module'
+          container = method.receiver
+        else
+          method_type = 'instance'
+          container = method.receiver.class
+        end
 
         # Skip traces of internal methods
         next if container == self.class
