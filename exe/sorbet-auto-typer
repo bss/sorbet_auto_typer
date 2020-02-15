@@ -9,34 +9,45 @@ require 'parser/current'
 Bundler.require(:default) # Load up everything where this file is being run.
 
 if ARGV.size < 1
-  puts "Usage: bundle exec sorbet-auto-typer [signature_file]"
+  puts "Usage: bundle exec sorbet-auto-typer [trace_file]"
   puts
   puts "Error: not enough arguments"
   Kernel.exit(1)
 end
 
-signature_file = ARGV.first
-signatures = File.readlines(signature_file).map do |l|
+trace_file = ARGV.first
+traces = File.readlines(trace_file).map do |l|
   SorbetAutoTyper::Trace.from_json(JSON.parse(l))
 end
 
-grouped_signatures = signatures.group_by(&:method_file)
+annotator = SorbetAutoTyper::Annotator.new(traces)
 
-grouped_signatures.values.each do |single_file_sigs|
-  source_file = single_file_sigs.first.method.source_location[0]
-  code = File.read(source_file)
-  buffer = Parser::Source::Buffer.new('(example)')
-  buffer.source = code
-
-  temp = Parser::CurrentRuby.parse(code)
-  rewriter = SorbetAutoTyper::SourceRewriter.new(single_file_sigs)
-
-  # Rewrite the AST, returns a String with the new form.
-  output = rewriter.rewrite(buffer, temp)
+all_files = traces.map(&:method_file).uniq
+all_files.each do |source_file|
   puts "---------------------------------------------------"
   puts source_file
   puts "---------------------------------------------------"
-  puts output
+  puts annotator.annotate_file(source_file)
   puts
   puts
 end
+# grouped_traces = traces.group_by(&:method_file)
+
+# grouped_traces.values.each do |single_file_sigs|
+#   source_file = single_file_sigs.first.method.source_location[0]
+#   code = File.read(source_file)
+#   buffer = Parser::Source::Buffer.new('(example)')
+#   buffer.source = code
+
+#   temp = Parser::CurrentRuby.parse(code)
+#   rewriter = SorbetAutoTyper::SourceRewriter.new(single_file_sigs)
+
+#   # Rewrite the AST, returns a String with the new form.
+#   output = rewriter.rewrite(buffer, temp)
+#   puts "---------------------------------------------------"
+#   puts source_file
+#   puts "---------------------------------------------------"
+#   puts output
+#   puts
+#   puts
+# end

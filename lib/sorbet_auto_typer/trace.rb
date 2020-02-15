@@ -29,7 +29,7 @@ module SorbetAutoTyper
       @method_type = T.let(options.fetch('method_type'), String)
     end
 
-    sig { returns(Class) }
+    sig { returns(T.any(Class, Module)) }
     def owner
       if method.owner.singleton_class?
         T.cast(method, Method).receiver.ancestors.find { |a| !(a.singleton_method(@method_name.to_sym) rescue nil).nil? }

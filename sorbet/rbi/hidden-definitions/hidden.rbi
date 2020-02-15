@@ -2581,16 +2581,10 @@ module Parser
   VERSION = ::T.let(nil, ::T.untyped)
 end
 
-module Parser::AST
-end
-
 class Parser::AST::Node
   def loc(); end
 
   def location(); end
-end
-
-class Parser::AST::Node
 end
 
 class Parser::AST::Processor
@@ -2810,9 +2804,6 @@ class Parser::AST::Processor
 end
 
 class Parser::AST::Processor
-end
-
-module Parser::AST
 end
 
 class Parser::Base
@@ -4496,9 +4487,6 @@ class Parser::Ruby26
   Racc_token_to_s_table = ::T.let(nil, ::T.untyped)
 end
 
-class Parser::Ruby26
-end
-
 module Parser::Source
 end
 
@@ -5047,9 +5035,6 @@ class Parser::TreeRewriter
   def wrap(range, before, after); end
 end
 
-class Parser::TreeRewriter
-end
-
 class Parser::VariablesStack
   def declare(name); end
 
@@ -5063,9 +5048,6 @@ class Parser::VariablesStack
 end
 
 class Parser::VariablesStack
-end
-
-module Parser
 end
 
 class Pathname
@@ -6787,6 +6769,11 @@ class Sorbet::Private::TodoRBI
   def self.output_file(); end
 end
 
+class SorbetAutoTyper::Annotator
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+end
+
 class SorbetAutoTyper::Configuration
   extend ::T::Private::Methods::MethodHooks
   extend ::T::Private::Methods::SingletonMethodHooks
@@ -6798,10 +6785,9 @@ class SorbetAutoTyper::Param
 end
 
 class SorbetAutoTyper::SourceRewriter
-  def initialize(signatures); end
-end
-
-class SorbetAutoTyper::SourceRewriter
+  extend ::T::Sig
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
 end
 
 class SorbetAutoTyper::Trace

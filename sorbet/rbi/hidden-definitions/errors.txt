@@ -1554,7 +1554,6 @@
 # uninitialized constant Opus
 # uninitialized constant PP
 # uninitialized constant PP
-# wrong constant name <Class:AST>
 # wrong constant name <Class:Base>
 # wrong constant name <Class:Builders>
 # wrong constant name <Class:ClobberingError>
@@ -1566,17 +1565,12 @@
 # wrong constant name <Class:MaxNumparamStack>
 # wrong constant name <Class:Meta>
 # wrong constant name <Class:Rewriter>
-# wrong constant name <Class:Ruby26>
 # wrong constant name <Class:Source>
 # wrong constant name <Class:StaticEnvironment>
 # wrong constant name <Class:SyntaxError>
-# wrong constant name <Class:TreeRewriter>
 # wrong constant name <Class:VariablesStack>
-# wrong constant name <Class:Node>
-# wrong constant name <Class:Processor>
 # wrong constant name loc
 # wrong constant name location
-# wrong constant name <static-init>
 # wrong constant name on_alias
 # wrong constant name on_and
 # wrong constant name on_and_asgn
@@ -1684,7 +1678,6 @@
 # wrong constant name process_regular_node
 # wrong constant name process_var_asgn_node
 # wrong constant name process_variable_node
-# wrong constant name <static-init>
 # wrong constant name <static-init>
 # undefined method `initialize<defaultArg>1' for class `Parser::Base'
 # Did you mean?  initialize_dup
@@ -2722,7 +2715,6 @@
 # wrong constant name _reduce_none
 # wrong constant name default_encoding
 # wrong constant name version
-# wrong constant name <static-init>
 # wrong constant name <Class:Buffer>
 # wrong constant name <Class:Comment>
 # wrong constant name <Class:Map>
@@ -3031,13 +3023,11 @@
 # wrong constant name replace
 # wrong constant name rewrite
 # wrong constant name wrap
-# wrong constant name <static-init>
 # wrong constant name declare
 # wrong constant name declared?
 # wrong constant name pop
 # wrong constant name push
 # wrong constant name reset
-# wrong constant name <static-init>
 # wrong constant name <static-init>
 # undefined method `children<defaultArg>1' for class `Pathname'
 # undefined method `find<defaultArg>1' for class `Pathname'
@@ -3916,8 +3906,6 @@
 # wrong constant name output_file
 # wrong constant name inherited
 # wrong constant name inherited
-# wrong constant name initialize
-# wrong constant name <static-init>
 # uninitialized constant SortedSet::InspectKey
 # wrong constant name initialize
 # wrong constant name setup

@@ -1,4 +1,4 @@
-# typed: false
+# typed: true
 
 class HelperClass
   def foo(return_a_num)
