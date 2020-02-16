@@ -24,6 +24,7 @@ class AnnotatorTest < Minitest::Test
     HelperModule::Test.bar
     HelperModule::Test.const_in_singleton_class
     HelperModule.empty_array
+    HelperClass::ASelfClass.new.something
     tracer.stop!
     
     traces = trace_data.string.split("\n").map do |l|

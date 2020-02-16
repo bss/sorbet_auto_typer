@@ -22,7 +22,7 @@ module SorbetAutoTyper
 
     sig { params(node: Parser::AST::Node).returns(Parser::AST::Node) }
     def on_class(node)
-      maybe_extend_t_sig(node, (node.children[1] || node.children[0]).loc.name) do
+      maybe_extend_t_sig(node, (node.children[1] || node.children[0]).loc.expression) do
         super
       end
     end

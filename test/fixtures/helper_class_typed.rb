@@ -34,4 +34,13 @@ class HelperClass
 
   class AnotherClass
   end
+
+  class ASelfClass < self
+    extend T::Sig
+
+    sig { returns(T::Array[T.any(Integer, String)]) }
+    def something
+      ['A', 123]
+    end
+  end
 end

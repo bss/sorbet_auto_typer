@@ -27,4 +27,10 @@ class HelperClass
 
   class AnotherClass
   end
+
+  class ASelfClass < self
+    def something
+      ['A', 123]
+    end
+  end
 end
