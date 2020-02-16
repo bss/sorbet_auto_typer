@@ -3,7 +3,7 @@
 class HelperClass
   extend T::Sig
 
-  sig { params(return_a_num: T::Boolean).returns(T.any(String, Integer)) }
+  sig { params(return_a_num: T::Boolean).returns(T.any(Integer, String)) }
   def foo(return_a_num)
     if return_a_num
       1234

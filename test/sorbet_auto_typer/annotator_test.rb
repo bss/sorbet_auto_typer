@@ -17,6 +17,10 @@ class AnnotatorTest < Minitest::Test
     TypedHelperClass.new.method_with_signature # Should not show up below since it's typed
     HelperModule::Test.foo
     HelperClass.blarp
+    HelperModule.hash_tester(['a', 'b', 'c', 'd', 'e'])
+    HelperModule.hash_tester(['lol', 'foo', 45, 'bar', 24], true)
+    HelperModule.range_tester(1..4)
+    HelperModule.range_tester(4..10)
     HelperModule::Test.bar
     tracer.stop!
     

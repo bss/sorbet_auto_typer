@@ -2,10 +2,20 @@
 
 module SorbetAutoTyper
   class MethodTrace < T::Struct
-    class Param < T::Struct
-      const :type, String
-      const :name, String
-      const :value_type, String
+    class Param
+      extend T::Sig
+
+      sig { params(name: String, type: T::Types::Base).void }
+      def initialize(name:, type:)
+        @name = name
+        @type = type
+      end
+
+      sig { returns(String) }
+      attr_reader :name
+
+      sig { returns(T::Types::Base) }
+      attr_reader :type
     end
 
     extend T::Sig
@@ -14,7 +24,7 @@ module SorbetAutoTyper
     const :method_type, String
     const :method_name, String
     const :args, T.nilable(T::Array[Param])
-    const :return_class, T.nilable(String)
+    const :return_class, T.nilable(T::Types::Base)
 
     sig { params(data: T::Hash[String, T.untyped]).returns(MethodTrace) }
     def self.from_json(data)
@@ -24,7 +34,7 @@ module SorbetAutoTyper
           container: Object.const_get(data.fetch('container')),
           method_type: data.fetch('method_type'),
           method_name: data.fetch('method_name'),
-          args: data.fetch('args').map { |a| Param.new(type: a[0], name: a[1], value_type: a[2]) },
+          args: data.fetch('args').map { |a| Param.new(name: a[1], type: sorbet_type_from_json(a[2])) },
           return_class: nil,
         )
       when 'return'
@@ -33,10 +43,32 @@ module SorbetAutoTyper
           method_type: data.fetch('method_type'),
           method_name: data.fetch('method_name'),
           args: nil,
-          return_class: data.fetch('return_class'),
+          return_class: sorbet_type_from_json(data.fetch('return_class')),
         )
       else
         raise ArgumentError, "Invalid type in data: '#{data.fetch('type')}'"
+      end
+    end
+
+    sig { params(data: T::Hash[String, T.untyped]).returns(T::Types::Base) }
+    def self.sorbet_type_from_json(data)
+      type = data.fetch('type')
+      case type
+      when 'Hash'
+        key_type = T::Types::Union.new(data.fetch('key_type').map { |t| sorbet_type_from_json(t) })
+        value_type = T::Types::Union.new(data.fetch('value_type').map { |t| sorbet_type_from_json(t) })
+        T::Types::TypedHash.new(keys: key_type, values: value_type)
+      when 'Range'
+        inner_type = T::Types::Union.new(data.fetch('inner_type').map { |t| sorbet_type_from_json(t) })
+        T::Types::TypedRange.new(inner_type)
+      when 'Array'
+        inner_type = T::Types::Union.new(data.fetch('inner_type').map { |t| sorbet_type_from_json(t) })
+        T::Types::TypedArray.new(inner_type)
+      when 'Set'
+        inner_type = T::Types::Union.new(data.fetch('inner_type').map { |t| sorbet_type_from_json(t) })
+        T::Types::TypedSet.new(inner_type)
+      else
+        T::Types::Simple.new(Object.const_get(type))
       end
     end
 

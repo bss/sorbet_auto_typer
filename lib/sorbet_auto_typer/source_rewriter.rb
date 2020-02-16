@@ -56,7 +56,7 @@ module SorbetAutoTyper
       if traces.size > 0
         args = traces.select(&:params?).flat_map(&:args)
         args_sigs = args.group_by(&:name).map do |arg_name, sigs|
-          [arg_name.to_s, classes_to_rbi_sig(sigs.map(&:value_type).uniq)]
+          [arg_name.to_s, T::Types::Union.new(sigs.map(&:type)).name]
         end
 
         params_sig = nil
@@ -65,13 +65,8 @@ module SorbetAutoTyper
           params_sig = "params(#{sig_str})"
         end
 
-        return_klasses = traces.select(&:return?).map(&:return_class).uniq
-        return_sig = classes_to_rbi_sig(return_klasses)
-        if return_sig.nil? || return_sig == 'NilClass'
-          return_sig = 'void'
-        else
-          return_sig = "returns(#{return_sig})"
-        end
+        return_type = T::Types::Union.new(traces.select(&:return?).map(&:return_class))
+        return_sig = "returns(#{return_type.name})"
 
         rbi_sig = [params_sig, return_sig].compact.join('.')
 
@@ -104,22 +99,6 @@ module SorbetAutoTyper
     def traces_for(method_name, in_sclass)
       types_to_look_for = in_sclass ? ['class', 'module'] : ['instance']
       @traces.select { |s| s.method_name == method_name.to_s && types_to_look_for.include?(s.method_type) }
-    end
-
-    def classes_to_rbi_sig(klasses)
-      klasses = klasses.map do |kls|
-        (kls == 'TrueClass' || kls == 'FalseClass') ? 'T::Boolean' : kls
-      end.uniq
-      if klasses.size == 0
-        nil
-      elsif klasses.size == 1
-        klasses.first.to_s
-      elsif klasses.include?('NilClass')
-        inner_sig = classes_to_rbi_sig(klasses.reject { |k| k == 'NilClass'})
-        "T.nilable(#{inner_sig})"
-      else
-        "T.any(#{klasses.map(&:to_s).join(', ')})"
-      end
     end
   end
 end

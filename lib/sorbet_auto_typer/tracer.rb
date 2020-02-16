@@ -46,7 +46,7 @@ module SorbetAutoTyper
             container: container,
             method_type: method_type,
             method_name: trace.method_id,
-            args: trace.parameters.map { |(type, name)| [type, name, trace.binding.eval(name.to_s).class.to_s] },
+            args: trace.parameters.map { |(type, name)| [type, name, type_from_value(trace.binding.eval(name.to_s))] },
           }
           @io_writer.puts(JSON.generate(data))
         elsif trace.event == :return
@@ -55,7 +55,7 @@ module SorbetAutoTyper
             container: container,
             method_type: method_type,
             method_name: trace.method_id,
-            return_class: trace.return_value.class,
+            return_class: type_from_value(trace.return_value),
           }
           @io_writer.puts(JSON.generate(data))
         end
@@ -74,6 +74,22 @@ module SorbetAutoTyper
     end
 
     private
+
+    sig { params(value: Object).returns(T::Hash[Symbol, T.untyped]) }
+    def type_from_value(value)
+      case value
+      when Hash
+        {
+          type: value.class.to_s,
+          key_type: value.keys.first(100).map { |v| type_from_value(v) }.uniq,
+          value_type: value.values.first(100).map { |v| type_from_value(v) }.uniq,
+        }
+      when Range, Array, Set
+        { type: value.class.to_s, inner_type: T.must(value.first(100)).map { |v| type_from_value(v) }.uniq }
+      else
+        { type: value.class.to_s }
+      end
+    end
 
     sig { returns(TracePoint) }
     attr_reader :trace_point

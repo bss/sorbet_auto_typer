@@ -67,6 +67,13 @@ class SorbetAutoTyperTest < Minitest::Test
     HelperClass.bar(28)
     HelperClass.new.foo(true)
     TypedHelperClass.new.method_with_signature # Should not show up below since it's typed
+    HelperModule::Test.foo
+    HelperClass.blarp
+    HelperModule.hash_tester(['a', 'b', 'c', 'd', 'e'])
+    HelperModule.hash_tester(['lol', 'foo', 45, 'bar', 24], true)
+    HelperModule.range_tester(1..4)
+    HelperModule.range_tester(4..10)
+    HelperModule::Test.bar
     SorbetAutoTyper.stop!
 
     assert_equal File.read(output_file), File.read(File.join(Dir.pwd, 'test', 'fixtures', 'expected_output.sigs'))
