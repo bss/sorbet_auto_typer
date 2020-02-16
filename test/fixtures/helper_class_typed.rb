@@ -12,6 +12,7 @@ class HelperClass
     end
   end
 
+  sig { params(num: T.any(Integer, NilClass)).returns(T.any(Float, NilClass, String)) }
   def self.bar(num=nil)
     if num.nil?
       nil

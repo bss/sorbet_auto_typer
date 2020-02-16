@@ -9,14 +9,14 @@ class AnnotatorTest < Minitest::Test
     trace_data = StringIO.new
     tracer = SorbetAutoTyper::Tracer.new(trace_data, filter_path=Dir.pwd)
     tracer.start!
-    # HelperClass.bar(27)
-    # HelperClass.bar
-    # HelperClass.new.foo(false)
-    # HelperClass.bar(28)
-    # HelperClass.new.foo(true)
+    HelperClass.bar(27)
+    HelperClass.bar
+    HelperClass.new.foo(false)
+    HelperClass.bar(28)
+    HelperClass.new.foo(true)
     TypedHelperClass.new.method_with_signature # Should not show up below since it's typed
     HelperModule::Test.foo
-    # HelperClass.blarp
+    HelperClass.blarp
     HelperModule::Test.bar
     tracer.stop!
     
