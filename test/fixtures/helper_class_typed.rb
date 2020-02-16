@@ -3,7 +3,7 @@
 class HelperClass
   extend T::Sig
 
-  sig { params(return_a_num: T.any(FalseClass, TrueClass)).returns(T.any(String, Integer)) }
+  sig { params(return_a_num: T::Boolean).returns(T.any(String, Integer)) }
   def foo(return_a_num)
     if return_a_num
       1234
@@ -12,7 +12,7 @@ class HelperClass
     end
   end
 
-  sig { params(num: T.any(Integer, NilClass)).returns(T.any(Float, NilClass, String)) }
+  sig { params(num: T.nilable(Integer)).returns(T.nilable(T.any(Float, String))) }
   def self.bar(num=nil)
     if num.nil?
       nil
