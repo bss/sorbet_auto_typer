@@ -55,18 +55,23 @@ module SorbetAutoTyper
       type = data.fetch('type')
       case type
       when 'Hash'
-        key_type = T::Types::Union.new(data.fetch('key_type').map { |t| sorbet_type_from_json(t) })
-        value_type = T::Types::Union.new(data.fetch('value_type').map { |t| sorbet_type_from_json(t) })
-        T::Types::TypedHash.new(keys: key_type, values: value_type)
+        key_types = data.fetch('key_type').map { |t| sorbet_type_from_json(t) }
+        key_types = [T.untyped] if key_types.empty?
+        value_types = data.fetch('value_type').map { |t| sorbet_type_from_json(t) }
+        value_types = [T.untyped] if value_types.empty?
+        T::Types::TypedHash.new(keys: T::Types::Union.new(key_types), values: T::Types::Union.new(value_types))
       when 'Range'
-        inner_type = T::Types::Union.new(data.fetch('inner_type').map { |t| sorbet_type_from_json(t) })
-        T::Types::TypedRange.new(inner_type)
+        inner_types = data.fetch('inner_type').map { |t| sorbet_type_from_json(t) }
+        inner_types = [T.untyped] if inner_types.empty?
+        T::Types::TypedRange.new(T::Types::Union.new(inner_types))
       when 'Array'
-        inner_type = T::Types::Union.new(data.fetch('inner_type').map { |t| sorbet_type_from_json(t) })
-        T::Types::TypedArray.new(inner_type)
+        inner_types = data.fetch('inner_type').map { |t| sorbet_type_from_json(t) }
+        inner_types = [T.untyped] if inner_types.empty?
+        T::Types::TypedArray.new(T::Types::Union.new(inner_types))
       when 'Set'
-        inner_type = T::Types::Union.new(data.fetch('inner_type').map { |t| sorbet_type_from_json(t) })
-        T::Types::TypedSet.new(inner_type)
+        inner_types = data.fetch('inner_type').map { |t| sorbet_type_from_json(t) }
+        inner_types = [T.untyped] if inner_types.empty?
+        T::Types::TypedSet.new(T::Types::Union.new(inner_types))
       else
         begin
           T::Types::Simple.new(Object.const_get(type))

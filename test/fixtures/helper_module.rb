@@ -35,4 +35,8 @@ module HelperModule
       Set.new([4,'5',6,6])
     end
   end
+
+  def self.empty_array
+    []
+  end
 end

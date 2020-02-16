@@ -46,4 +46,9 @@ module HelperModule
       Set.new([4,'5',6,6])
     end
   end
+
+  sig { returns(T::Array[T.untyped]) }
+  def self.empty_array
+    []
+  end
 end

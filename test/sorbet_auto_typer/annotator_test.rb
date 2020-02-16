@@ -23,6 +23,7 @@ class AnnotatorTest < Minitest::Test
     HelperModule.range_tester(4..10)
     HelperModule::Test.bar
     HelperModule::Test.const_in_singleton_class
+    HelperModule.empty_array
     tracer.stop!
     
     traces = trace_data.string.split("\n").map do |l|
