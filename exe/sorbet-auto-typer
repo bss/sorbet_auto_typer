@@ -16,8 +16,14 @@ if ARGV.size < 1
 end
 
 trace_file = ARGV.first
-traces = File.readlines(trace_file).map do |l|
-  SorbetAutoTyper::MethodTrace.from_trace_line(l)
+uniq_trace_lines = Set.new()
+
+File.foreach(trace_file) do |line|
+  uniq_trace_lines << line
+end
+
+traces = uniq_trace_lines.map do |l|
+  SorbetAutoTyper::MethodTrace.from_trace_line(l.strip)
 end
 
 annotator = SorbetAutoTyper::Annotator.new(traces)
