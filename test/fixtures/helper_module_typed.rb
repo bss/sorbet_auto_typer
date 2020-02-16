@@ -14,6 +14,13 @@ module HelperModule
       def foo
         'test'
       end
+
+      sig { returns(T.untyped) }
+      def const_in_singleton_class
+        PrivateClass.new
+      end
+
+      class PrivateClass; end
     end
 
     sig { returns(NilClass) }

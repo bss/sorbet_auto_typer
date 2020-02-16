@@ -7,6 +7,12 @@ module HelperModule
       def foo
         'test'
       end
+
+      def const_in_singleton_class
+        PrivateClass.new
+      end
+
+      class PrivateClass; end
     end
 
     def self.bar

@@ -68,7 +68,11 @@ module SorbetAutoTyper
         inner_type = T::Types::Union.new(data.fetch('inner_type').map { |t| sorbet_type_from_json(t) })
         T::Types::TypedSet.new(inner_type)
       else
-        T::Types::Simple.new(Object.const_get(type))
+        begin
+          T::Types::Simple.new(Object.const_get(type))
+        rescue NameError
+          T.untyped
+        end
       end
     end
 
