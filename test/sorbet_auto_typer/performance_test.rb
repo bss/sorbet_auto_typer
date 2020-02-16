@@ -2,7 +2,6 @@
 require "test_helper"
 require 'securerandom'
 require 'benchmark'
-require 'ruby-prof'
 
 class SorbetAutoTyperTest < Minitest::Test
   extend T::Sig
