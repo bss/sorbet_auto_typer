@@ -6,39 +6,52 @@ module SorbetAutoTyper
   class SourceRewriter < Parser::TreeRewriter
     extend T::Sig
 
-    sig { params(traces: T::Array[Trace]).void }
+    sig { params(traces: T::Array[MethodTrace]).void }
     def initialize(traces)
       @traces = traces
       @in_sclass = T.let(false, T::Boolean)
+      @signature_counter = 0
     end
 
     sig { params(node: Parser::AST::Node).returns(Parser::AST::Node) }
     def on_module(node)
-      indent = ' ' * (node.loc.column+2)
-      insert_after(node.loc.name, "\n#{indent}extends T::Sig\n")
-      super
+      maybe_extend_t_sig(node, node.children[0].loc.name) do
+        super
+      end
     end
 
     sig { params(node: Parser::AST::Node).returns(Parser::AST::Node) }
     def on_class(node)
-      if @traces.map(&:owner).uniq.any? { |kls| node.children[0] == Parser::CurrentRuby.parse(kls.to_s) }
-        indent = ' ' * (node.loc.column+2)
-        insert_after((node.children[1] || node.children[0]).loc.name, "\n#{indent}extends T::Sig\n")
+      maybe_extend_t_sig(node, (node.children[1] || node.children[0]).loc.name) do
+        super
       end
-      super
     end
 
     sig { params(node: Parser::AST::Node).returns(Parser::AST::Node) }
     def on_sclass(node)
-      @in_sclass = true
-      out = super
-      @in_sclass = false
-      out
+      maybe_extend_t_sig(node, node.children[0].loc.expression) do
+        in_sclass do
+          super
+        end
+      end
     end
 
     sig { params(node: Parser::AST::Node).returns(Parser::AST::Node) }
     def on_def(node)
-      method_name = node.children[0]
+      insert_signature_for_method(node.children[0], node)
+      super
+    end
+
+    def on_defs(node)
+      in_sclass do
+        insert_signature_for_method(node.children[1], node)
+        super
+      end
+    end
+
+    private
+
+    def insert_signature_for_method(method_name, node)
       traces = traces_for(method_name, @in_sclass)
       if traces.size > 0
         args = traces.select(&:params?).flat_map(&:args)
@@ -52,7 +65,7 @@ module SorbetAutoTyper
           params_sig = "params(#{sig_str})"
         end
 
-        return_klasses = traces.select(&:return?).map(&:return_kls).uniq
+        return_klasses = traces.select(&:return?).map(&:return_class).uniq
         return_sig = classes_to_returns_rbi(return_klasses)
         return_sig = return_sig != 'void' ? "returns(#{return_sig})" : return_sig
 
@@ -61,19 +74,32 @@ module SorbetAutoTyper
         sig_indent = ' ' * (node.loc.column/2)
         indent = ' ' * node.loc.column
         insert_before(node.loc.expression, "sig { #{rbi_sig} }\n#{indent}")
+
+        @signature_counter += 1
       end
-      super
     end
 
-    # def on_defs(node)
-    #   binding.pry
-    #   node
-    # end
+    def in_sclass
+      @in_sclass = true
+      out = yield
+      @in_sclass = false
+      out
+    end
 
-    private
+    def maybe_extend_t_sig(node, location)
+      sig_counter_before = @signature_counter
+      out = yield
+      if @signature_counter > sig_counter_before
+        indent = ' ' * (node.loc.column+2)
+        insert_after(location, "\n#{indent}extend T::Sig\n")
+        @signature_counter = sig_counter_before
+      end
+      out
+    end
+
     def traces_for(method_name, in_sclass)
-      type_to_look_for = in_sclass ? 'class' : 'instance'
-      @traces.select { |s| s.method_name == method_name.to_s && s.method_type == type_to_look_for }
+      types_to_look_for = in_sclass ? ['class', 'module'] : ['instance']
+      @traces.select { |s| s.method_name == method_name.to_s && types_to_look_for.include?(s.method_type) }
     end
 
     def classes_to_returns_rbi(klasses)
@@ -98,7 +124,7 @@ module SorbetAutoTyper
         inner_sig = classes_to_rbi_sig(klasses.reject { |k| k == NilClass})
         "T.nilable(#{inner_sig})"
       else
-        "T.any(#{klasses.map(&:to_s)}.join(', ')})"
+        "T.any(#{klasses.map(&:to_s).join(', ')})"
       end
     end
   end

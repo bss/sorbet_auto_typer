@@ -2,6 +2,8 @@
 $LOAD_PATH.unshift File.expand_path("../lib", __dir__)
 require "sorbet_auto_typer"
 
+require 'pry'
+
 require "minitest/autorun"
 
 require 'fixtures/helper_class'

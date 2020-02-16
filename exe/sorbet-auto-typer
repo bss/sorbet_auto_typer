@@ -17,7 +17,7 @@ end
 
 trace_file = ARGV.first
 traces = File.readlines(trace_file).map do |l|
-  SorbetAutoTyper::Trace.from_json(JSON.parse(l))
+  SorbetAutoTyper::MethodTrace.from_json(JSON.parse(l))
 end
 
 annotator = SorbetAutoTyper::Annotator.new(traces)

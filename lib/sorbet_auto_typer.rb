@@ -3,7 +3,7 @@ require 'sorbet-runtime'
 require "sorbet_auto_typer/version"
 require "sorbet_auto_typer/configuration"
 require "sorbet_auto_typer/tracer"
-require "sorbet_auto_typer/trace"
+require "sorbet_auto_typer/method_trace"
 require "sorbet_auto_typer/source_rewriter"
 require "sorbet_auto_typer/annotator"
 

@@ -3,9 +3,9 @@ module SorbetAutoTyper
   class Annotator
     extend T::Sig
 
-    sig { params(traces: T::Array[Trace]).void }
+    sig { params(traces: T::Array[MethodTrace]).void }
     def initialize(traces)
-      @traces = T.let(traces.group_by(&:method_file), T::Hash[String, T::Array[Trace]])
+      @traces = T.let(traces.group_by { |t| t.method_file }, T::Hash[String, T::Array[MethodTrace]])
     end
 
     sig { params(source_file: String).returns(String) }
@@ -22,7 +22,7 @@ module SorbetAutoTyper
     end
 
     private
-    sig { returns(T::Hash[String, T::Array[Trace]]) }
+    sig { returns(T::Hash[String, T::Array[MethodTrace]]) }
     attr_reader :traces
   end
 end
