@@ -1,73 +1,37 @@
-# typed: strict
+# frozen_string_literal: true
+# typed: false
 require 'json'
 
 module SorbetAutoTyper
   class Tracer
-    extend T::Sig
+    METHOD_TYPE_INSTANCE = 'instance'
+    METHOD_TYPE_CLASS = 'class'
+    METHOD_TYPE_MODULE = 'module'
+    OUTPUT_TYPE_CALL = 'C'
+    OUTPUT_TYPE_RETURN = 'R'
+    OUTPUT_DELIMITER = '|'
+    OUTPUT_TYPE_INNER_LEFT = '('
+    OUTPUT_TYPE_INNER_RIGHT = ')'
+    OUTPUT_TYPE_DELIMITER = ';'
+    OUTPUT_TYPE_DEFAULT = 'D'
+    OUTPUT_TYPE_ARRAY = 'A'
+    OUTPUT_TYPE_RANGE = 'R'
+    OUTPUT_TYPE_SET = 'S'
+    OUTPUT_TYPE_HASH = 'H'
 
-    IOLike = T.type_alias do
-      T.any(
-        IO,
-        StringIO
-      )
-    end
-
-    sig { params(io_writer: IOLike, filter_path: String).void }
     def initialize(io_writer, filter_path='')
       @io_writer = io_writer
+      @io_writer.sync = false
       @filter_path = filter_path
-      @trace_point = T.let(TracePoint.new(:call, :return) do |trace|
-        next if !trace.path.start_with?(filter_path)
-
-        method = trace.self.method(trace.method_id)
-        method_type = nil
-        container = nil
-        case method.receiver
-        when Class
-          method_type = 'class'
-          container = method.receiver
-        when Module
-          method_type = 'module'
-          container = method.receiver
-        else
-          method_type = 'instance'
-          container = method.receiver.class
-        end
-
-        # Skip traces of internal methods
-        next if container == self.class
-
-        # Skip if we already got a signature
-        next if T::Utils.signature_for_instance_method(method.owner, trace.method_id)
-
-        if trace.event == :call
-          data = {
-            type: 'call',
-            container: container,
-            method_type: method_type,
-            method_name: trace.method_id,
-            args: trace.parameters.map { |(type, name)| [type, name, type_from_value(trace.binding.eval(name.to_s))] },
-          }
-          @io_writer.puts(JSON.generate(data))
-        elsif trace.event == :return
-          data = {
-            type: 'return',
-            container: container,
-            method_type: method_type,
-            method_name: trace.method_id,
-            return_class: type_from_value(trace.return_value),
-          }
-          @io_writer.puts(JSON.generate(data))
-        end
-      end, TracePoint)
+      @trace_point = TracePoint.new(:call, :return) do |trace|
+        handle_trace(trace)
+      end
     end
 
-    sig { void }
     def start!
       trace_point.enable
     end
 
-    sig { void }
     def stop!
       trace_point.disable
       @io_writer.close
@@ -75,23 +39,104 @@ module SorbetAutoTyper
 
     private
 
-    sig { params(value: Object).returns(T::Hash[Symbol, T.untyped]) }
-    def type_from_value(value)
-      case value
-      when Hash
-        {
-          type: value.class.to_s,
-          key_type: value.keys.first(100).map { |v| type_from_value(v) }.uniq,
-          value_type: value.values.first(100).map { |v| type_from_value(v) }.uniq,
-        }
-      when Range, Array, Set
-        { type: value.class.to_s, inner_type: T.must(value.first(100)).map { |v| type_from_value(v) }.uniq }
+    def handle_trace(trace)
+      return if !trace.path.start_with?(@filter_path)
+
+      method = trace.self.method(trace.method_id)
+
+      # Skip if we already got a signature
+      return unless method.source_location.first.start_with?(@filter_path)
+
+      method_type = nil
+      container = nil
+      case method.receiver
+      when Class, Module
+        method_type = METHOD_TYPE_CLASS
+        container = method.receiver
       else
-        { type: value.class.to_s }
+        method_type = METHOD_TYPE_INSTANCE
+        container = method.receiver.class
+      end
+
+      # Skip traces of internal methods
+      return if container == self.class
+
+      if trace.event == :call
+        @io_writer.write(OUTPUT_TYPE_CALL)
+        @io_writer.write(OUTPUT_DELIMITER)
+        @io_writer.write(container.to_s)
+        @io_writer.write(OUTPUT_DELIMITER)
+        @io_writer.write(method_type.to_s)
+        @io_writer.write(OUTPUT_DELIMITER)
+        @io_writer.write(trace.method_id.to_s)
+        trace.parameters.each do |(_type, name)|
+          @io_writer.write(OUTPUT_DELIMITER)
+          @io_writer.write(name)
+          @io_writer.write(OUTPUT_DELIMITER)
+          @io_writer.write(type_from_value(trace.binding.eval(name.to_s)))
+        end
+        @io_writer.write("\n")
+      elsif trace.event == :return
+        @io_writer.write(OUTPUT_TYPE_RETURN)
+        @io_writer.write(OUTPUT_DELIMITER)
+        @io_writer.write(container.to_s)
+        @io_writer.write(OUTPUT_DELIMITER)
+        @io_writer.write(method_type.to_s)
+        @io_writer.write(OUTPUT_DELIMITER)
+        @io_writer.write(trace.method_id.to_s)
+        @io_writer.write(OUTPUT_DELIMITER)
+        @io_writer.write(type_from_value(trace.return_value))
+        @io_writer.write("\n")
       end
     end
 
-    sig { returns(TracePoint) }
+    def type_from_value(value)
+      case value
+      when Hash
+        "".dup.concat(
+          OUTPUT_TYPE_HASH,
+          OUTPUT_TYPE_DELIMITER,
+          OUTPUT_TYPE_INNER_LEFT,
+          value.keys.first(10).map { |v| type_from_value(v) }.uniq.join(OUTPUT_TYPE_DELIMITER),
+          OUTPUT_TYPE_INNER_RIGHT,
+          OUTPUT_TYPE_DELIMITER,
+          OUTPUT_TYPE_INNER_LEFT,
+          value.values.first(10).map { |v| type_from_value(v) }.uniq.join(OUTPUT_TYPE_DELIMITER),
+          OUTPUT_TYPE_INNER_RIGHT,
+        )
+      when Range
+        "".dup.concat(
+          OUTPUT_TYPE_RANGE,
+          OUTPUT_TYPE_DELIMITER,
+          OUTPUT_TYPE_INNER_LEFT,
+          value.first(10).map { |v| type_from_value(v) }.uniq.join(OUTPUT_TYPE_DELIMITER),
+          OUTPUT_TYPE_INNER_RIGHT,
+        )
+      when Array
+        "".dup.concat(
+          OUTPUT_TYPE_ARRAY,
+          OUTPUT_TYPE_DELIMITER,
+          OUTPUT_TYPE_INNER_LEFT,
+          value.first(10).map { |v| type_from_value(v) }.uniq.join(OUTPUT_TYPE_DELIMITER),
+          OUTPUT_TYPE_INNER_RIGHT,
+        )
+      when Set
+        "".dup.concat(
+          OUTPUT_TYPE_SET,
+          OUTPUT_TYPE_DELIMITER,
+          OUTPUT_TYPE_INNER_LEFT,
+          value.first(10).map { |v| type_from_value(v) }.uniq.join(OUTPUT_TYPE_DELIMITER),
+          OUTPUT_TYPE_INNER_RIGHT,
+        )
+      else
+        "".dup.concat(
+          OUTPUT_TYPE_DEFAULT,
+          OUTPUT_TYPE_DELIMITER,
+          value.class.to_s,
+        )
+      end
+    end
+
     attr_reader :trace_point
   end
 end

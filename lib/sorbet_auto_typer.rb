@@ -1,4 +1,4 @@
-# typed: strong
+# typed: ignore
 require 'sorbet-runtime'
 require "sorbet_auto_typer/version"
 require "sorbet_auto_typer/configuration"

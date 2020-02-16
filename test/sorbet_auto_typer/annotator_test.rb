@@ -27,7 +27,7 @@ class AnnotatorTest < Minitest::Test
     tracer.stop!
     
     traces = trace_data.string.split("\n").map do |l|
-      SorbetAutoTyper::MethodTrace.from_json(JSON.parse(l))
+      SorbetAutoTyper::MethodTrace.from_trace_line(l)
     end
     
     annotator = SorbetAutoTyper::Annotator.new(traces)

@@ -97,8 +97,8 @@ module SorbetAutoTyper
     end
 
     def traces_for(method_name, in_sclass)
-      types_to_look_for = in_sclass ? ['class', 'module'] : ['instance']
-      @traces.select { |s| s.method_name == method_name.to_s && types_to_look_for.include?(s.method_type) }
+      type_to_look_for = in_sclass ? 'class' : 'instance'
+      @traces.select { |s| s.method_name == method_name.to_s && s.method_type == type_to_look_for }
     end
   end
 end

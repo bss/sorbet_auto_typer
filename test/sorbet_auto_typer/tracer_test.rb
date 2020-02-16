@@ -4,10 +4,6 @@ require "test_helper"
 class TracerTest < Minitest::Test
   extend T::Sig
 
-  def parse_tracer_output(output)
-    output.split("\n").map { |o| JSON.parse(o) }
-  end
-
   sig { void }
   def test_tracer_traces_method_calls
     output = StringIO.new
@@ -23,92 +19,20 @@ class TracerTest < Minitest::Test
     tracer.stop!
 
     expected_output = [
-      {
-        'type' => 'call',
-        'container' => 'HelperClass',
-        'method_type' => 'class',
-        'method_name' => 'bar',
-        'args' => [['opt', 'num', {'type' => 'Integer'}]],
-      },
-      {
-        'type' => 'return',
-        'container' => 'HelperClass',
-        'method_type' => 'class',
-        'method_name' => 'bar',
-        'return_class' => {'type' => 'Float'},
-      },
-      {
-        'type' => 'call',
-        'container' => 'HelperClass',
-        'method_type' => 'class',
-        'method_name' => 'bar',
-        'args' => [['opt', 'num', {'type' => 'NilClass'}]],
-      },
-      {
-        'type' => 'return',
-        'container' => 'HelperClass',
-        'method_type' => 'class',
-        'method_name' => 'bar',
-        'return_class' => {'type' => 'NilClass'},
-      },
-      {
-        'type' => 'call',
-        'container' => 'HelperClass',
-        'method_type' => 'instance',
-        'method_name' => 'foo',
-        'args' => [['req', 'return_a_num', {'type' => 'FalseClass'}]],
-      },
-      {
-        'type' => 'return',
-        'container' => 'HelperClass',
-        'method_type' => 'instance',
-        'method_name' => 'foo',
-        'return_class' => {'type' => 'String'},
-      },
-      {
-        'type' => 'call',
-        'container' => 'HelperClass',
-        'method_type' => 'class',
-        'method_name' => 'bar',
-        'args' => [['opt', 'num', {'type' => 'Integer'}]],
-      },
-      {
-        'type' => 'return',
-        'container' => 'HelperClass',
-        'method_type' => 'class',
-        'method_name' => 'bar',
-        'return_class' => {'type' => 'String'},
-      },
-      {
-        'type' => 'call',
-        'container' => 'HelperClass',
-        'method_type' => 'instance',
-        'method_name' => 'foo',
-        'args' => [['req', 'return_a_num', {'type' => 'TrueClass'}]],
-      },
-      {
-        'type' => 'return',
-        'container' => 'HelperClass',
-        'method_type' => 'instance',
-        'method_name' => 'foo',
-        'return_class' => {'type' => 'Integer'},
-      },
-      {
-        'type' => 'call',
-        'container' => 'HelperModule::Test',
-        'method_type' => 'module',
-        'method_name' => 'foo',
-        'args' => [],
-      },
-      {
-        'type' => 'return',
-        'container' => 'HelperModule::Test',
-        'method_type' => 'module',
-        'method_name' => 'foo',
-        'return_class' => {'type' => 'String'},
-      },
+      "C|HelperClass|class|bar|num|D;Integer",
+      "R|HelperClass|class|bar|D;Float",
+      "C|HelperClass|class|bar|num|D;NilClass",
+      "R|HelperClass|class|bar|D;NilClass",
+      "C|HelperClass|instance|foo|return_a_num|D;FalseClass",
+      "R|HelperClass|instance|foo|D;String",
+      "C|HelperClass|class|bar|num|D;Integer",
+      "R|HelperClass|class|bar|D;String",
+      "C|HelperClass|instance|foo|return_a_num|D;TrueClass",
+      "R|HelperClass|instance|foo|D;Integer",
+      "C|HelperModule::Test|class|foo",
+      "R|HelperModule::Test|class|foo|D;String",
     ]
-    actual_output = parse_tracer_output(output.string)
+    actual_output = output.string.split("\n")
     assert_equal expected_output, actual_output
   end
 end
