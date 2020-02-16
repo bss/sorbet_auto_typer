@@ -49,7 +49,7 @@ module SorbetAutoTyper
       end
     end
 
-    # sig { returns(String) }
+    sig { returns(String) }
     def method_file
       method.source_location.first
     end
