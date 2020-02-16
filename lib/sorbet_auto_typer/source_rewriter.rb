@@ -66,8 +66,12 @@ module SorbetAutoTyper
         end
 
         return_klasses = traces.select(&:return?).map(&:return_class).uniq
-        return_sig = classes_to_returns_rbi(return_klasses)
-        return_sig = return_sig != 'void' ? "returns(#{return_sig})" : return_sig
+        return_sig = classes_to_rbi_sig(return_klasses)
+        if return_sig.nil? || return_sig == 'NilClass'
+          return_sig = 'void'
+        else
+          return_sig = "returns(#{return_sig})"
+        end
 
         rbi_sig = [params_sig, return_sig].compact.join('.')
 
@@ -102,26 +106,16 @@ module SorbetAutoTyper
       @traces.select { |s| s.method_name == method_name.to_s && types_to_look_for.include?(s.method_type) }
     end
 
-    def classes_to_returns_rbi(klasses)
-      if klasses.size == 0 || (klasses.size == 1 && klasses.first == NilClass)
-        'void'
-      else
-        classes_to_rbi_sig(klasses)
-      end
-    end
-  
     def classes_to_rbi_sig(klasses)
       klasses = klasses.map do |kls|
-        (kls == TrueClass || kls == FalseClass) ? T::Boolean : kls
+        (kls == 'TrueClass' || kls == 'FalseClass') ? 'T::Boolean' : kls
       end.uniq
       if klasses.size == 0
         nil
       elsif klasses.size == 1
         klasses.first.to_s
-      elsif klasses.size == 2 && klasses.include?(TrueClass) && klasses.include?(FalseClass)
-        'T::Boolean'
-      elsif klasses.include?(NilClass)
-        inner_sig = classes_to_rbi_sig(klasses.reject { |k| k == NilClass})
+      elsif klasses.include?('NilClass')
+        inner_sig = classes_to_rbi_sig(klasses.reject { |k| k == 'NilClass'})
         "T.nilable(#{inner_sig})"
       else
         "T.any(#{klasses.map(&:to_s).join(', ')})"
