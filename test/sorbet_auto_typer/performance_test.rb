@@ -6,7 +6,7 @@ require 'benchmark'
 class SorbetAutoTyperTest < Minitest::Test
   extend T::Sig
 
-  TOTAL_TRACE_COUNT = 100_000
+  TOTAL_TRACE_COUNT = 1_000_000
 
   sig { void }
   def setup
@@ -44,6 +44,6 @@ class SorbetAutoTyperTest < Minitest::Test
 
     line_count = `wc -l #{output_file}`.strip.split(" ").first.to_i
     assert_equal(TOTAL_TRACE_COUNT, line_count)
-    assert_in_delta(1.0, t.total, 0.5)
+    assert_in_delta(8.0, t.total, 0.5)
   end
 end
