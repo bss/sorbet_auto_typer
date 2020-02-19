@@ -1,17 +1,60 @@
 #!/usr/bin/env ruby
-require 'json'
-require 'pry'
-require "bundler/setup"
-require 'sorbet_auto_typer'
+require 'getoptlong'
+require 'bundler/setup'
 require 'parser'
 require 'parser/current'
 
-Bundler.require(:default) # Load up everything where this file is being run.
+require 'diff-lcs'
+
+require 'sorbet_auto_typer'
+
+# Load up everything where this file is being run.
+Bundler.require(:default)
+
+LOOK_BEFORE = 1
+LOOK_AFTER = 1
+
+def print_help
+  puts <<-EOF
+#{File.basename($0)} [OPTIONS] ... SIGNATURE_FILE
+
+-h, --help:
+   show help
+
+--dry, -d:
+   do not overwrite files, only display desired changes
+
+--verbose, -v:
+   more verbose output
+
+SIGNATURE_FILE: Signature file to use for auto-generated types
+  EOF
+end
+
+opts = GetoptLong.new(
+  [ '--help', '-h', GetoptLong::NO_ARGUMENT ],
+  [ '--dry', '-d', GetoptLong::NO_ARGUMENT ],
+  [ '--verbose', '-v', GetoptLong::NO_ARGUMENT ],
+)
+
+dry_run = false
+verbose = false
+opts.each do |opt, arg|
+  case opt
+    when '--help'
+      print_help
+      Kernel.exit(0)
+    when '--dry'
+      dry_run = true
+    when '--verbose'
+      verbose = true
+  end
+end
 
 if ARGV.size < 1
-  puts "Usage: bundle exec sorbet-auto-typer [trace_file]"
+  puts "Error: Please provide a SIGNATURE_FILE."
   puts
-  puts "Error: not enough arguments"
+  print_help
   Kernel.exit(1)
 end
 
@@ -24,16 +67,40 @@ end
 
 traces = uniq_trace_lines.map do |l|
   SorbetAutoTyper::MethodTrace.from_trace_line(l.strip)
-end
+end.compact
 
 annotator = SorbetAutoTyper::Annotator.new(traces)
 
 all_files = traces.map(&:method_file).uniq
 all_files.each do |source_file|
-  puts "---------------------------------------------------"
-  puts source_file
-  puts "---------------------------------------------------"
-  puts annotator.annotate_file(source_file)
-  puts
-  puts
+  puts "Annotating: #{source_file}"
+  new_source = annotator.annotate_file(source_file)
+
+  if verbose
+    puts "----"
+
+    original_source_lines = File.read(source_file).split("\n")
+    new_source_lines = new_source.split("\n")
+    diffs = Diff::LCS.sdiff(original_source_lines, new_source_lines)
+    changed_diffs = diffs.each_with_index.reject { |(d, idx)| d.unchanged? }
+    indexes_to_display = changed_diffs.flat_map { |(_, line)| (line-LOOK_BEFORE..line+LOOK_AFTER).to_a }.uniq
+    indexes_to_display.each do |idx|
+      dc = diffs[idx]
+      unless dc.nil?
+        if dc.unchanged?
+          puts "  #{dc.old_element}"
+        else
+          if dc.deleting? || dc.changed?
+            puts "+ #{dc.old_element}"
+          end
+
+          if dc.adding? || dc.changed?
+            puts "+ #{dc.new_element}"
+          end
+        end
+      end
+    end
+  end
+
+  File.write(source_file, new_source) unless dry_run
 end

@@ -33,7 +33,7 @@ module SorbetAutoTyper
     const :args, T.nilable(T::Array[Param])
     const :return_class, T.nilable(T::Types::Base)
 
-    sig { params(line: String).returns(MethodTrace) }
+    sig { params(line: String).returns(T.nilable(MethodTrace)) }
     def self.from_trace_line(line)
       type, container, method_type, method_name, args_or_return = line.split(Tracer::OUTPUT_DELIMITER, 5)
       case type
@@ -56,6 +56,9 @@ module SorbetAutoTyper
       else
         raise ArgumentError, "Invalid type in data: '#{type}'"
       end
+    rescue NameError => e
+      puts "Invalid trace line: #{e.message}"
+      nil
     end
 
     sig { params(type_str: String).returns(T::Types::Base) }
