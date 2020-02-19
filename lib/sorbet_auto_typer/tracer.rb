@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 # typed: false
-require 'json'
 
 module SorbetAutoTyper
   class Tracer
     METHOD_TYPE_INSTANCE = 'instance'
     METHOD_TYPE_CLASS = 'class'
-    METHOD_TYPE_MODULE = 'module'
     OUTPUT_TYPE_CALL = 'C'
     OUTPUT_TYPE_RETURN = 'R'
     OUTPUT_DELIMITER = '|'
@@ -26,6 +24,7 @@ module SorbetAutoTyper
       @trace_point = TracePoint.new(:call, :return) do |trace|
         handle_trace(trace)
       end
+      @traces_seen = {}
     end
 
     def start!
@@ -40,7 +39,13 @@ module SorbetAutoTyper
     private
 
     def handle_trace(trace)
-      return if !trace.path.start_with?(@filter_path)
+      return unless trace.path.start_with?(@filter_path)
+
+      # Only do 5 traces per. file/line/method
+      trace_id = "#{trace.event}::#{trace.path}::#{trace.lineno}::#{trace.method_id}"
+      @traces_seen[trace_id] ||= 0
+      @traces_seen[trace_id] += 1
+      return if @traces_seen[trace_id] >= 5
 
       method = trace.self.method(trace.method_id)
 
