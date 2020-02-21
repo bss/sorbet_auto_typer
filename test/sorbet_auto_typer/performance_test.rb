@@ -43,7 +43,7 @@ class SorbetAutoTyperTest < Minitest::Test
     SorbetAutoTyper.stop!
 
     line_count = `wc -l #{output_file}`.strip.split(" ").first.to_i
-    assert_equal(TOTAL_TRACE_COUNT, line_count)
-    assert_in_delta(8.0, t.total, 0.5)
+    assert_equal(48, line_count)
+    assert_in_delta(2.0, t.total, 0.5)
   end
 end
