@@ -12,12 +12,9 @@ jobs:
           name: Update bundler
           command: gem install bundler:2.0.1
       - ruby/install-deps
-      - run:
-          name: Get info
-          command: pwd; ls -la
-      - run:
-          name: Run Sorbet
-          command: bundle exec srb tc
+      # - run:
+      #     name: Run Sorbet
+      #     command: bundle exec srb tc
       - run:
           name: Run Tests
           command: bundle exec rake test
