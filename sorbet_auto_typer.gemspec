@@ -8,12 +8,12 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Bo Stendal Sorensen"]
   spec.email         = ["bo@stendal-sorensen.net"]
 
-  spec.summary       = "Automatically generate sorbet type signatures based on a test-suite"
-  spec.description   = "This let's you automatically type up your codebase using the test-suite of your project."
+  spec.summary       = "Automatically generate sorbet type signatures based on code-instrumentation"
+  spec.description   = "This let's you automatically type up your codebase by instrumenting code, (e.g. using the test suite of the project)."
   spec.homepage      = "https://github.com/bss/sorbet_auto_typer"
   spec.license       = "MIT"
 
-  spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
+  spec.metadata["allowed_push_host"] = "https://rubygems.org"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/bss/sorbet_auto_typer"
