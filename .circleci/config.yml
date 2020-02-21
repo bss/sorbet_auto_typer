@@ -6,10 +6,11 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.6.5-buster
-        environment:
-          BUNDLER_VERSION: 2.0.1
     steps:
       - checkout
+      - run:
+          name: Update bundler
+          command: gem install bundler:2.0.1
       - ruby/install-deps
       - run:
           name: Run Sorbet
