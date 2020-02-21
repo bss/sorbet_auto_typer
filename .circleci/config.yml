@@ -14,7 +14,7 @@ jobs:
       - ruby/install-deps
       - run:
           name: Run Sorbet
-          command: srb tc
+          command: bundle exec srb tc
       - run:
           name: Run Tests
           command: bundle exec rake test
