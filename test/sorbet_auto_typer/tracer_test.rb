@@ -6,8 +6,8 @@ class TracerTest < Minitest::Test
 
   sig { void }
   def test_tracer_traces_method_calls
-    temp_file = Tempfile.new
-    tracer = SorbetAutoTyper::Tracer.new(temp_file.path, filter_path=Dir.pwd)
+    io_writer = StringIO.new
+    tracer = SorbetAutoTyper::Tracer.new(io_writer, filter_path=Dir.pwd)
     tracer.start!
     HelperClass.bar(27)
     HelperClass.bar
@@ -59,7 +59,7 @@ class TracerTest < Minitest::Test
       "C|HelperClass::ASelfClass|instance|something",
       "R|HelperClass::ASelfClass|instance|something|A;(D;String;D;Integer)",
     ]
-    actual_output = File.read(temp_file.path).split("\n")
+    actual_output = io_writer.string.split("\n")
     assert_equal(expected_output.size, actual_output.size)
     expected_output.each_with_index do |expected, idx|
       assert_match expected, actual_output[idx]
