@@ -1,12 +1,10 @@
 # SorbetAutoTyper
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/sorbet_auto_typer`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+SorbetAutoTyper is a tool that is able to add sorbet signatures to files by instrumenting code, for example by running the test suite of a project.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add this line to your application's Gemfile (you probably want to add it in the development/test section):
 
 ```ruby
 gem 'sorbet_auto_typer'
@@ -16,23 +14,88 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install sorbet_auto_typer
-
 ## Usage
 
-TODO: Write usage instructions here
+SorbetAutoTyper works in two steps:
 
-## Development
+1. Instrumentation
+2. Analysis
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+### Instrumentation
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+The first step is to instrument the code. To be able to instrument even a large codebase, SorbetAutoTyper will stop instrumenting a method after a specific amount of calls. Underneath the hood the ruby `TracePoint` API is used to ensure maximum speed.
+
+To instrument a codeblock, first configure the gem:
+
+```ruby
+SorbetAutoTyper.configure do |c|
+  c.output_file = File.join(Dir.pwd, 'tmp', "#{SecureRandom.uuid}.sig")
+  c.filter_path = File.join(Dir.pwd, 'lib')
+end
+```
+
+This will set up the gem to output a signature file with a random name to the `tmp` directory and only inspect files in the `lib` directory.
+This configuration only needs to be done once pr. process.
+
+Next we can start and stop SorbetAutoTyper using `SorbetAutoTyper.start!` and `SorbetAutoTyper.stop!`.
+
+Instrumenting a simple file could look like this:
+
+```ruby
+SorbetAutoTyper.start!
+a = MyModule::MyClass.new
+a.hello
+SorbetAutoTyper.stop!
+```
+
+In the context of a test runner like RSpec, the following could be added to the spec helper of the project:
+
+```ruby
+SorbetAutoTyper.configure do |c|
+  c.output_file = File.join(Dir.pwd, 'tmp', "#{SecureRandom.uuid}.sig")
+  c.filter_path = File.join(Dir.pwd, 'lib')
+end
+
+RSpec.configure do |config|
+  config.before(:suite) do
+    SorbetAutoTyper.start!
+  end
+
+  config.after(:suite) do
+    SorbetAutoTyper.stop!
+  end
+end
+```
+
+### Analysis
+
+Running the analysis is as simple as running the `sorbet-auto-typer` tool within your project. If you run it without any arguments, it will print a bit of help:
+
+```bash
+$ bundle exec sorbet-auto-typer
+Error: Please provide a SIGNATURE_FILE.
+
+sorbet-auto-typer [OPTIONS] ... SIGNATURE_FILE
+
+-h, --help:
+   show help
+
+--dry, -d:
+   do not overwrite files, only display desired changes
+
+--verbose, -v:
+   more verbose output
+
+SIGNATURE_FILE: Signature file to use for auto-generated types
+```
+
+The `--dry` and `--verbose` flags will make sure none of the source files are overwritten and provide a diff of the files. Those are recommended options on the first run.
+
+When you are ready to run `SorbetAutoTyper` on your project, simply run it without any options and it will add method signatures to the source files in the project.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/sorbet_auto_typer. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/bss/sorbet_auto_typer. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -40,4 +103,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the SorbetAutoTyper project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/sorbet_auto_typer/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the SorbetAutoTyper project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/bss/sorbet_auto_typer/blob/master/CODE_OF_CONDUCT.md).
