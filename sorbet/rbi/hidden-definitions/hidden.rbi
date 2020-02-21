@@ -77,6 +77,10 @@ end
 module AST
 end
 
+class Addrinfo
+  def connect_internal(local_addrinfo, timeout=T.unsafe(nil)); end
+end
+
 class Array
   include ::JSON::Ext::Generator::GeneratorMethods::Array
   def bsearch(); end
@@ -100,6 +104,10 @@ end
 
 class Array
   def self.try_convert(_); end
+end
+
+class BasicObject
+  def __binding__(); end
 end
 
 BasicObject::BasicObject = BasicObject
@@ -820,8 +828,2117 @@ module Bundler::VersionRanges
   def self.for_many(requirements); end
 end
 
+module Byebug
+  include ::Byebug::Helpers::ReflectionHelper
+  def displays(); end
+
+  def displays=(displays); end
+
+  def init_file(); end
+
+  def init_file=(init_file); end
+
+  def mode(); end
+
+  def mode=(mode); end
+
+  def run_init_script(); end
+  PORT = ::T.let(nil, ::T.untyped)
+end
+
+class Byebug::AutoirbSetting
+  def banner(); end
+
+  def value=(val); end
+  DEFAULT = ::T.let(nil, ::T.untyped)
+end
+
+class Byebug::AutoirbSetting
+end
+
+class Byebug::AutolistSetting
+  def banner(); end
+
+  def value=(val); end
+  DEFAULT = ::T.let(nil, ::T.untyped)
+end
+
+class Byebug::AutolistSetting
+end
+
+class Byebug::AutoprySetting
+  def banner(); end
+
+  def value=(val); end
+  DEFAULT = ::T.let(nil, ::T.untyped)
+end
+
+class Byebug::AutoprySetting
+end
+
+class Byebug::AutosaveSetting
+  def banner(); end
+  DEFAULT = ::T.let(nil, ::T.untyped)
+end
+
+class Byebug::AutosaveSetting
+end
+
+class Byebug::BasenameSetting
+  def banner(); end
+end
+
+class Byebug::BasenameSetting
+end
+
+class Byebug::BreakCommand
+  include ::Byebug::Helpers::EvalHelper
+  include ::Byebug::Helpers::FileHelper
+  include ::Byebug::Helpers::ParseHelper
+  def execute(); end
+end
+
+class Byebug::BreakCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::Breakpoint
+  def enabled=(enabled); end
+
+  def enabled?(); end
+
+  def expr(); end
+
+  def expr=(expr); end
+
+  def hit_condition(); end
+
+  def hit_condition=(hit_condition); end
+
+  def hit_count(); end
+
+  def hit_value(); end
+
+  def hit_value=(hit_value); end
+
+  def id(); end
+
+  def initialize(_, _1, _2); end
+
+  def pos(); end
+
+  def source(); end
+end
+
+class Byebug::Breakpoint
+  def self.add(file, line, expr=T.unsafe(nil)); end
+
+  def self.first(); end
+
+  def self.last(); end
+
+  def self.none?(); end
+
+  def self.potential_line?(filename, lineno); end
+
+  def self.potential_lines(filename); end
+
+  def self.remove(id); end
+end
+
+class Byebug::CallstyleSetting
+  def banner(); end
+  DEFAULT = ::T.let(nil, ::T.untyped)
+end
+
+class Byebug::CallstyleSetting
+end
+
+class Byebug::CatchCommand
+  include ::Byebug::Helpers::EvalHelper
+  def execute(); end
+end
+
+class Byebug::CatchCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::Command
+  def arguments(); end
+
+  def confirm(*args, &block); end
+
+  def context(); end
+
+  def errmsg(*args, &block); end
+
+  def frame(); end
+
+  def help(*args, &block); end
+
+  def initialize(processor, input=T.unsafe(nil)); end
+
+  def match(*args, &block); end
+
+  def pr(*args, &block); end
+
+  def prc(*args, &block); end
+
+  def print(*args, &block); end
+
+  def processor(); end
+
+  def prv(*args, &block); end
+
+  def puts(*args, &block); end
+end
+
+class Byebug::Command
+  extend ::Forwardable
+  extend ::Byebug::Helpers::StringHelper
+  def self.allow_in_control(); end
+
+  def self.allow_in_control=(allow_in_control); end
+
+  def self.allow_in_post_mortem(); end
+
+  def self.allow_in_post_mortem=(allow_in_post_mortem); end
+
+  def self.always_run(); end
+
+  def self.always_run=(always_run); end
+
+  def self.columnize(width); end
+
+  def self.help(); end
+
+  def self.match(input); end
+end
+
+class Byebug::CommandList
+  include ::Enumerable
+  def each(&blk); end
+
+  def initialize(commands); end
+
+  def match(input); end
+end
+
+class Byebug::CommandList
+end
+
+class Byebug::CommandNotFound
+  def initialize(input, parent=T.unsafe(nil)); end
+end
+
+class Byebug::CommandNotFound
+end
+
+class Byebug::CommandProcessor
+  include ::Byebug::Helpers::EvalHelper
+  def after_repl(); end
+
+  def at_breakpoint(brkpt); end
+
+  def at_catchpoint(exception); end
+
+  def at_end(); end
+
+  def at_line(); end
+
+  def at_return(return_value); end
+
+  def at_tracing(); end
+
+  def before_repl(); end
+
+  def command_list(); end
+
+  def commands(*args, &block); end
+
+  def confirm(*args, &block); end
+
+  def context(); end
+
+  def errmsg(*args, &block); end
+
+  def frame(*args, &block); end
+
+  def initialize(context, interface=T.unsafe(nil)); end
+
+  def interface(); end
+
+  def pr(*args, &block); end
+
+  def prc(*args, &block); end
+
+  def prev_line(); end
+
+  def prev_line=(prev_line); end
+
+  def printer(); end
+
+  def proceed!(); end
+
+  def process_commands(); end
+
+  def prompt(); end
+
+  def prv(*args, &block); end
+
+  def puts(*args, &block); end
+
+  def repl(); end
+end
+
+class Byebug::CommandProcessor
+  extend ::Forwardable
+end
+
+class Byebug::ConditionCommand
+  include ::Byebug::Helpers::ParseHelper
+  def execute(); end
+end
+
+class Byebug::ConditionCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::Context
+  include ::Byebug::Helpers::FileHelper
+  def at_breakpoint(breakpoint); end
+
+  def at_catchpoint(exception); end
+
+  def at_end(); end
+
+  def at_line(); end
+
+  def at_return(return_value); end
+
+  def at_tracing(); end
+
+  def backtrace(); end
+
+  def dead?(); end
+
+  def file(*args, &block); end
+
+  def frame(); end
+
+  def frame=(pos); end
+
+  def frame_binding(*_); end
+
+  def frame_class(*_); end
+
+  def frame_file(*_); end
+
+  def frame_line(*_); end
+
+  def frame_method(*_); end
+
+  def frame_self(*_); end
+
+  def full_location(); end
+
+  def ignored?(); end
+
+  def interrupt(); end
+
+  def line(*args, &block); end
+
+  def location(); end
+
+  def resume(); end
+
+  def stack_size(); end
+
+  def step_into(*_); end
+
+  def step_out(*_); end
+
+  def step_over(*_); end
+
+  def stop_reason(); end
+
+  def suspend(); end
+
+  def suspended?(); end
+
+  def switch(); end
+
+  def thnum(); end
+
+  def thread(); end
+
+  def tracing(); end
+
+  def tracing=(tracing); end
+end
+
+class Byebug::Context
+  extend ::Byebug::Helpers::PathHelper
+  extend ::Forwardable
+  def self.ignored_files(); end
+
+  def self.ignored_files=(ignored_files); end
+
+  def self.interface(); end
+
+  def self.interface=(interface); end
+
+  def self.processor(); end
+
+  def self.processor=(processor); end
+end
+
+class Byebug::ContinueCommand
+  include ::Byebug::Helpers::ParseHelper
+  def execute(); end
+end
+
+class Byebug::ContinueCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::ControlProcessor
+  def commands(); end
+end
+
+class Byebug::ControlProcessor
+end
+
+class Byebug::DebugCommand
+  include ::Byebug::Helpers::EvalHelper
+  def execute(); end
+end
+
+class Byebug::DebugCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::DebugThread
+end
+
+class Byebug::DebugThread
+  def self.inherited(); end
+end
+
+class Byebug::DeleteCommand
+  include ::Byebug::Helpers::ParseHelper
+  def execute(); end
+end
+
+class Byebug::DeleteCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::DisableCommand
+  include ::Byebug::Subcommands
+end
+
+class Byebug::DisableCommand::BreakpointsCommand
+  include ::Byebug::Helpers::ToggleHelper
+  include ::Byebug::Helpers::ParseHelper
+  def execute(); end
+end
+
+class Byebug::DisableCommand::BreakpointsCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::DisableCommand::DisplayCommand
+  include ::Byebug::Helpers::ToggleHelper
+  include ::Byebug::Helpers::ParseHelper
+  def execute(); end
+end
+
+class Byebug::DisableCommand::DisplayCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::DisableCommand
+  extend ::Byebug::Subcommands::ClassMethods
+  extend ::Byebug::Helpers::ReflectionHelper
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::DisplayCommand
+  include ::Byebug::Helpers::EvalHelper
+  def execute(); end
+end
+
+class Byebug::DisplayCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::DownCommand
+  include ::Byebug::Helpers::FrameHelper
+  include ::Byebug::Helpers::ParseHelper
+  def execute(); end
+end
+
+class Byebug::DownCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::EditCommand
+  def execute(); end
+end
+
+class Byebug::EditCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::EnableCommand
+  include ::Byebug::Subcommands
+end
+
+class Byebug::EnableCommand::BreakpointsCommand
+  include ::Byebug::Helpers::ToggleHelper
+  include ::Byebug::Helpers::ParseHelper
+  def execute(); end
+end
+
+class Byebug::EnableCommand::BreakpointsCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::EnableCommand::DisplayCommand
+  include ::Byebug::Helpers::ToggleHelper
+  include ::Byebug::Helpers::ParseHelper
+  def execute(); end
+end
+
+class Byebug::EnableCommand::DisplayCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::EnableCommand
+  extend ::Byebug::Subcommands::ClassMethods
+  extend ::Byebug::Helpers::ReflectionHelper
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::FinishCommand
+  include ::Byebug::Helpers::ParseHelper
+  def execute(); end
+end
+
+class Byebug::FinishCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::Frame
+  include ::Byebug::Helpers::FileHelper
+  def _binding(); end
+
+  def _class(); end
+
+  def _method(); end
+
+  def _self(); end
+
+  def args(); end
+
+  def c_frame?(); end
+
+  def current?(); end
+
+  def deco_args(); end
+
+  def deco_block(); end
+
+  def deco_call(); end
+
+  def deco_class(); end
+
+  def deco_file(); end
+
+  def deco_method(); end
+
+  def deco_pos(); end
+
+  def file(); end
+
+  def initialize(context, pos); end
+
+  def line(); end
+
+  def locals(); end
+
+  def mark(); end
+
+  def pos(); end
+
+  def to_hash(); end
+end
+
+class Byebug::Frame
+end
+
+class Byebug::FrameCommand
+  include ::Byebug::Helpers::FrameHelper
+  include ::Byebug::Helpers::ParseHelper
+  def execute(); end
+end
+
+class Byebug::FrameCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::FullpathSetting
+  def banner(); end
+  DEFAULT = ::T.let(nil, ::T.untyped)
+end
+
+class Byebug::FullpathSetting
+end
+
+class Byebug::HelpCommand
+  def execute(); end
+end
+
+class Byebug::HelpCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+module Byebug::Helpers
+end
+
+module Byebug::Helpers::BinHelper
+  def executable_file_extensions(); end
+
+  def find_executable(path, cmd); end
+
+  def real_executable?(file); end
+
+  def search_paths(); end
+
+  def which(cmd); end
+end
+
+module Byebug::Helpers::BinHelper
+end
+
+module Byebug::Helpers::EvalHelper
+  def error_eval(str, binding=T.unsafe(nil)); end
+
+  def multiple_thread_eval(expression); end
+
+  def separate_thread_eval(expression); end
+
+  def silent_eval(str, binding=T.unsafe(nil)); end
+
+  def warning_eval(str, binding=T.unsafe(nil)); end
+end
+
+module Byebug::Helpers::EvalHelper
+end
+
+module Byebug::Helpers::FileHelper
+  def get_line(filename, lineno); end
+
+  def get_lines(filename); end
+
+  def n_lines(filename); end
+
+  def normalize(filename); end
+
+  def shortpath(fullpath); end
+
+  def virtual_file?(name); end
+end
+
+module Byebug::Helpers::FileHelper
+end
+
+module Byebug::Helpers::FrameHelper
+  def jump_frames(steps); end
+
+  def switch_to_frame(frame); end
+end
+
+module Byebug::Helpers::FrameHelper
+end
+
+module Byebug::Helpers::ParseHelper
+  def get_int(str, cmd, min=T.unsafe(nil), max=T.unsafe(nil)); end
+
+  def parse_steps(str, cmd); end
+
+  def syntax_valid?(code); end
+end
+
+module Byebug::Helpers::ParseHelper
+end
+
+module Byebug::Helpers::PathHelper
+  def all_files(); end
+
+  def bin_file(); end
+
+  def gem_files(); end
+
+  def lib_files(); end
+
+  def root_path(); end
+
+  def test_files(); end
+end
+
+module Byebug::Helpers::PathHelper
+end
+
+module Byebug::Helpers::ReflectionHelper
+  def commands(); end
+end
+
+module Byebug::Helpers::ReflectionHelper
+end
+
+module Byebug::Helpers::StringHelper
+  def camelize(str); end
+
+  def deindent(str, leading_spaces: T.unsafe(nil)); end
+
+  def prettify(str); end
+end
+
+module Byebug::Helpers::StringHelper
+end
+
+module Byebug::Helpers::ThreadHelper
+  def context_from_thread(thnum); end
+
+  def current_thread?(ctx); end
+
+  def display_context(ctx); end
+
+  def thread_arguments(ctx); end
+end
+
+module Byebug::Helpers::ThreadHelper
+end
+
+module Byebug::Helpers::ToggleHelper
+  include ::Byebug::Helpers::ParseHelper
+  def enable_disable_breakpoints(is_enable, args); end
+
+  def enable_disable_display(is_enable, args); end
+end
+
+module Byebug::Helpers::ToggleHelper
+end
+
+module Byebug::Helpers::VarHelper
+  include ::Byebug::Helpers::EvalHelper
+  def var_args(); end
+
+  def var_global(); end
+
+  def var_instance(str); end
+
+  def var_list(ary, binding=T.unsafe(nil)); end
+
+  def var_local(); end
+end
+
+module Byebug::Helpers::VarHelper
+end
+
+module Byebug::Helpers
+end
+
+class Byebug::HistfileSetting
+  def banner(); end
+  DEFAULT = ::T.let(nil, ::T.untyped)
+end
+
+class Byebug::HistfileSetting
+end
+
+class Byebug::History
+  def buffer(); end
+
+  def clear(); end
+
+  def default_max_size(); end
+
+  def ignore?(buf); end
+
+  def last_ids(number); end
+
+  def pop(); end
+
+  def push(cmd); end
+
+  def restore(); end
+
+  def save(); end
+
+  def size(); end
+
+  def size=(size); end
+
+  def specific_max_size(number); end
+
+  def to_s(n_cmds); end
+end
+
+class Byebug::History
+end
+
+class Byebug::HistoryCommand
+  include ::Byebug::Helpers::ParseHelper
+  def execute(); end
+end
+
+class Byebug::HistoryCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::HistsizeSetting
+  def banner(); end
+  DEFAULT = ::T.let(nil, ::T.untyped)
+end
+
+class Byebug::HistsizeSetting
+end
+
+class Byebug::InfoCommand
+  include ::Byebug::Subcommands
+end
+
+class Byebug::InfoCommand::BreakpointsCommand
+  def execute(); end
+end
+
+class Byebug::InfoCommand::BreakpointsCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::InfoCommand::DisplayCommand
+  def execute(); end
+end
+
+class Byebug::InfoCommand::DisplayCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::InfoCommand::FileCommand
+  include ::Byebug::Helpers::FileHelper
+  include ::Byebug::Helpers::StringHelper
+  def execute(); end
+end
+
+class Byebug::InfoCommand::FileCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::InfoCommand::LineCommand
+  def execute(); end
+end
+
+class Byebug::InfoCommand::LineCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::InfoCommand::ProgramCommand
+  def execute(); end
+end
+
+class Byebug::InfoCommand::ProgramCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::InfoCommand
+  extend ::Byebug::Subcommands::ClassMethods
+  extend ::Byebug::Helpers::ReflectionHelper
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::Interface
+  include ::Byebug::Helpers::FileHelper
+  def autorestore(); end
+
+  def autosave(); end
+
+  def close(); end
+
+  def command_queue(); end
+
+  def command_queue=(command_queue); end
+
+  def confirm(prompt); end
+
+  def errmsg(message); end
+
+  def error(); end
+
+  def history(); end
+
+  def history=(history); end
+
+  def input(); end
+
+  def last_if_empty(input); end
+
+  def output(); end
+
+  def prepare_input(prompt); end
+
+  def print(message); end
+
+  def puts(message); end
+
+  def read_command(prompt); end
+
+  def read_file(filename); end
+
+  def read_input(prompt, save_hist=T.unsafe(nil)); end
+end
+
+class Byebug::Interface
+end
+
+class Byebug::InterruptCommand
+  def execute(); end
+end
+
+class Byebug::InterruptCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::IrbCommand
+  def execute(); end
+end
+
+class Byebug::IrbCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::KillCommand
+  def execute(); end
+end
+
+class Byebug::KillCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::LinetraceSetting
+  def banner(); end
+
+  def value=(val); end
+end
+
+class Byebug::LinetraceSetting
+end
+
+class Byebug::ListCommand
+  include ::Byebug::Helpers::FileHelper
+  include ::Byebug::Helpers::ParseHelper
+  def amend_final(*args, &block); end
+
+  def execute(); end
+
+  def max_line(*args, &block); end
+
+  def size(*args, &block); end
+end
+
+class Byebug::ListCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::ListsizeSetting
+  def banner(); end
+  DEFAULT = ::T.let(nil, ::T.untyped)
+end
+
+class Byebug::ListsizeSetting
+end
+
+class Byebug::LocalInterface
+  def readline(prompt); end
+
+  def with_repl_like_sigint(); end
+  EOF_ALIAS = ::T.let(nil, ::T.untyped)
+end
+
+class Byebug::LocalInterface
+end
+
+class Byebug::MethodCommand
+  include ::Byebug::Helpers::EvalHelper
+  def execute(); end
+end
+
+class Byebug::MethodCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::NextCommand
+  include ::Byebug::Helpers::ParseHelper
+  def execute(); end
+end
+
+class Byebug::NextCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::PostMortemProcessor
+  def commands(); end
+end
+
+class Byebug::PostMortemProcessor
+end
+
+class Byebug::PostMortemSetting
+  def banner(); end
+
+  def value=(val); end
+end
+
+class Byebug::PostMortemSetting
+end
+
+module Byebug::Printers
+end
+
+class Byebug::Printers::Base
+  def type(); end
+  SEPARATOR = ::T.let(nil, ::T.untyped)
+end
+
+class Byebug::Printers::Base::MissedArgument
+end
+
+class Byebug::Printers::Base::MissedArgument
+end
+
+class Byebug::Printers::Base::MissedPath
+end
+
+class Byebug::Printers::Base::MissedPath
+end
+
+class Byebug::Printers::Base
+end
+
+class Byebug::Printers::Plain
+  def print(path, args=T.unsafe(nil)); end
+
+  def print_collection(path, collection, &block); end
+
+  def print_variables(variables, *_unused); end
+end
+
+class Byebug::Printers::Plain
+end
+
+module Byebug::Printers
+end
+
+class Byebug::PryCommand
+  def execute(); end
+end
+
+class Byebug::PryCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::PryProcessor
+  def at_breakpoint(breakpoint); end
+
+  def at_return(_return_value); end
+
+  def bold(*args, &block); end
+
+  def output(*args, &block); end
+
+  def perform(action, options=T.unsafe(nil)); end
+
+  def pry(); end
+
+  def pry=(pry); end
+
+  def run(&_block); end
+end
+
+class Byebug::PryProcessor
+  def self.start(); end
+end
+
+class Byebug::QuitCommand
+  def execute(); end
+end
+
+class Byebug::QuitCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+module Byebug::Remote
+end
+
+class Byebug::Remote::Client
+  def initialize(interface); end
+
+  def interface(); end
+
+  def socket(); end
+
+  def start(host=T.unsafe(nil), port=T.unsafe(nil)); end
+
+  def started?(); end
+end
+
+class Byebug::Remote::Client
+end
+
+class Byebug::Remote::Server
+  def actual_port(); end
+
+  def initialize(wait_connection:, &block); end
+
+  def start(host, port); end
+
+  def wait_connection(); end
+end
+
+class Byebug::Remote::Server
+end
+
+module Byebug::Remote
+end
+
+class Byebug::RemoteInterface
+  def initialize(socket); end
+
+  def readline(prompt); end
+end
+
+class Byebug::RemoteInterface
+end
+
+class Byebug::RestartCommand
+  include ::Byebug::Helpers::BinHelper
+  include ::Byebug::Helpers::PathHelper
+  def execute(); end
+end
+
+class Byebug::RestartCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::SaveCommand
+  def execute(); end
+end
+
+class Byebug::SaveCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::SavefileSetting
+  def banner(); end
+  DEFAULT = ::T.let(nil, ::T.untyped)
+end
+
+class Byebug::SavefileSetting
+end
+
+class Byebug::ScriptInterface
+  def initialize(file, verbose=T.unsafe(nil)); end
+end
+
+class Byebug::ScriptInterface
+end
+
+class Byebug::ScriptProcessor
+  def commands(); end
+end
+
+class Byebug::ScriptProcessor
+end
+
+class Byebug::SetCommand
+  include ::Byebug::Helpers::ParseHelper
+  def execute(); end
+end
+
+class Byebug::SetCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::Setting
+  def boolean?(); end
+
+  def help(); end
+
+  def integer?(); end
+
+  def to_sym(); end
+
+  def value(); end
+
+  def value=(value); end
+  DEFAULT = ::T.let(nil, ::T.untyped)
+end
+
+class Byebug::Setting
+  def self.[](name); end
+
+  def self.[]=(name, value); end
+
+  def self.find(shortcut); end
+
+  def self.help_all(); end
+
+  def self.settings(); end
+end
+
+class Byebug::ShowCommand
+  def execute(); end
+end
+
+class Byebug::ShowCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::SkipCommand
+  include ::Byebug::Helpers::ParseHelper
+  def auto_run(); end
+
+  def execute(); end
+
+  def initialize_attributes(); end
+
+  def keep_execution(); end
+
+  def reset_attributes(); end
+end
+
+class Byebug::SkipCommand
+  def self.description(); end
+
+  def self.file_line(); end
+
+  def self.file_line=(file_line); end
+
+  def self.file_path(); end
+
+  def self.file_path=(file_path); end
+
+  def self.previous_autolist(); end
+
+  def self.regexp(); end
+
+  def self.restore_autolist(); end
+
+  def self.setup_autolist(value); end
+
+  def self.short_description(); end
+end
+
+class Byebug::SourceCommand
+  def execute(); end
+end
+
+class Byebug::SourceCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::SourceFileFormatter
+  include ::Byebug::Helpers::FileHelper
+  def amend(line, ceiling); end
+
+  def amend_final(line); end
+
+  def amend_initial(line); end
+
+  def annotator(); end
+
+  def file(); end
+
+  def initialize(file, annotator); end
+
+  def lines(min, max); end
+
+  def lines_around(center); end
+
+  def max_initial_line(); end
+
+  def max_line(); end
+
+  def range_around(center); end
+
+  def range_from(min); end
+
+  def size(); end
+end
+
+class Byebug::SourceFileFormatter
+end
+
+class Byebug::StackOnErrorSetting
+  def banner(); end
+end
+
+class Byebug::StackOnErrorSetting
+end
+
+class Byebug::StepCommand
+  include ::Byebug::Helpers::ParseHelper
+  def execute(); end
+end
+
+class Byebug::StepCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+module Byebug::Subcommands
+  def execute(); end
+
+  def subcommand_list(*args, &block); end
+end
+
+module Byebug::Subcommands::ClassMethods
+  include ::Byebug::Helpers::ReflectionHelper
+  def help(); end
+
+  def subcommand_list(); end
+end
+
+module Byebug::Subcommands::ClassMethods
+end
+
+module Byebug::Subcommands
+  extend ::Forwardable
+  def self.included(command); end
+end
+
+class Byebug::ThreadCommand
+  include ::Byebug::Subcommands
+end
+
+class Byebug::ThreadCommand::CurrentCommand
+  include ::Byebug::Helpers::ThreadHelper
+  def execute(); end
+end
+
+class Byebug::ThreadCommand::CurrentCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::ThreadCommand::ListCommand
+  include ::Byebug::Helpers::ThreadHelper
+  def execute(); end
+end
+
+class Byebug::ThreadCommand::ListCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::ThreadCommand::ResumeCommand
+  include ::Byebug::Helpers::ThreadHelper
+  def execute(); end
+end
+
+class Byebug::ThreadCommand::ResumeCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::ThreadCommand::StopCommand
+  include ::Byebug::Helpers::ThreadHelper
+  def execute(); end
+end
+
+class Byebug::ThreadCommand::StopCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::ThreadCommand::SwitchCommand
+  include ::Byebug::Helpers::ThreadHelper
+  def execute(); end
+end
+
+class Byebug::ThreadCommand::SwitchCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::ThreadCommand
+  extend ::Byebug::Subcommands::ClassMethods
+  extend ::Byebug::Helpers::ReflectionHelper
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::ThreadsTable
+end
+
+class Byebug::ThreadsTable
+end
+
+class Byebug::TracevarCommand
+  def execute(); end
+end
+
+class Byebug::TracevarCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::UndisplayCommand
+  include ::Byebug::Helpers::ParseHelper
+  def execute(); end
+end
+
+class Byebug::UndisplayCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::UntracevarCommand
+  def execute(); end
+end
+
+class Byebug::UntracevarCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::UpCommand
+  include ::Byebug::Helpers::FrameHelper
+  include ::Byebug::Helpers::ParseHelper
+  def execute(); end
+end
+
+class Byebug::UpCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::VarCommand
+  include ::Byebug::Subcommands
+end
+
+class Byebug::VarCommand::AllCommand
+  include ::Byebug::Helpers::VarHelper
+  include ::Byebug::Helpers::EvalHelper
+  def execute(); end
+end
+
+class Byebug::VarCommand::AllCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::VarCommand::ArgsCommand
+  include ::Byebug::Helpers::VarHelper
+  include ::Byebug::Helpers::EvalHelper
+  def execute(); end
+end
+
+class Byebug::VarCommand::ArgsCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::VarCommand::ConstCommand
+  include ::Byebug::Helpers::EvalHelper
+  def execute(); end
+end
+
+class Byebug::VarCommand::ConstCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::VarCommand::GlobalCommand
+  include ::Byebug::Helpers::VarHelper
+  include ::Byebug::Helpers::EvalHelper
+  def execute(); end
+end
+
+class Byebug::VarCommand::GlobalCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::VarCommand::InstanceCommand
+  include ::Byebug::Helpers::VarHelper
+  include ::Byebug::Helpers::EvalHelper
+  def execute(); end
+end
+
+class Byebug::VarCommand::InstanceCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::VarCommand::LocalCommand
+  include ::Byebug::Helpers::VarHelper
+  include ::Byebug::Helpers::EvalHelper
+  def execute(); end
+end
+
+class Byebug::VarCommand::LocalCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::VarCommand
+  extend ::Byebug::Subcommands::ClassMethods
+  extend ::Byebug::Helpers::ReflectionHelper
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::WhereCommand
+  include ::Byebug::Helpers::FrameHelper
+  def execute(); end
+end
+
+class Byebug::WhereCommand
+  def self.description(); end
+
+  def self.regexp(); end
+
+  def self.short_description(); end
+end
+
+class Byebug::WidthSetting
+  def banner(); end
+  DEFAULT = ::T.let(nil, ::T.untyped)
+end
+
+class Byebug::WidthSetting
+end
+
+module Byebug
+  extend ::Byebug
+  extend ::Byebug::Helpers::ReflectionHelper
+  def self.actual_control_port(); end
+
+  def self.actual_port(); end
+
+  def self.attach(); end
+
+  def self.handle_post_mortem(); end
+
+  def self.interrupt(); end
+
+  def self.load_settings(); end
+
+  def self.parse_host_and_port(host_port_spec); end
+
+  def self.spawn(host=T.unsafe(nil), port=T.unsafe(nil)); end
+
+  def self.start_client(host=T.unsafe(nil), port=T.unsafe(nil)); end
+
+  def self.start_control(host=T.unsafe(nil), port=T.unsafe(nil)); end
+
+  def self.start_server(host=T.unsafe(nil), port=T.unsafe(nil)); end
+
+  def self.wait_connection(); end
+
+  def self.wait_connection=(wait_connection); end
+end
+
 class Class
   def json_creatable?(); end
+end
+
+module CodeRay
+  CODERAY_PATH = ::T.let(nil, ::T.untyped)
+  TokenKinds = ::T.let(nil, ::T.untyped)
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+class CodeRay::Duo
+  def call(code, options=T.unsafe(nil)); end
+
+  def encode(code, options=T.unsafe(nil)); end
+
+  def encoder(); end
+
+  def format(); end
+
+  def format=(format); end
+
+  def highlight(code, options=T.unsafe(nil)); end
+
+  def initialize(lang=T.unsafe(nil), format=T.unsafe(nil), options=T.unsafe(nil)); end
+
+  def lang(); end
+
+  def lang=(lang); end
+
+  def options(); end
+
+  def options=(options); end
+
+  def scanner(); end
+end
+
+class CodeRay::Duo
+  def self.[](*_); end
+end
+
+module CodeRay::Encoders
+end
+
+class CodeRay::Encoders::Encoder
+  def <<(token); end
+
+  def begin_group(kind); end
+
+  def begin_line(kind); end
+
+  def compile(tokens, options=T.unsafe(nil)); end
+
+  def encode(code, lang, options=T.unsafe(nil)); end
+
+  def encode_tokens(tokens, options=T.unsafe(nil)); end
+
+  def end_group(kind); end
+
+  def end_line(kind); end
+
+  def file_extension(); end
+
+  def finish(options); end
+
+  def get_output(options); end
+
+  def highlight(code, lang, options=T.unsafe(nil)); end
+
+  def initialize(options=T.unsafe(nil)); end
+
+  def options(); end
+
+  def options=(options); end
+
+  def output(data); end
+
+  def scanner(); end
+
+  def scanner=(scanner); end
+
+  def setup(options); end
+
+  def text_token(text, kind); end
+
+  def token(content, kind); end
+
+  def tokens(tokens, options=T.unsafe(nil)); end
+  DEFAULT_OPTIONS = ::T.let(nil, ::T.untyped)
+end
+
+CodeRay::Encoders::Encoder::PLUGIN_HOST = CodeRay::Encoders
+
+class CodeRay::Encoders::Encoder
+  extend ::CodeRay::Plugin
+  def self.const_missing(sym); end
+
+  def self.file_extension(); end
+end
+
+class CodeRay::Encoders::Terminal
+  TOKEN_COLORS = ::T.let(nil, ::T.untyped)
+end
+
+class CodeRay::Encoders::Terminal
+end
+
+module CodeRay::Encoders
+  extend ::CodeRay::PluginHost
+end
+
+module CodeRay::FileType
+  TypeFromExt = ::T.let(nil, ::T.untyped)
+  TypeFromName = ::T.let(nil, ::T.untyped)
+  TypeFromShebang = ::T.let(nil, ::T.untyped)
+end
+
+class CodeRay::FileType::UnknownFileType
+end
+
+class CodeRay::FileType::UnknownFileType
+end
+
+module CodeRay::FileType
+  def self.[](filename, read_shebang=T.unsafe(nil)); end
+
+  def self.fetch(filename, default=T.unsafe(nil), read_shebang=T.unsafe(nil)); end
+
+  def self.type_from_shebang(filename); end
+end
+
+module CodeRay::Plugin
+  def aliases(); end
+
+  def plugin_host(host=T.unsafe(nil)); end
+
+  def plugin_id(); end
+
+  def register_for(id); end
+
+  def title(title=T.unsafe(nil)); end
+end
+
+module CodeRay::Plugin
+end
+
+module CodeRay::PluginHost
+  def [](id, *args, &blk); end
+
+  def all_plugins(); end
+
+  def const_missing(const); end
+
+  def default(id=T.unsafe(nil)); end
+
+  def list(); end
+
+  def load(id, *args, &blk); end
+
+  def load_all(); end
+
+  def load_plugin_map(); end
+
+  def make_plugin_hash(); end
+
+  def map(hash); end
+
+  def path_to(plugin_id); end
+
+  def plugin_hash(); end
+
+  def plugin_path(*args); end
+
+  def register(plugin, id); end
+
+  def validate_id(id); end
+  PLUGIN_HOSTS = ::T.let(nil, ::T.untyped)
+  PLUGIN_HOSTS_BY_ID = ::T.let(nil, ::T.untyped)
+end
+
+class CodeRay::PluginHost::HostNotFound
+end
+
+class CodeRay::PluginHost::HostNotFound
+end
+
+class CodeRay::PluginHost::PluginNotFound
+end
+
+class CodeRay::PluginHost::PluginNotFound
+end
+
+module CodeRay::PluginHost
+  def self.extended(mod); end
+end
+
+module CodeRay::Scanners
+end
+
+class CodeRay::Scanners::Scanner
+  include ::Enumerable
+  def binary_string(); end
+
+  def column(pos=T.unsafe(nil)); end
+
+  def each(&block); end
+
+  def file_extension(); end
+
+  def initialize(code=T.unsafe(nil), options=T.unsafe(nil)); end
+
+  def lang(); end
+
+  def line(pos=T.unsafe(nil)); end
+
+  def raise_inspect(message, tokens, state=T.unsafe(nil), ambit=T.unsafe(nil), backtrace=T.unsafe(nil)); end
+
+  def raise_inspect_arguments(message, tokens, state, ambit); end
+
+  def reset_instance(); end
+
+  def scan_rest(); end
+
+  def scan_tokens(tokens, options); end
+
+  def scanner_state_info(state); end
+
+  def set_string_from_source(source); end
+
+  def set_tokens_from_options(options); end
+
+  def setup(); end
+
+  def state(); end
+
+  def state=(state); end
+
+  def string=(code); end
+
+  def tokenize(source=T.unsafe(nil), options=T.unsafe(nil)); end
+
+  def tokens(); end
+
+  def tokens_last(tokens, n); end
+
+  def tokens_size(tokens); end
+  DEFAULT_OPTIONS = ::T.let(nil, ::T.untyped)
+  KINDS_NOT_LOC = ::T.let(nil, ::T.untyped)
+  SCANNER_STATE_INFO = ::T.let(nil, ::T.untyped)
+  SCAN_ERROR_MESSAGE = ::T.let(nil, ::T.untyped)
+end
+
+CodeRay::Scanners::Scanner::PLUGIN_HOST = CodeRay::Scanners
+
+class CodeRay::Scanners::Scanner::ScanError
+end
+
+class CodeRay::Scanners::Scanner::ScanError
+end
+
+class CodeRay::Scanners::Scanner
+  extend ::CodeRay::Plugin
+  def self.encode_with_encoding(code, target_encoding); end
+
+  def self.encoding(name=T.unsafe(nil)); end
+
+  def self.file_extension(extension=T.unsafe(nil)); end
+
+  def self.guess_encoding(s); end
+
+  def self.lang(); end
+
+  def self.normalize(code); end
+
+  def self.to_unix(code); end
+end
+
+module CodeRay::Scanners
+  extend ::CodeRay::PluginHost
+end
+
+module CodeRay::Styles
+end
+
+class CodeRay::Styles::Style
+  DEFAULT_OPTIONS = ::T.let(nil, ::T.untyped)
+end
+
+CodeRay::Styles::Style::PLUGIN_HOST = CodeRay::Styles
+
+class CodeRay::Styles::Style
+  extend ::CodeRay::Plugin
+end
+
+module CodeRay::Styles
+  extend ::CodeRay::PluginHost
+end
+
+class CodeRay::Tokens
+  def begin_group(kind); end
+
+  def begin_line(kind); end
+
+  def count(); end
+
+  def encode(encoder, options=T.unsafe(nil)); end
+
+  def end_group(kind); end
+
+  def end_line(kind); end
+
+  def method_missing(meth, options=T.unsafe(nil)); end
+
+  def scanner(); end
+
+  def scanner=(scanner); end
+
+  def split_into_parts(*sizes); end
+
+  def text_token(*_); end
+
+  def tokens(*_); end
+end
+
+class CodeRay::Tokens
+end
+
+class CodeRay::TokensProxy
+  def block(); end
+
+  def block=(block); end
+
+  def each(*args, &blk); end
+
+  def encode(encoder, options=T.unsafe(nil)); end
+
+  def initialize(input, lang, options=T.unsafe(nil), block=T.unsafe(nil)); end
+
+  def input(); end
+
+  def input=(input); end
+
+  def lang(); end
+
+  def lang=(lang); end
+
+  def method_missing(method, *args, &blk); end
+
+  def options(); end
+
+  def options=(options); end
+
+  def scanner(); end
+
+  def tokens(); end
+end
+
+class CodeRay::TokensProxy
+end
+
+module CodeRay
+  def self.coderay_path(*path); end
+
+  def self.encode(code, lang, format, options=T.unsafe(nil)); end
+
+  def self.encode_file(filename, format, options=T.unsafe(nil)); end
+
+  def self.encode_tokens(tokens, format, options=T.unsafe(nil)); end
+
+  def self.encoder(format, options=T.unsafe(nil)); end
+
+  def self.get_scanner_options(options); end
+
+  def self.highlight(code, lang, options=T.unsafe(nil), format=T.unsafe(nil)); end
+
+  def self.highlight_file(filename, options=T.unsafe(nil), format=T.unsafe(nil)); end
+
+  def self.scan(code, lang, options=T.unsafe(nil), &block); end
+
+  def self.scan_file(filename, lang=T.unsafe(nil), options=T.unsafe(nil), &block); end
+
+  def self.scanner(lang, options=T.unsafe(nil), &block); end
 end
 
 class Complex
@@ -830,6 +2947,10 @@ class Complex
   def self.rect(*_); end
 
   def self.rectangular(*_); end
+end
+
+class Date::Infinity
+  def initialize(d=T.unsafe(nil)); end
 end
 
 class Delegator
@@ -1331,6 +3452,8 @@ class Etc::Passwd
 end
 
 class Exception
+  def __bb_context(); end
+
   def full_message(*_); end
 end
 
@@ -1338,6 +3461,35 @@ class Exception
   def self.exception(*_); end
 
   def self.to_tty?(); end
+end
+
+module Exception2MessageMapper
+  def bind(cl); end
+
+end
+
+Exception2MessageMapper::E2MM = Exception2MessageMapper
+
+class Exception2MessageMapper::ErrNotRegisteredException
+end
+
+class Exception2MessageMapper::ErrNotRegisteredException
+end
+
+module Exception2MessageMapper
+  def self.Fail(klass=T.unsafe(nil), err=T.unsafe(nil), *rest); end
+
+  def self.Raise(klass=T.unsafe(nil), err=T.unsafe(nil), *rest); end
+
+  def self.def_e2message(k, c, m); end
+
+  def self.def_exception(k, n, m, s=T.unsafe(nil)); end
+
+  def self.e2mm_message(klass, exp); end
+
+  def self.extend_object(cl); end
+
+  def self.message(klass, exp); end
 end
 
 class ExitCalledError
@@ -1436,6 +3588,33 @@ class Float
   include ::JSON::Ext::Generator::GeneratorMethods::Float
 end
 
+module Forwardable
+  def def_delegator(accessor, method, ali=T.unsafe(nil)); end
+
+  def def_delegators(accessor, *methods); end
+
+  def def_instance_delegator(accessor, method, ali=T.unsafe(nil)); end
+
+  def def_instance_delegators(accessor, *methods); end
+
+  def delegate(hash); end
+
+  def instance_delegate(hash); end
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+module Forwardable
+  def self._compile_method(src, file, line); end
+
+  def self._delegator_method(obj, accessor, method, ali); end
+
+  def self._valid_method?(method); end
+
+  def self.debug(); end
+
+  def self.debug=(debug); end
+end
+
 module GC
   def garbage_collect(*_); end
 end
@@ -1503,6 +3682,21 @@ end
 
 class Hash
   def self.try_convert(_); end
+end
+
+class HelperClass
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+end
+
+module HelperModule::Test
+  extend ::T::Private::Methods::SingletonMethodHooks
+  extend ::T::Private::Methods::MethodHooks
+end
+
+module HelperModule
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
 end
 
 class IO
@@ -1648,6 +3842,641 @@ class IPAddr
   def self.ntop(addr); end
 end
 
+module IRB
+  IRBRC_EXT = ::T.let(nil, ::T.untyped)
+  MagicFile = ::T.let(nil, ::T.untyped)
+  STDIN_FILE_NAME = ::T.let(nil, ::T.untyped)
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+class IRB::Abort
+end
+
+class IRB::Abort
+end
+
+class IRB::Context
+  def __exit__(*_); end
+
+  def __inspect__(); end
+
+  def __to_s__(); end
+
+  def ap_name(); end
+
+  def ap_name=(ap_name); end
+
+  def auto_indent_mode(); end
+
+  def auto_indent_mode=(auto_indent_mode); end
+
+  def back_trace_limit(); end
+
+  def back_trace_limit=(back_trace_limit); end
+
+  def debug?(); end
+
+  def debug_level(); end
+
+  def debug_level=(value); end
+
+  def echo(); end
+
+  def echo=(echo); end
+
+  def echo?(); end
+
+  def eval_history=(*opts, &b); end
+
+  def evaluate(line, line_no, exception: T.unsafe(nil)); end
+
+  def exit(ret=T.unsafe(nil)); end
+
+  def file_input?(); end
+
+  def ignore_eof(); end
+
+  def ignore_eof=(ignore_eof); end
+
+  def ignore_eof?(); end
+
+  def ignore_sigint(); end
+
+  def ignore_sigint=(ignore_sigint); end
+
+  def ignore_sigint?(); end
+
+  def initialize(irb, workspace=T.unsafe(nil), input_method=T.unsafe(nil), output_method=T.unsafe(nil)); end
+
+  def inspect?(); end
+
+  def inspect_last_value(); end
+
+  def inspect_mode(); end
+
+  def inspect_mode=(opt); end
+
+  def io(); end
+
+  def io=(io); end
+
+  def irb(); end
+
+  def irb=(irb); end
+
+  def irb_name(); end
+
+  def irb_name=(irb_name); end
+
+  def irb_path(); end
+
+  def irb_path=(irb_path); end
+
+  def last_value(); end
+
+  def load_modules(); end
+
+  def load_modules=(load_modules); end
+
+  def main(); end
+
+  def prompt_c(); end
+
+  def prompt_c=(prompt_c); end
+
+  def prompt_i(); end
+
+  def prompt_i=(prompt_i); end
+
+  def prompt_mode(); end
+
+  def prompt_mode=(mode); end
+
+  def prompt_n(); end
+
+  def prompt_n=(prompt_n); end
+
+  def prompt_s(); end
+
+  def prompt_s=(prompt_s); end
+
+  def prompting?(); end
+
+  def rc(); end
+
+  def rc=(rc); end
+
+  def rc?(); end
+
+  def return_format(); end
+
+  def return_format=(return_format); end
+
+  def save_history=(*opts, &b); end
+
+  def set_last_value(value); end
+
+  def thread(); end
+
+  def use_loader=(*opts, &b); end
+
+  def use_readline(); end
+
+  def use_readline=(opt); end
+
+  def use_readline?(); end
+
+  def use_tracer=(*opts, &b); end
+
+  def verbose(); end
+
+  def verbose=(verbose); end
+
+  def verbose?(); end
+
+  def workspace(); end
+
+  def workspace=(workspace); end
+
+  def workspace_home(); end
+  IDNAME_IVARS = ::T.let(nil, ::T.untyped)
+  NOPRINTING_IVARS = ::T.let(nil, ::T.untyped)
+  NO_INSPECTING_IVARS = ::T.let(nil, ::T.untyped)
+end
+
+class IRB::Context
+end
+
+module IRB::ContextExtender
+end
+
+IRB::ContextExtender::CE = IRB::ContextExtender
+
+module IRB::ContextExtender
+  def self.def_extend_command(cmd_name, load_file, *aliases); end
+
+  def self.install_extend_commands(); end
+end
+
+class IRB::DefaultEncodings
+  def external(); end
+
+  def external=(_); end
+
+  def internal(); end
+
+  def internal=(_); end
+end
+
+class IRB::DefaultEncodings
+  def self.[](*_); end
+
+  def self.members(); end
+end
+
+module IRB::ExtendCommandBundle
+  def install_alias_method(to, from, override=T.unsafe(nil)); end
+
+  def irb(*opts, &b); end
+
+  def irb_change_workspace(*opts, &b); end
+
+  def irb_context(); end
+
+  def irb_current_working_workspace(*opts, &b); end
+
+  def irb_exit(ret=T.unsafe(nil)); end
+
+  def irb_fg(*opts, &b); end
+
+  def irb_help(*opts, &b); end
+
+  def irb_jobs(*opts, &b); end
+
+  def irb_kill(*opts, &b); end
+
+  def irb_load(*opts, &b); end
+
+  def irb_pop_workspace(*opts, &b); end
+
+  def irb_push_workspace(*opts, &b); end
+
+  def irb_require(*opts, &b); end
+
+  def irb_source(*opts, &b); end
+
+  def irb_workspaces(*opts, &b); end
+  NO_OVERRIDE = ::T.let(nil, ::T.untyped)
+  OVERRIDE_ALL = ::T.let(nil, ::T.untyped)
+  OVERRIDE_PRIVATE_ONLY = ::T.let(nil, ::T.untyped)
+end
+
+IRB::ExtendCommandBundle::EXCB = IRB::ExtendCommandBundle
+
+module IRB::ExtendCommandBundle
+  def self.def_extend_command(cmd_name, cmd_class, load_file=T.unsafe(nil), *aliases); end
+
+  def self.extend_object(obj); end
+
+  def self.install_extend_commands(); end
+
+  def self.irb_original_method_name(method_name); end
+end
+
+class IRB::FileInputMethod
+  def encoding(); end
+
+  def eof?(); end
+
+  def initialize(file); end
+end
+
+class IRB::FileInputMethod
+end
+
+class IRB::InputMethod
+  def file_name(); end
+
+  def gets(); end
+
+  def initialize(file=T.unsafe(nil)); end
+
+  def prompt(); end
+
+  def prompt=(prompt); end
+
+  def readable_after_eof?(); end
+end
+
+class IRB::InputMethod
+end
+
+class IRB::Inspector
+  def init(); end
+
+  def initialize(inspect_proc, init_proc=T.unsafe(nil)); end
+
+  def inspect_value(v); end
+  INSPECTORS = ::T.let(nil, ::T.untyped)
+end
+
+class IRB::Inspector
+  def self.def_inspector(key, arg=T.unsafe(nil), &block); end
+
+  def self.keys_with_inspector(inspector); end
+end
+
+class IRB::Irb
+  def context(); end
+
+  def eval_input(); end
+
+  def handle_exception(exc); end
+
+  def initialize(workspace=T.unsafe(nil), input_method=T.unsafe(nil), output_method=T.unsafe(nil)); end
+
+  def output_value(); end
+
+  def prompt(prompt, ltype, indent, line_no); end
+
+  def run(conf=T.unsafe(nil)); end
+
+  def scanner(); end
+
+  def scanner=(scanner); end
+
+  def signal_handle(); end
+
+  def signal_status(status); end
+
+  def suspend_context(context); end
+
+  def suspend_input_method(input_method); end
+
+  def suspend_name(path=T.unsafe(nil), name=T.unsafe(nil)); end
+
+  def suspend_workspace(workspace); end
+  ATTR_PLAIN = ::T.let(nil, ::T.untyped)
+  ATTR_TTY = ::T.let(nil, ::T.untyped)
+end
+
+class IRB::Irb
+end
+
+class IRB::Locale
+  def String(mes); end
+
+  def encoding(); end
+
+  def find(file, paths=T.unsafe(nil)); end
+
+  def format(*opts); end
+
+  def gets(*rs); end
+
+  def initialize(locale=T.unsafe(nil)); end
+
+  def lang(); end
+
+  def load(file, priv=T.unsafe(nil)); end
+
+  def modifier(); end
+
+  def print(*opts); end
+
+  def printf(*opts); end
+
+  def puts(*opts); end
+
+  def readline(*rs); end
+
+  def require(file, priv=T.unsafe(nil)); end
+
+  def territory(); end
+  LOCALE_DIR = ::T.let(nil, ::T.untyped)
+  LOCALE_NAME_RE = ::T.let(nil, ::T.untyped)
+end
+
+class IRB::Locale
+end
+
+module IRB::MethodExtender
+  def def_post_proc(base_method, extend_method); end
+
+  def def_pre_proc(base_method, extend_method); end
+
+  def new_alias_name(name, prefix=T.unsafe(nil), postfix=T.unsafe(nil)); end
+end
+
+module IRB::MethodExtender
+end
+
+module IRB::Notifier
+  def Fail(err=T.unsafe(nil), *rest); end
+
+  def Raise(err=T.unsafe(nil), *rest); end
+  D_NOMSG = ::T.let(nil, ::T.untyped)
+end
+
+class IRB::Notifier::AbstractNotifier
+  def exec_if(); end
+
+  def initialize(prefix, base_notifier); end
+
+  def notify?(); end
+
+  def ppx(prefix, *objs); end
+
+  def prefix(); end
+
+  def print(*opts); end
+
+  def printf(format, *opts); end
+
+  def printn(*opts); end
+
+  def puts(*objs); end
+end
+
+class IRB::Notifier::AbstractNotifier
+end
+
+class IRB::Notifier::CompositeNotifier
+  def def_notifier(level, prefix=T.unsafe(nil)); end
+
+  def level(); end
+
+  def level=(value); end
+
+  def level_notifier(); end
+
+  def level_notifier=(value); end
+
+  def notifiers(); end
+end
+
+class IRB::Notifier::CompositeNotifier
+end
+
+class IRB::Notifier::ErrUndefinedNotifier
+end
+
+class IRB::Notifier::ErrUndefinedNotifier
+end
+
+class IRB::Notifier::ErrUnrecognizedLevel
+end
+
+class IRB::Notifier::ErrUnrecognizedLevel
+end
+
+class IRB::Notifier::LeveledNotifier
+  include ::Comparable
+  def initialize(base, level, prefix); end
+
+  def level(); end
+end
+
+class IRB::Notifier::LeveledNotifier
+end
+
+class IRB::Notifier::NoMsgNotifier
+  def initialize(); end
+end
+
+class IRB::Notifier::NoMsgNotifier
+end
+
+module IRB::Notifier
+  extend ::Exception2MessageMapper
+  def self.def_notifier(prefix=T.unsafe(nil), output_method=T.unsafe(nil)); end
+
+  def self.included(mod); end
+end
+
+class IRB::OutputMethod
+  def Fail(err=T.unsafe(nil), *rest); end
+
+  def Raise(err=T.unsafe(nil), *rest); end
+
+  def parse_printf_format(format, opts); end
+
+  def ppx(prefix, *objs); end
+
+  def print(*opts); end
+
+  def printf(format, *opts); end
+
+  def printn(*opts); end
+
+  def puts(*objs); end
+end
+
+class IRB::OutputMethod::NotImplementedError
+end
+
+class IRB::OutputMethod::NotImplementedError
+end
+
+class IRB::OutputMethod
+  extend ::Exception2MessageMapper
+  def self.included(mod); end
+end
+
+class IRB::ReadlineInputMethod
+  include ::Readline
+  def encoding(); end
+
+  def eof?(); end
+
+  def initialize(); end
+
+  def line(line_no); end
+end
+
+class IRB::ReadlineInputMethod
+end
+
+class IRB::SLex
+  def Fail(err=T.unsafe(nil), *rest); end
+
+  def Raise(err=T.unsafe(nil), *rest); end
+
+  def create(token, preproc=T.unsafe(nil), postproc=T.unsafe(nil)); end
+
+  def def_rule(token, preproc=T.unsafe(nil), postproc=T.unsafe(nil), &block); end
+
+  def def_rules(*tokens, &block); end
+
+  def match(token); end
+
+  def postproc(token); end
+
+  def preproc(token, proc); end
+
+  def search(token); end
+  DOUT = ::T.let(nil, ::T.untyped)
+  D_DEBUG = ::T.let(nil, ::T.untyped)
+  D_DETAIL = ::T.let(nil, ::T.untyped)
+  D_WARN = ::T.let(nil, ::T.untyped)
+end
+
+class IRB::SLex::ErrNodeAlreadyExists
+end
+
+class IRB::SLex::ErrNodeAlreadyExists
+end
+
+class IRB::SLex::ErrNodeNothing
+end
+
+class IRB::SLex::ErrNodeNothing
+end
+
+class IRB::SLex::Node
+  def create_subnode(chrs, preproc=T.unsafe(nil), postproc=T.unsafe(nil)); end
+
+  def initialize(preproc=T.unsafe(nil), postproc=T.unsafe(nil)); end
+
+  def match(chrs, op=T.unsafe(nil)); end
+
+  def match_io(io, op=T.unsafe(nil)); end
+
+  def postproc(); end
+
+  def postproc=(postproc); end
+
+  def preproc(); end
+
+  def preproc=(preproc); end
+
+  def search(chrs, opt=T.unsafe(nil)); end
+end
+
+class IRB::SLex::Node
+end
+
+class IRB::SLex
+  extend ::Exception2MessageMapper
+  def self.included(mod); end
+end
+
+class IRB::StdioInputMethod
+  def encoding(); end
+
+  def eof?(); end
+
+  def initialize(); end
+
+  def line(line_no); end
+end
+
+class IRB::StdioInputMethod
+end
+
+class IRB::StdioOutputMethod
+end
+
+class IRB::StdioOutputMethod
+end
+
+class IRB::WorkSpace
+  def code_around_binding(); end
+
+  def evaluate(context, statements, file=T.unsafe(nil), line=T.unsafe(nil)); end
+
+  def filter_backtrace(bt); end
+
+  def initialize(*main); end
+
+  def local_variable_get(name); end
+
+  def local_variable_set(name, value); end
+
+  def main(); end
+end
+
+class IRB::WorkSpace
+end
+
+module IRB
+  def self.CurrentContext(); end
+
+  def self.Inspector(inspect, init=T.unsafe(nil)); end
+
+  def self.conf(); end
+
+  def self.default_src_encoding(); end
+
+  def self.delete_caller(); end
+
+  def self.init_config(ap_path); end
+
+  def self.init_error(); end
+
+  def self.irb_abort(irb, exception=T.unsafe(nil)); end
+
+  def self.irb_at_exit(); end
+
+  def self.irb_exit(irb, ret); end
+
+  def self.load_modules(); end
+
+  def self.parse_opts(argv: T.unsafe(nil)); end
+
+  def self.rc_file(ext=T.unsafe(nil)); end
+
+  def self.rc_file_generators(); end
+
+  def self.run_config(); end
+
+  def self.setup(ap_path, argv: T.unsafe(nil)); end
+
+  def self.start(ap_path=T.unsafe(nil)); end
+
+  def self.version(); end
+end
+
 class Integer
   include ::JSON::Ext::Generator::GeneratorMethods::Integer
   def allbits?(_); end
@@ -1683,13 +4512,19 @@ JSON::State = JSON::Ext::Generator::State
 JSON::UnparserError = JSON::GeneratorError
 
 module Kernel
+  def byebug(); end
+
+  def debugger(); end
+
   def gem(dep, *reqs); end
 
   def itself(); end
 
   def object_id(); end
 
-  def respond_to?(*_); end
+  def pretty_inspect(); end
+
+  def remote_byebug(host=T.unsafe(nil), port=T.unsafe(nil)); end
 
   def then(); end
 
@@ -1719,6 +4554,100 @@ end
 
 module Marshal
   def self.restore(*_); end
+end
+
+class Method
+  include ::MethodSource::SourceLocation::MethodExtensions
+  include ::MethodSource::MethodExtensions
+end
+
+module MethodSource
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+module MethodSource::CodeHelpers
+  def comment_describing(file, line_number); end
+
+  def complete_expression?(str); end
+
+  def expression_at(file, line_number, options=T.unsafe(nil)); end
+end
+
+module MethodSource::CodeHelpers::IncompleteExpression
+  GENERIC_REGEXPS = ::T.let(nil, ::T.untyped)
+  RBX_ONLY_REGEXPS = ::T.let(nil, ::T.untyped)
+end
+
+module MethodSource::CodeHelpers::IncompleteExpression
+  def self.===(ex); end
+
+  def self.rbx?(); end
+end
+
+module MethodSource::CodeHelpers
+end
+
+module MethodSource::MethodExtensions
+  def comment(); end
+
+  def source(); end
+end
+
+module MethodSource::MethodExtensions
+  def self.included(klass); end
+end
+
+module MethodSource::ReeSourceLocation
+  def source_location(); end
+end
+
+module MethodSource::ReeSourceLocation
+end
+
+module MethodSource::SourceLocation
+end
+
+module MethodSource::SourceLocation::MethodExtensions
+  def source_location(); end
+end
+
+module MethodSource::SourceLocation::MethodExtensions
+end
+
+module MethodSource::SourceLocation::ProcExtensions
+  def source_location(); end
+end
+
+module MethodSource::SourceLocation::ProcExtensions
+end
+
+module MethodSource::SourceLocation::UnboundMethodExtensions
+  def source_location(); end
+end
+
+module MethodSource::SourceLocation::UnboundMethodExtensions
+end
+
+module MethodSource::SourceLocation
+end
+
+class MethodSource::SourceNotFoundError
+end
+
+class MethodSource::SourceNotFoundError
+end
+
+module MethodSource
+  extend ::MethodSource::CodeHelpers
+  def self.comment_helper(source_location, name=T.unsafe(nil)); end
+
+  def self.extract_code(source_location); end
+
+  def self.lines_for(file_name, name=T.unsafe(nil)); end
+
+  def self.source_helper(source_location, name=T.unsafe(nil)); end
+
+  def self.valid_expression?(str); end
 end
 
 Methods = T::Private::Methods
@@ -2505,6 +5434,202 @@ class NameError
   def receiver(); end
 end
 
+class Net::BufferedIO
+  def write_timeout(); end
+
+  def write_timeout=(write_timeout); end
+end
+
+class Net::HTTP
+  def max_retries(); end
+
+  def max_retries=(retries); end
+
+  def max_version(); end
+
+  def max_version=(max_version); end
+
+  def min_version(); end
+
+  def min_version=(min_version); end
+
+  def write_timeout(); end
+
+  def write_timeout=(sec); end
+  ENVIRONMENT_VARIABLE_IS_MULTIUSER_SAFE = ::T.let(nil, ::T.untyped)
+end
+
+class Net::HTTPAlreadyReported
+  HAS_BODY = ::T.let(nil, ::T.untyped)
+end
+
+class Net::HTTPAlreadyReported
+end
+
+class Net::HTTPClientError
+end
+
+Net::HTTPClientErrorCode::EXCEPTION_TYPE = Net::HTTPServerException
+
+class Net::HTTPClientError
+end
+
+Net::HTTPClientException = Net::HTTPServerException
+
+class Net::HTTPEarlyHints
+  HAS_BODY = ::T.let(nil, ::T.untyped)
+end
+
+class Net::HTTPEarlyHints
+end
+
+Net::HTTPFatalErrorCode = Net::HTTPClientError
+
+class Net::HTTPGatewayTimeout
+  HAS_BODY = ::T.let(nil, ::T.untyped)
+end
+
+class Net::HTTPGatewayTimeout
+end
+
+class Net::HTTPInformation
+end
+
+Net::HTTPInformationCode::EXCEPTION_TYPE = Net::HTTPError
+
+class Net::HTTPInformation
+end
+
+class Net::HTTPLoopDetected
+  HAS_BODY = ::T.let(nil, ::T.untyped)
+end
+
+class Net::HTTPLoopDetected
+end
+
+class Net::HTTPMisdirectedRequest
+  HAS_BODY = ::T.let(nil, ::T.untyped)
+end
+
+class Net::HTTPMisdirectedRequest
+end
+
+Net::HTTPMovedTemporarily = Net::HTTPFound
+
+Net::HTTPMultipleChoice = Net::HTTPMultipleChoices
+
+class Net::HTTPNotExtended
+  HAS_BODY = ::T.let(nil, ::T.untyped)
+end
+
+class Net::HTTPNotExtended
+end
+
+class Net::HTTPPayloadTooLarge
+  HAS_BODY = ::T.let(nil, ::T.untyped)
+end
+
+class Net::HTTPPayloadTooLarge
+end
+
+class Net::HTTPProcessing
+  HAS_BODY = ::T.let(nil, ::T.untyped)
+end
+
+class Net::HTTPProcessing
+end
+
+class Net::HTTPRangeNotSatisfiable
+  HAS_BODY = ::T.let(nil, ::T.untyped)
+end
+
+class Net::HTTPRangeNotSatisfiable
+end
+
+class Net::HTTPRedirection
+end
+
+Net::HTTPRedirectionCode::EXCEPTION_TYPE = Net::HTTPRetriableError
+
+class Net::HTTPRedirection
+end
+
+class Net::HTTPRequestTimeout
+  HAS_BODY = ::T.let(nil, ::T.untyped)
+end
+
+class Net::HTTPRequestTimeout
+end
+
+Net::HTTPRequestURITooLarge = Net::HTTPURITooLong
+
+Net::HTTPResponceReceiver = Net::HTTPResponse
+
+Net::HTTPRetriableCode = Net::HTTPRedirection
+
+class Net::HTTPServerError
+end
+
+Net::HTTPServerErrorCode::EXCEPTION_TYPE = Net::HTTPFatalError
+
+class Net::HTTPServerError
+end
+
+class Net::HTTP
+end
+
+Net::HTTPSession::ProxyDelta = Net::HTTP::ProxyDelta
+
+Net::HTTPSession::ProxyMod = Net::HTTP::ProxyDelta
+
+class Net::HTTP
+end
+
+class Net::HTTPSuccess
+end
+
+Net::HTTPSuccessCode::EXCEPTION_TYPE = Net::HTTPError
+
+class Net::HTTPSuccess
+end
+
+class Net::HTTPURITooLong
+  HAS_BODY = ::T.let(nil, ::T.untyped)
+end
+
+class Net::HTTPURITooLong
+end
+
+Net::HTTPUnknownResponse::EXCEPTION_TYPE = Net::HTTPError
+
+class Net::HTTPVariantAlsoNegotiates
+  HAS_BODY = ::T.let(nil, ::T.untyped)
+end
+
+class Net::HTTPVariantAlsoNegotiates
+end
+
+Net::NetPrivate::HTTPRequest = Net::HTTPRequest
+
+Net::NetPrivate::Socket = Net::InternetMessageIO
+
+Net::ProtocRetryError = Net::ProtoRetriableError
+
+class Net::ReadTimeout
+  def initialize(io=T.unsafe(nil)); end
+
+  def io(); end
+end
+
+class Net::WriteTimeout
+  def initialize(io=T.unsafe(nil)); end
+
+  def io(); end
+end
+
+class Net::WriteTimeout
+end
+
 class NilClass
   include ::JSON::Ext::Generator::GeneratorMethods::NilClass
   def to_i(); end
@@ -2519,7 +5644,12 @@ end
 class Object
   include ::JSON::Ext::Generator::GeneratorMethods::Object
   include ::Minitest::Expectations
+  include ::PP::ObjectMixin
+  def pry(object=T.unsafe(nil), hash=T.unsafe(nil)); end
+
   def stub(name, val_or_callable, *block_args); end
+
+  def to_yaml(options=T.unsafe(nil)); end
   ARGF = ::T.let(nil, ::T.untyped)
   ARGV = ::T.let(nil, ::T.untyped)
   CROSS_COMPILING = ::T.let(nil, ::T.untyped)
@@ -2538,6 +5668,10 @@ class Object
   STDIN = ::T.let(nil, ::T.untyped)
   STDOUT = ::T.let(nil, ::T.untyped)
   TOPLEVEL_BINDING = ::T.let(nil, ::T.untyped)
+end
+
+class Object
+  def self.yaml_tag(url); end
 end
 
 class ObjectSpace::WeakMap
@@ -2572,6 +5706,137 @@ module ObjectSpace
   def self.garbage_collect(*_); end
 
   def self.undefine_finalizer(_); end
+end
+
+class OpenSSL::ASN1::ASN1Data
+  def indefinite_length(); end
+
+  def indefinite_length=(indefinite_length); end
+end
+
+class OpenSSL::BN
+  def +@(); end
+
+  def -@(); end
+
+  def /(_); end
+
+  def negative?(); end
+end
+
+module OpenSSL::KDF
+end
+
+class OpenSSL::KDF::KDFError
+end
+
+class OpenSSL::KDF::KDFError
+end
+
+module OpenSSL::KDF
+  def self.hkdf(*_); end
+
+  def self.pbkdf2_hmac(*_); end
+
+  def self.scrypt(*_); end
+end
+
+class OpenSSL::OCSP::Request
+  def signed?(); end
+end
+
+OpenSSL::PKCS7::Signer = OpenSSL::PKCS7::SignerInfo
+
+class OpenSSL::PKey::EC
+  EXPLICIT_CURVE = ::T.let(nil, ::T.untyped)
+end
+
+class OpenSSL::PKey::EC::Point
+  def to_octet_string(_); end
+end
+
+class OpenSSL::PKey::RSA
+  def sign_pss(*_); end
+
+  def verify_pss(*_); end
+end
+
+module OpenSSL::SSL
+  OP_ALLOW_NO_DHE_KEX = ::T.let(nil, ::T.untyped)
+  OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION = ::T.let(nil, ::T.untyped)
+  OP_CRYPTOPRO_TLSEXT_BUG = ::T.let(nil, ::T.untyped)
+  OP_LEGACY_SERVER_CONNECT = ::T.let(nil, ::T.untyped)
+  OP_NO_ENCRYPT_THEN_MAC = ::T.let(nil, ::T.untyped)
+  OP_NO_RENEGOTIATION = ::T.let(nil, ::T.untyped)
+  OP_NO_TLSv1_3 = ::T.let(nil, ::T.untyped)
+  OP_SAFARI_ECDHE_ECDSA_BUG = ::T.let(nil, ::T.untyped)
+  OP_TLSEXT_PADDING = ::T.let(nil, ::T.untyped)
+  SSL2_VERSION = ::T.let(nil, ::T.untyped)
+  SSL3_VERSION = ::T.let(nil, ::T.untyped)
+  TLS1_1_VERSION = ::T.let(nil, ::T.untyped)
+  TLS1_2_VERSION = ::T.let(nil, ::T.untyped)
+  TLS1_3_VERSION = ::T.let(nil, ::T.untyped)
+  TLS1_VERSION = ::T.let(nil, ::T.untyped)
+end
+
+class OpenSSL::SSL::SSLContext
+  def add_certificate(*_); end
+
+  def alpn_protocols(); end
+
+  def alpn_protocols=(alpn_protocols); end
+
+  def alpn_select_cb(); end
+
+  def alpn_select_cb=(alpn_select_cb); end
+
+  def enable_fallback_scsv(); end
+
+  def max_version=(version); end
+
+  def min_version=(version); end
+  DEFAULT_TMP_DH_CALLBACK = ::T.let(nil, ::T.untyped)
+end
+
+class OpenSSL::SSL::SSLSocket
+  def alpn_protocol(); end
+
+  def tmp_key(); end
+end
+
+module OpenSSL::X509
+  V_FLAG_NO_CHECK_TIME = ::T.let(nil, ::T.untyped)
+  V_FLAG_TRUSTED_FIRST = ::T.let(nil, ::T.untyped)
+end
+
+class OpenSSL::X509::Attribute
+  def ==(other); end
+end
+
+class OpenSSL::X509::CRL
+  def ==(other); end
+end
+
+class OpenSSL::X509::Extension
+  def ==(other); end
+end
+
+class OpenSSL::X509::Name
+  def to_utf8(); end
+end
+
+class OpenSSL::X509::Request
+  def ==(other); end
+end
+
+class OpenSSL::X509::Revoked
+  def ==(other); end
+
+  def to_der(); end
+end
+
+module OpenSSL
+  def self.fips_mode(); end
 end
 
 ParseError = Racc::ParseError
@@ -5061,6 +8326,8 @@ class Pathname
 end
 
 class Proc
+  include ::MethodSource::SourceLocation::ProcExtensions
+  include ::MethodSource::MethodExtensions
   def <<(_); end
 
   def ===(*_); end
@@ -5110,6 +8377,4266 @@ module Process
   def self.last_status(); end
 
   def self.setpgrp(); end
+end
+
+class Pry
+  def add_sticky_local(name, &block); end
+
+  def backtrace(); end
+
+  def backtrace=(backtrace); end
+
+  def binding_stack(); end
+
+  def binding_stack=(binding_stack); end
+
+  def color(); end
+
+  def color=(value); end
+
+  def command_state(); end
+
+  def commands(); end
+
+  def commands=(value); end
+
+  def complete(str); end
+
+  def config(); end
+
+  def current_binding(); end
+
+  def current_context(); end
+
+  def custom_completions(); end
+
+  def custom_completions=(custom_completions); end
+
+  def editor(); end
+
+  def editor=(value); end
+
+  def eval(line, options=T.unsafe(nil)); end
+
+  def eval_string(); end
+
+  def eval_string=(eval_string); end
+
+  def evaluate_ruby(code); end
+
+  def exception_handler(); end
+
+  def exception_handler=(value); end
+
+  def exec_hook(name, *args, &block); end
+
+  def exit_value(); end
+
+  def extra_sticky_locals(); end
+
+  def extra_sticky_locals=(value); end
+
+  def hooks(); end
+
+  def hooks=(value); end
+
+  def initialize(options=T.unsafe(nil)); end
+
+  def inject_local(name, value, b); end
+
+  def inject_sticky_locals!(); end
+
+  def input(); end
+
+  def input=(value); end
+
+  def input_array(); end
+
+  def input_ring(); end
+
+  def last_dir(); end
+
+  def last_dir=(last_dir); end
+
+  def last_exception(); end
+
+  def last_exception=(e); end
+
+  def last_file(); end
+
+  def last_file=(last_file); end
+
+  def last_result(); end
+
+  def last_result=(last_result); end
+
+  def last_result_is_exception?(); end
+
+  def memory_size(); end
+
+  def memory_size=(size); end
+
+  def output(); end
+
+  def output=(value); end
+
+  def output_array(); end
+
+  def output_ring(); end
+
+  def pager(); end
+
+  def pager=(value); end
+
+  def pop_prompt(); end
+
+  def print(); end
+
+  def print=(value); end
+
+  def process_command(val); end
+
+  def process_command_safely(val); end
+
+  def prompt(); end
+
+  def prompt=(new_prompt); end
+
+  def push_binding(object); end
+
+  def push_initial_binding(target=T.unsafe(nil)); end
+
+  def push_prompt(new_prompt); end
+
+  def quiet?(); end
+
+  def raise_up(*args); end
+
+  def raise_up!(*args); end
+
+  def raise_up_common(force, *args); end
+
+  def repl(target=T.unsafe(nil)); end
+
+  def reset_eval_string(); end
+
+  def run_command(val); end
+
+  def select_prompt(); end
+
+  def set_last_result(result, code=T.unsafe(nil)); end
+
+  def should_print?(); end
+
+  def show_result(result); end
+
+  def sticky_locals(); end
+
+  def suppress_output(); end
+
+  def suppress_output=(suppress_output); end
+
+  def update_input_history(code); end
+  BINDING_METHOD_IMPL = ::T.let(nil, ::T.untyped)
+  CLIPPED_PRINT = ::T.let(nil, ::T.untyped)
+  Commands = ::T.let(nil, ::T.untyped)
+  DEFAULT_CONTROL_D_HANDLER = ::T.let(nil, ::T.untyped)
+  DEFAULT_EXCEPTION_HANDLER = ::T.let(nil, ::T.untyped)
+  DEFAULT_EXCEPTION_WHITELIST = ::T.let(nil, ::T.untyped)
+  DEFAULT_HOOKS = ::T.let(nil, ::T.untyped)
+  DEFAULT_PRINT = ::T.let(nil, ::T.untyped)
+  DEFAULT_SYSTEM = ::T.let(nil, ::T.untyped)
+  EMPTY_COMPLETIONS = ::T.let(nil, ::T.untyped)
+  HOME_RC_FILE = ::T.let(nil, ::T.untyped)
+  LOCAL_RC_FILE = ::T.let(nil, ::T.untyped)
+  SIMPLE_PRINT = ::T.let(nil, ::T.untyped)
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+class Pry::BasicObject
+  include ::Kernel
+end
+
+Pry::BasicObject::Kernel = Kernel
+
+Pry::BasicObject::Pry = Pry
+
+class Pry::BasicObject
+end
+
+class Pry::BlockCommand
+  def call(*args); end
+
+  def help(); end
+
+  def opts(); end
+end
+
+class Pry::BlockCommand
+end
+
+module Pry::Byebug
+end
+
+module Pry::Byebug::Breakpoints
+  def add_file(file, line, expression=T.unsafe(nil)); end
+
+  def add_method(method, expression=T.unsafe(nil)); end
+
+  def breakpoints(); end
+
+  def change(id, expression=T.unsafe(nil)); end
+
+  def delete(id); end
+
+  def delete_all(); end
+
+  def disable(id); end
+
+  def disable_all(); end
+
+  def each(&block); end
+
+  def enable(id); end
+
+  def find_by_id(id); end
+
+  def last(); end
+
+  def size(); end
+
+  def to_a(); end
+end
+
+class Pry::Byebug::Breakpoints::FileBreakpoint
+  def source_code(); end
+
+  def to_s(); end
+end
+
+class Pry::Byebug::Breakpoints::FileBreakpoint
+end
+
+class Pry::Byebug::Breakpoints::MethodBreakpoint
+  def initialize(byebug_bp, method); end
+
+  def source_code(); end
+
+  def to_s(); end
+end
+
+class Pry::Byebug::Breakpoints::MethodBreakpoint
+end
+
+module Pry::Byebug::Breakpoints
+  extend ::Enumerable
+  extend ::Pry::Byebug::Breakpoints
+end
+
+module Pry::Byebug
+end
+
+class Pry::CLI
+end
+
+class Pry::CLI::NoOptionsError
+end
+
+class Pry::CLI::NoOptionsError
+end
+
+class Pry::CLI
+  def self.add_option_processor(&block); end
+
+  def self.add_options(&block); end
+
+  def self.add_plugin_options(); end
+
+  def self.input_args(); end
+
+  def self.input_args=(input_args); end
+
+  def self.option_processors(); end
+
+  def self.option_processors=(option_processors); end
+
+  def self.options(); end
+
+  def self.options=(options); end
+
+  def self.parse_options(args=T.unsafe(nil)); end
+
+  def self.reset(); end
+
+  def self.start(opts); end
+end
+
+class Pry::ClassCommand
+  def args(); end
+
+  def args=(args); end
+
+  def call(*args); end
+
+  def complete(search); end
+
+  def help(); end
+
+  def options(opt); end
+
+  def opts(); end
+
+  def opts=(opts); end
+
+  def process(); end
+
+  def setup(); end
+
+  def slop(); end
+
+  def subcommands(cmd); end
+end
+
+class Pry::ClassCommand
+  def self.inherited(klass); end
+
+  def self.source_location(); end
+end
+
+class Pry::Code
+  def <<(line, lineno=T.unsafe(nil)); end
+
+  def ==(other); end
+
+  def after(lineno, lines=T.unsafe(nil)); end
+
+  def alter(&block); end
+
+  def around(lineno, lines=T.unsafe(nil)); end
+
+  def before(lineno, lines=T.unsafe(nil)); end
+
+  def between(start_line, end_line=T.unsafe(nil)); end
+
+  def code_type(); end
+
+  def code_type=(code_type); end
+
+  def comment_describing(line_number); end
+
+  def expression_at(line_number, consume=T.unsafe(nil)); end
+
+  def grep(pattern); end
+
+  def highlighted(); end
+
+  def initialize(lines=T.unsafe(nil), start_line=T.unsafe(nil), code_type=T.unsafe(nil)); end
+
+  def length(); end
+
+  def max_lineno_width(); end
+
+  def method_missing(name, *args, &block); end
+
+  def nesting_at(line_number); end
+
+  def print_to_output(output, color=T.unsafe(nil)); end
+
+  def push(line, lineno=T.unsafe(nil)); end
+
+  def raw(); end
+
+  def select(&block); end
+
+  def take_lines(start_line, num_lines); end
+
+  def with_indentation(spaces=T.unsafe(nil)); end
+
+  def with_line_numbers(y_n=T.unsafe(nil)); end
+
+  def with_marker(lineno=T.unsafe(nil)); end
+end
+
+class Pry::Code::CodeRange
+  def indices_range(lines); end
+
+  def initialize(start_line, end_line=T.unsafe(nil)); end
+end
+
+class Pry::Code::CodeRange
+end
+
+class Pry::Code::LOC
+  def ==(other); end
+
+  def add_line_number(max_width=T.unsafe(nil), color=T.unsafe(nil)); end
+
+  def add_marker(marker_lineno); end
+
+  def colorize(code_type); end
+
+  def handle_multiline_entries_from_edit_command(line, max_width); end
+
+  def indent(distance); end
+
+  def initialize(line, lineno); end
+
+  def line(); end
+
+  def lineno(); end
+
+  def tuple(); end
+end
+
+class Pry::Code::LOC
+end
+
+class Pry::Code
+  extend ::MethodSource::CodeHelpers
+  def self.from_file(filename, code_type=T.unsafe(nil)); end
+
+  def self.from_method(meth, start_line=T.unsafe(nil)); end
+
+  def self.from_module(mod, candidate_rank=T.unsafe(nil), start_line=T.unsafe(nil)); end
+end
+
+class Pry::CodeFile
+  def code(); end
+
+  def code_type(); end
+
+  def initialize(filename, code_type=T.unsafe(nil)); end
+  DEFAULT_EXT = ::T.let(nil, ::T.untyped)
+  EXTENSIONS = ::T.let(nil, ::T.untyped)
+  FILES = ::T.let(nil, ::T.untyped)
+  INITIAL_PWD = ::T.let(nil, ::T.untyped)
+end
+
+class Pry::CodeFile
+end
+
+class Pry::CodeObject
+  include ::Pry::Helpers::CommandHelpers
+  include ::Pry::Helpers::OptionsHelpers
+  def _pry_(); end
+
+  def _pry_=(_pry_); end
+
+  def command_lookup(); end
+
+  def default_lookup(); end
+
+  def empty_lookup(); end
+
+  def initialize(str, _pry_, options=T.unsafe(nil)); end
+
+  def method_or_class_lookup(); end
+
+  def str(); end
+
+  def str=(str); end
+
+  def super_level(); end
+
+  def super_level=(super_level); end
+
+  def target(); end
+
+  def target=(target); end
+end
+
+module Pry::CodeObject::Helpers
+  def c_method?(); end
+
+  def c_module?(); end
+
+  def command?(); end
+
+  def module_with_yard_docs?(); end
+
+  def real_method_object?(); end
+end
+
+module Pry::CodeObject::Helpers
+end
+
+class Pry::CodeObject
+  def self.lookup(str, _pry_, options=T.unsafe(nil)); end
+end
+
+class Pry::ColorPrinter
+  def text(str, width=T.unsafe(nil)); end
+  OBJ_COLOR = ::T.let(nil, ::T.untyped)
+end
+
+class Pry::ColorPrinter
+  def self.pp(obj, out=T.unsafe(nil), width=T.unsafe(nil), newline=T.unsafe(nil)); end
+end
+
+class Pry::Command
+  include ::Pry::Helpers::BaseHelpers
+  include ::Pry::Helpers::CommandHelpers
+  include ::Pry::Helpers::OptionsHelpers
+  include ::Pry::Helpers::Text
+  def _pry_(); end
+
+  def _pry_=(_pry_); end
+
+  def arg_string(); end
+
+  def arg_string=(arg_string); end
+
+  def block(); end
+
+  def call_safely(*args); end
+
+  def captures(); end
+
+  def captures=(captures); end
+
+  def check_for_command_collision(command_match, arg_string); end
+
+  def command_block(); end
+
+  def command_block=(command_block); end
+
+  def command_name(); end
+
+  def command_options(); end
+
+  def command_set(); end
+
+  def command_set=(command_set); end
+
+  def commands(); end
+
+  def complete(_search); end
+
+  def context(); end
+
+  def context=(context); end
+
+  def dependencies_met?(); end
+
+  def description(); end
+
+  def eval_string(); end
+
+  def eval_string=(eval_string); end
+
+  def hooks(); end
+
+  def hooks=(hooks); end
+
+  def initialize(context=T.unsafe(nil)); end
+
+  def interpolate_string(str); end
+
+  def match(); end
+
+  def name(); end
+
+  def output(); end
+
+  def output=(output); end
+
+  def process_line(line); end
+
+  def run(command_string, *args); end
+
+  def source(); end
+
+  def state(); end
+
+  def target(); end
+
+  def target=(target); end
+
+  def target_self(); end
+
+  def text(); end
+
+  def tokenize(val); end
+
+  def use_unpatched_symbol(); end
+
+  def void(); end
+  VOID_VALUE = ::T.let(nil, ::T.untyped)
+end
+
+class Pry::Command::AmendLine
+end
+
+class Pry::Command::AmendLine
+end
+
+class Pry::Command::Bang
+end
+
+class Pry::Command::Bang
+end
+
+class Pry::Command::BangPry
+end
+
+class Pry::Command::BangPry
+end
+
+class Pry::Command::Cat
+  def load_path_completions(); end
+end
+
+class Pry::Command::Cat::AbstractFormatter
+  include ::Pry::Helpers::CommandHelpers
+  include ::Pry::Helpers::OptionsHelpers
+  include ::Pry::Helpers::BaseHelpers
+end
+
+class Pry::Command::Cat::AbstractFormatter
+end
+
+class Pry::Command::Cat::ExceptionFormatter
+  include ::Pry::Helpers::Text
+  def _pry_(); end
+
+  def ex(); end
+
+  def format(); end
+
+  def initialize(exception, _pry_, opts); end
+
+  def opts(); end
+end
+
+class Pry::Command::Cat::ExceptionFormatter
+end
+
+class Pry::Command::Cat::FileFormatter
+  def _pry_(); end
+
+  def file_and_line(); end
+
+  def file_with_embedded_line(); end
+
+  def format(); end
+
+  def initialize(file_with_embedded_line, _pry_, opts); end
+
+  def opts(); end
+end
+
+class Pry::Command::Cat::FileFormatter
+end
+
+class Pry::Command::Cat::InputExpressionFormatter
+  def format(); end
+
+  def initialize(input_expressions, opts); end
+
+  def input_expressions(); end
+
+  def input_expressions=(input_expressions); end
+
+  def opts(); end
+
+  def opts=(opts); end
+end
+
+class Pry::Command::Cat::InputExpressionFormatter
+end
+
+class Pry::Command::Cat
+end
+
+class Pry::Command::Cd
+end
+
+class Pry::Command::Cd
+end
+
+class Pry::Command::ChangeInspector
+  def process(inspector); end
+end
+
+class Pry::Command::ChangeInspector
+end
+
+class Pry::Command::ChangePrompt
+  def process(prompt); end
+end
+
+class Pry::Command::ChangePrompt
+end
+
+class Pry::Command::ClearScreen
+end
+
+class Pry::Command::ClearScreen
+end
+
+class Pry::Command::CodeCollector
+  include ::Pry::Helpers::CommandHelpers
+  include ::Pry::Helpers::OptionsHelpers
+  def _pry_(); end
+
+  def args(); end
+
+  def code_object(); end
+
+  def content(); end
+
+  def file(); end
+
+  def file=(file); end
+
+  def initialize(args, opts, _pry_); end
+
+  def line_range(); end
+
+  def obj_name(); end
+
+  def opts(); end
+
+  def pry_input_content(); end
+
+  def pry_output_content(); end
+
+  def restrict_to_lines(content, range); end
+end
+
+class Pry::Command::CodeCollector
+  def self.inject_options(opt); end
+
+  def self.input_expression_ranges(); end
+
+  def self.input_expression_ranges=(input_expression_ranges); end
+
+  def self.output_result_ranges(); end
+
+  def self.output_result_ranges=(output_result_ranges); end
+end
+
+class Pry::Command::DisablePry
+end
+
+class Pry::Command::DisablePry
+end
+
+class Pry::Command::Edit
+  def apply_runtime_patch(); end
+
+  def bad_option_combination?(); end
+
+  def code_object(); end
+
+  def ensure_file_name_is_valid(file_name); end
+
+  def file_and_line(); end
+
+  def file_and_line_for_current_exception(); end
+
+  def file_based_exception?(); end
+
+  def file_edit(); end
+
+  def filename_argument(); end
+
+  def initial_temp_file_content(); end
+
+  def input_expression(); end
+
+  def never_reload?(); end
+
+  def patch_exception?(); end
+
+  def previously_patched?(code_object); end
+
+  def probably_a_file?(str); end
+
+  def pry_method?(code_object); end
+
+  def reload?(file_name=T.unsafe(nil)); end
+
+  def reloadable?(); end
+
+  def repl_edit(); end
+
+  def repl_edit?(); end
+
+  def runtime_patch?(); end
+end
+
+class Pry::Command::Edit::ExceptionPatcher
+  def _pry_(); end
+
+  def _pry_=(_pry_); end
+
+  def file_and_line(); end
+
+  def file_and_line=(file_and_line); end
+
+  def initialize(_pry_, state, exception_file_and_line); end
+
+  def perform_patch(); end
+
+  def state(); end
+
+  def state=(state); end
+end
+
+class Pry::Command::Edit::ExceptionPatcher
+end
+
+module Pry::Command::Edit::FileAndLineLocator
+end
+
+module Pry::Command::Edit::FileAndLineLocator
+  def self.from_binding(target); end
+
+  def self.from_code_object(code_object, filename_argument); end
+
+  def self.from_exception(exception, backtrace_level); end
+
+  def self.from_filename_argument(filename_argument); end
+end
+
+class Pry::Command::Edit
+end
+
+class Pry::Command::Exit
+  def process_pop_and_return(); end
+end
+
+class Pry::Command::Exit
+end
+
+class Pry::Command::ExitAll
+end
+
+class Pry::Command::ExitAll
+end
+
+class Pry::Command::ExitProgram
+end
+
+class Pry::Command::ExitProgram
+end
+
+class Pry::Command::FindMethod
+end
+
+class Pry::Command::FindMethod
+  extend ::Pry::Helpers::BaseHelpers
+end
+
+class Pry::Command::FixIndent
+end
+
+class Pry::Command::FixIndent
+end
+
+class Pry::Command::GemCd
+  def complete(str); end
+
+  def process(gem); end
+end
+
+class Pry::Command::GemCd
+end
+
+class Pry::Command::GemInstall
+  def process(gem); end
+end
+
+class Pry::Command::GemInstall
+end
+
+class Pry::Command::GemList
+  def process(pattern=T.unsafe(nil)); end
+end
+
+class Pry::Command::GemList
+end
+
+class Pry::Command::GemOpen
+  def complete(str); end
+
+  def process(gem); end
+end
+
+class Pry::Command::GemOpen
+end
+
+class Pry::Command::GemReadme
+  def process(name); end
+end
+
+class Pry::Command::GemReadme
+end
+
+class Pry::Command::GemSearch
+  def process(str); end
+  API_ENDPOINT = ::T.let(nil, ::T.untyped)
+end
+
+class Pry::Command::GemSearch
+end
+
+class Pry::Command::GemStat
+  def process(name); end
+  FAIL_WHALE = ::T.let(nil, ::T.untyped)
+  STAT_HOST = ::T.let(nil, ::T.untyped)
+  STAT_PATH = ::T.let(nil, ::T.untyped)
+  STAT_PORT = ::T.let(nil, ::T.untyped)
+end
+
+class Pry::Command::GemStat
+end
+
+class Pry::Command::Gist
+  def clipboard_content(content); end
+
+  def comment_expression_result_for_gist(result); end
+
+  def gist_content(content, filename); end
+
+  def input_content(); end
+end
+
+class Pry::Command::Gist
+end
+
+class Pry::Command::Help
+  def command_groups(); end
+
+  def display_command(command); end
+
+  def display_filtered_commands(search); end
+
+  def display_filtered_search_results(search); end
+
+  def display_index(groups); end
+
+  def display_search(search); end
+
+  def group_sort_key(group_name); end
+
+  def help_text_for_commands(name, commands); end
+
+  def normalize(key); end
+
+  def search_hash(search, hash); end
+
+  def sorted_commands(commands); end
+
+  def sorted_group_names(groups); end
+
+  def visible_commands(); end
+end
+
+class Pry::Command::Help
+end
+
+class Pry::Command::Hist
+end
+
+class Pry::Command::Hist
+end
+
+class Pry::Command::ImportSet
+  def process(_command_set_name); end
+end
+
+class Pry::Command::ImportSet
+end
+
+class Pry::Command::InstallCommand
+  def process(name); end
+end
+
+class Pry::Command::InstallCommand
+end
+
+class Pry::Command::JumpTo
+  def process(break_level); end
+end
+
+class Pry::Command::JumpTo
+end
+
+class Pry::Command::ListInspectors
+end
+
+class Pry::Command::ListInspectors
+end
+
+class Pry::Command::Ls
+  def no_user_opts?(); end
+  DEFAULT_OPTIONS = ::T.let(nil, ::T.untyped)
+end
+
+class Pry::Command::Ls::Constants
+  include ::Pry::Command::Ls::Interrogatable
+  def initialize(interrogatee, no_user_opts, opts, _pry_); end
+  DEPRECATED_CONSTANTS = ::T.let(nil, ::T.untyped)
+end
+
+class Pry::Command::Ls::Constants
+end
+
+class Pry::Command::Ls::Formatter
+  def _pry_(); end
+
+  def grep=(grep); end
+
+  def initialize(_pry_); end
+
+  def write_out(); end
+end
+
+class Pry::Command::Ls::Formatter
+end
+
+class Pry::Command::Ls::Globals
+  def initialize(opts, _pry_); end
+  BUILTIN_GLOBALS = ::T.let(nil, ::T.untyped)
+  PSEUDO_GLOBALS = ::T.let(nil, ::T.untyped)
+end
+
+class Pry::Command::Ls::Globals
+end
+
+class Pry::Command::Ls::Grep
+  def initialize(grep_regexp); end
+
+  def regexp(); end
+end
+
+class Pry::Command::Ls::Grep
+end
+
+class Pry::Command::Ls::InstanceVars
+  include ::Pry::Command::Ls::Interrogatable
+  def initialize(interrogatee, no_user_opts, opts, _pry_); end
+end
+
+class Pry::Command::Ls::InstanceVars
+end
+
+module Pry::Command::Ls::Interrogatable
+end
+
+module Pry::Command::Ls::Interrogatable
+end
+
+module Pry::Command::Ls::JRubyHacks
+end
+
+module Pry::Command::Ls::JRubyHacks
+end
+
+class Pry::Command::Ls::LocalNames
+  def initialize(no_user_opts, args, _pry_); end
+end
+
+class Pry::Command::Ls::LocalNames
+end
+
+class Pry::Command::Ls::LocalVars
+  def initialize(opts, _pry_); end
+end
+
+class Pry::Command::Ls::LocalVars
+end
+
+class Pry::Command::Ls::LsEntity
+  def _pry_(); end
+
+  def entities_table(); end
+
+  def initialize(opts); end
+end
+
+class Pry::Command::Ls::LsEntity
+end
+
+class Pry::Command::Ls::Methods
+  include ::Pry::Command::Ls::Interrogatable
+  include ::Pry::Command::Ls::MethodsHelper
+  include ::Pry::Command::Ls::JRubyHacks
+  def initialize(interrogatee, no_user_opts, opts, _pry_); end
+end
+
+class Pry::Command::Ls::Methods
+end
+
+module Pry::Command::Ls::MethodsHelper
+  include ::Pry::Command::Ls::JRubyHacks
+end
+
+module Pry::Command::Ls::MethodsHelper
+end
+
+class Pry::Command::Ls::SelfMethods
+  include ::Pry::Command::Ls::Interrogatable
+  include ::Pry::Command::Ls::MethodsHelper
+  include ::Pry::Command::Ls::JRubyHacks
+  def initialize(interrogatee, no_user_opts, opts, _pry_); end
+end
+
+class Pry::Command::Ls::SelfMethods
+end
+
+class Pry::Command::Ls
+end
+
+class Pry::Command::Nesting
+end
+
+class Pry::Command::Nesting
+end
+
+class Pry::Command::Play
+  def code_object(); end
+
+  def content(); end
+
+  def content_after_options(); end
+
+  def content_at_expression(); end
+
+  def default_file(); end
+
+  def file_content(); end
+
+  def perform_play(); end
+
+  def should_use_default_file?(); end
+
+  def show_input(); end
+end
+
+class Pry::Command::Play
+end
+
+class Pry::Command::PryBacktrace
+end
+
+class Pry::Command::PryBacktrace
+end
+
+class Pry::Command::RaiseUp
+end
+
+class Pry::Command::RaiseUp
+end
+
+class Pry::Command::ReloadCode
+end
+
+class Pry::Command::ReloadCode
+end
+
+class Pry::Command::Reset
+end
+
+class Pry::Command::Reset
+end
+
+class Pry::Command::Ri
+  def process(spec); end
+end
+
+class Pry::Command::Ri
+end
+
+class Pry::Command::SaveFile
+  def display_content(); end
+
+  def file_name(); end
+
+  def mode(); end
+
+  def save_file(); end
+end
+
+class Pry::Command::SaveFile
+end
+
+class Pry::Command::ShellCommand
+  def process(cmd); end
+end
+
+class Pry::Command::ShellCommand
+end
+
+class Pry::Command::ShellMode
+end
+
+class Pry::Command::ShellMode
+end
+
+class Pry::Command::ShowDoc
+  include ::Pry::Helpers::DocumentationHelpers
+  def content_for(code_object); end
+
+  def docs_for(code_object); end
+
+  def render_doc_markup_for(code_object); end
+end
+
+class Pry::Command::ShowDoc
+end
+
+class Pry::Command::ShowInfo
+  def code_object_header(code_object, line_num); end
+
+  def code_object_with_accessible_source(code_object); end
+
+  def complete(input); end
+
+  def content_and_header_for_code_object(code_object); end
+
+  def content_and_headers_for_all_module_candidates(mod); end
+
+  def file_and_line_for(code_object); end
+
+  def header(code_object); end
+
+  def header_options(); end
+
+  def initialize(*_); end
+
+  def method_header(code_object, line_num); end
+
+  def method_sections(code_object); end
+
+  def module_header(code_object, line_num); end
+
+  def no_definition_message(); end
+
+  def obj_name(); end
+
+  def show_all_modules?(code_object); end
+
+  def start_line_for(code_object); end
+
+  def use_line_numbers?(); end
+
+  def valid_superclass?(code_object); end
+end
+
+class Pry::Command::ShowInfo
+  extend ::Pry::Helpers::BaseHelpers
+end
+
+class Pry::Command::ShowInput
+end
+
+class Pry::Command::ShowInput
+end
+
+class Pry::Command::ShowSource
+  def content_for(code_object); end
+end
+
+class Pry::Command::ShowSource
+end
+
+class Pry::Command::Stat
+end
+
+class Pry::Command::Stat
+end
+
+class Pry::Command::SwitchTo
+  def process(selection); end
+end
+
+class Pry::Command::SwitchTo
+end
+
+class Pry::Command::ToggleColor
+  def color_toggle(); end
+end
+
+class Pry::Command::ToggleColor
+end
+
+class Pry::Command::Version
+end
+
+class Pry::Command::Version
+end
+
+class Pry::Command::WatchExpression
+end
+
+class Pry::Command::WatchExpression::Expression
+  def _pry_(); end
+
+  def changed?(); end
+
+  def eval!(); end
+
+  def initialize(_pry_, target, source); end
+
+  def previous_value(); end
+
+  def source(); end
+
+  def target(); end
+
+  def value(); end
+end
+
+class Pry::Command::WatchExpression::Expression
+end
+
+class Pry::Command::WatchExpression
+end
+
+class Pry::Command::Whereami
+  def bad_option_combination?(); end
+
+  def code(); end
+
+  def code?(); end
+
+  def initialize(*_); end
+
+  def location(); end
+end
+
+class Pry::Command::Whereami
+  def self.method_size_cutoff(); end
+
+  def self.method_size_cutoff=(method_size_cutoff); end
+end
+
+class Pry::Command::Wtf
+end
+
+class Pry::Command::Wtf
+end
+
+class Pry::Command
+  extend ::Pry::Helpers::DocumentationHelpers
+  extend ::Pry::CodeObject::Helpers
+  def self.banner(arg=T.unsafe(nil)); end
+
+  def self.block(); end
+
+  def self.block=(block); end
+
+  def self.command_name(); end
+
+  def self.command_options(arg=T.unsafe(nil)); end
+
+  def self.command_options=(command_options); end
+
+  def self.command_regex(); end
+
+  def self.convert_to_regex(obj); end
+
+  def self.default_options(match); end
+
+  def self.description(arg=T.unsafe(nil)); end
+
+  def self.description=(description); end
+
+  def self.doc(); end
+
+  def self.file(); end
+
+  def self.group(name=T.unsafe(nil)); end
+
+  def self.hooks(); end
+
+  def self.line(); end
+
+  def self.match(arg=T.unsafe(nil)); end
+
+  def self.match=(match); end
+
+  def self.match_score(val); end
+
+  def self.matches?(val); end
+
+  def self.options(arg=T.unsafe(nil)); end
+
+  def self.options=(options); end
+
+  def self.source(); end
+
+  def self.source_file(); end
+
+  def self.source_line(); end
+
+  def self.subclass(match, description, options, helpers, &block); end
+end
+
+class Pry::CommandError
+end
+
+class Pry::CommandError
+end
+
+class Pry::CommandSet
+  include ::Enumerable
+  include ::Pry::Helpers::BaseHelpers
+  def [](pattern); end
+
+  def []=(pattern, command); end
+
+  def add_command(command); end
+
+  def alias_command(match, action, options=T.unsafe(nil)); end
+
+  def block_command(match, description=T.unsafe(nil), options=T.unsafe(nil), &block); end
+
+  def command(match, description=T.unsafe(nil), options=T.unsafe(nil), &block); end
+
+  def complete(search, context=T.unsafe(nil)); end
+
+  def create_command(match, description=T.unsafe(nil), options=T.unsafe(nil), &block); end
+
+  def delete(*searches); end
+
+  def desc(search, description=T.unsafe(nil)); end
+
+  def disabled_command(name_of_disabled_command, message, matcher=T.unsafe(nil)); end
+
+  def each(&block); end
+
+  def find_command(pattern); end
+
+  def find_command_by_match_or_listing(match_or_listing); end
+
+  def find_command_for_help(search); end
+
+  def helper_module(); end
+
+  def helpers(&block); end
+
+  def import(*sets); end
+
+  def import_from(set, *matches); end
+
+  def initialize(*imported_sets, &block); end
+
+  def keys(); end
+
+  def list_commands(); end
+
+  def process_line(val, context=T.unsafe(nil)); end
+
+  def rename_command(new_match, search, options=T.unsafe(nil)); end
+
+  def run_command(context, match, *args); end
+
+  def to_h(); end
+
+  def to_hash(); end
+
+  def valid_command?(val); end
+end
+
+class Pry::CommandSet
+end
+
+class Pry::Config
+  include ::Pry::Config::Behavior
+end
+
+module Pry::Config::Behavior
+  def ==(other); end
+
+  def [](key); end
+
+  def []=(key, value); end
+
+  def clear(); end
+
+  def default(); end
+
+  def eager_load!(); end
+
+  def eql?(other); end
+
+  def forget(key); end
+
+  def initialize(default=T.unsafe(nil)); end
+
+  def inspect(); end
+
+  def key?(key); end
+
+  def keys(); end
+
+  def last_default(); end
+
+  def merge!(other); end
+
+  def method_missing(name, *args, &block); end
+
+  def pretty_print(q); end
+
+  def to_h(); end
+
+  def to_hash(); end
+  ASSIGNMENT = ::T.let(nil, ::T.untyped)
+  INSPECT_REGEXP = ::T.let(nil, ::T.untyped)
+  NODUP = ::T.let(nil, ::T.untyped)
+end
+
+module Pry::Config::Behavior::Builder
+  def assign(attributes, default=T.unsafe(nil)); end
+
+  def from_hash(attributes, default=T.unsafe(nil)); end
+end
+
+module Pry::Config::Behavior::Builder
+end
+
+class Pry::Config::Behavior::ReservedKeyError
+end
+
+class Pry::Config::Behavior::ReservedKeyError
+end
+
+module Pry::Config::Behavior
+  def self.included(klass); end
+end
+
+module Pry::Config::Convenience
+  def config_shortcut(*names); end
+  SHORTCUTS = ::T.let(nil, ::T.untyped)
+end
+
+module Pry::Config::Convenience
+end
+
+class Pry::Config::Default
+  include ::Pry::Config::Behavior
+  include ::Pry::Config::Memoization
+  def auto_indent(); end
+
+  def collision_warning(); end
+
+  def color(); end
+
+  def command_completions(); end
+
+  def command_prefix(); end
+
+  def commands(); end
+
+  def completer(); end
+
+  def control_d_handler(); end
+
+  def correct_indent(); end
+
+  def default_window_size(); end
+
+  def disable_auto_reload(); end
+
+  def editor(); end
+
+  def exception_handler(); end
+
+  def exception_whitelist(); end
+
+  def exec_string(); end
+
+  def extra_sticky_locals(); end
+
+  def file_completions(); end
+
+  def gist(); end
+
+  def history(); end
+
+  def hooks(); end
+
+  def initialize(); end
+
+  def input(); end
+
+  def ls(); end
+
+  def memory_size(); end
+
+  def output(); end
+
+  def output_prefix(); end
+
+  def pager(); end
+
+  def print(); end
+
+  def prompt(); end
+
+  def prompt_name(); end
+
+  def prompt_safe_contexts(); end
+
+  def quiet(); end
+
+  def requires(); end
+
+  def should_load_local_rc(); end
+
+  def should_load_plugins(); end
+
+  def should_load_rc(); end
+
+  def should_load_requires(); end
+
+  def should_trap_interrupts(); end
+
+  def system(); end
+
+  def windows_console_warning(); end
+end
+
+class Pry::Config::Default
+  extend ::Pry::Config::Behavior::Builder
+  extend ::Pry::Config::Memoization::ClassMethods
+end
+
+class Pry::Config::Lazy
+  def call(); end
+
+  def initialize(&block); end
+end
+
+class Pry::Config::Lazy
+end
+
+module Pry::Config::Memoization
+  def memoized_methods(); end
+  MEMOIZED_METHODS = ::T.let(nil, ::T.untyped)
+end
+
+module Pry::Config::Memoization::ClassMethods
+  def def_memoized(method_table); end
+end
+
+module Pry::Config::Memoization::ClassMethods
+end
+
+module Pry::Config::Memoization
+  def self.included(mod); end
+end
+
+class Pry::Config
+  extend ::Pry::Config::Behavior::Builder
+  def self.shortcuts(); end
+end
+
+class Pry::Editor
+  include ::Pry::Helpers::CommandHelpers
+  include ::Pry::Helpers::OptionsHelpers
+  def _pry_(); end
+
+  def edit_tempfile_with_content(initial_content, line=T.unsafe(nil)); end
+
+  def initialize(_pry_); end
+
+  def invoke_editor(file, line, blocking=T.unsafe(nil)); end
+end
+
+class Pry::Editor
+end
+
+module Pry::ExtendCommandBundle
+end
+
+module Pry::ExtendCommandBundle
+end
+
+module Pry::Forwardable
+  include ::Forwardable
+  def def_private_delegators(target, *private_delegates); end
+end
+
+module Pry::Forwardable
+end
+
+module Pry::FrozenObjectException
+end
+
+module Pry::FrozenObjectException
+  def self.===(exception); end
+end
+
+module Pry::Helpers
+end
+
+module Pry::Helpers::BaseHelpers
+  def colorize_code(code); end
+
+  def command_dependencies_met?(options); end
+
+  def find_command(name, set=T.unsafe(nil)); end
+
+  def heading(text); end
+
+  def highlight(string, regexp, highlight_color=T.unsafe(nil)); end
+
+  def jruby?(); end
+
+  def jruby_19?(); end
+
+  def linux?(); end
+
+  def mac_osx?(); end
+
+  def mri?(); end
+
+  def mri_19?(); end
+
+  def mri_2?(); end
+
+  def not_a_real_file?(file); end
+
+  def safe_send(obj, method, *args, &block); end
+
+  def silence_warnings(); end
+
+  def stagger_output(text, _out=T.unsafe(nil)); end
+
+  def use_ansi_codes?(); end
+
+  def windows?(); end
+
+  def windows_ansi?(); end
+end
+
+module Pry::Helpers::BaseHelpers
+  extend ::Pry::Helpers::BaseHelpers
+end
+
+module Pry::Helpers::CommandHelpers
+  include ::Pry::Helpers::OptionsHelpers
+end
+
+module Pry::Helpers::CommandHelpers
+  def self.absolute_index_number(line_number, array_length); end
+
+  def self.absolute_index_range(range_or_number, array_length); end
+
+  def self.command_error(message, omit_help, klass=T.unsafe(nil)); end
+
+  def self.get_method_or_raise(name, target, opts=T.unsafe(nil), omit_help=T.unsafe(nil)); end
+
+  def self.internal_binding?(target); end
+
+  def self.one_index_number(line_number); end
+
+  def self.one_index_range(range); end
+
+  def self.one_index_range_or_number(range_or_number); end
+
+  def self.restrict_to_lines(content, lines); end
+
+  def self.set_file_and_dir_locals(file_name, _pry_=T.unsafe(nil), target=T.unsafe(nil)); end
+
+  def self.temp_file(ext=T.unsafe(nil)); end
+
+  def self.unindent(text, left_padding=T.unsafe(nil)); end
+end
+
+module Pry::Helpers::DocumentationHelpers
+end
+
+module Pry::Helpers::DocumentationHelpers
+  def self.get_comment_content(comment); end
+
+  def self.process_comment_markup(comment); end
+
+  def self.process_rdoc(comment); end
+
+  def self.process_yardoc(comment); end
+
+  def self.process_yardoc_tag(comment, tag); end
+
+  def self.strip_comments_from_c_code(code); end
+
+  def self.strip_leading_whitespace(text); end
+end
+
+module Pry::Helpers::OptionsHelpers
+end
+
+module Pry::Helpers::OptionsHelpers
+  def self.method_object(); end
+
+  def self.method_options(opt); end
+end
+
+module Pry::Helpers::Platform
+end
+
+module Pry::Helpers::Platform
+  def self.jruby?(); end
+
+  def self.jruby_19?(); end
+
+  def self.linux?(); end
+
+  def self.mac_osx?(); end
+
+  def self.mri?(); end
+
+  def self.mri_19?(); end
+
+  def self.mri_2?(); end
+
+  def self.windows?(); end
+
+  def self.windows_ansi?(); end
+end
+
+class Pry::Helpers::Table
+  def ==(other); end
+
+  def column_count(); end
+
+  def column_count=(n); end
+
+  def columns(); end
+
+  def fits_on_line?(line_length); end
+
+  def initialize(items, args, config=T.unsafe(nil)); end
+
+  def items(); end
+
+  def items=(items); end
+
+  def rows_to_s(style=T.unsafe(nil)); end
+
+  def to_a(); end
+end
+
+class Pry::Helpers::Table
+end
+
+module Pry::Helpers::Text
+  def black(text); end
+
+  def black_on_black(text); end
+
+  def black_on_blue(text); end
+
+  def black_on_cyan(text); end
+
+  def black_on_green(text); end
+
+  def black_on_magenta(text); end
+
+  def black_on_purple(text); end
+
+  def black_on_red(text); end
+
+  def black_on_white(text); end
+
+  def black_on_yellow(text); end
+
+  def blue(text); end
+
+  def blue_on_black(text); end
+
+  def blue_on_blue(text); end
+
+  def blue_on_cyan(text); end
+
+  def blue_on_green(text); end
+
+  def blue_on_magenta(text); end
+
+  def blue_on_purple(text); end
+
+  def blue_on_red(text); end
+
+  def blue_on_white(text); end
+
+  def blue_on_yellow(text); end
+
+  def bold(text); end
+
+  def bright_black(text); end
+
+  def bright_black_on_black(text); end
+
+  def bright_black_on_blue(text); end
+
+  def bright_black_on_cyan(text); end
+
+  def bright_black_on_green(text); end
+
+  def bright_black_on_magenta(text); end
+
+  def bright_black_on_purple(text); end
+
+  def bright_black_on_red(text); end
+
+  def bright_black_on_white(text); end
+
+  def bright_black_on_yellow(text); end
+
+  def bright_blue(text); end
+
+  def bright_blue_on_black(text); end
+
+  def bright_blue_on_blue(text); end
+
+  def bright_blue_on_cyan(text); end
+
+  def bright_blue_on_green(text); end
+
+  def bright_blue_on_magenta(text); end
+
+  def bright_blue_on_purple(text); end
+
+  def bright_blue_on_red(text); end
+
+  def bright_blue_on_white(text); end
+
+  def bright_blue_on_yellow(text); end
+
+  def bright_cyan(text); end
+
+  def bright_cyan_on_black(text); end
+
+  def bright_cyan_on_blue(text); end
+
+  def bright_cyan_on_cyan(text); end
+
+  def bright_cyan_on_green(text); end
+
+  def bright_cyan_on_magenta(text); end
+
+  def bright_cyan_on_purple(text); end
+
+  def bright_cyan_on_red(text); end
+
+  def bright_cyan_on_white(text); end
+
+  def bright_cyan_on_yellow(text); end
+
+  def bright_green(text); end
+
+  def bright_green_on_black(text); end
+
+  def bright_green_on_blue(text); end
+
+  def bright_green_on_cyan(text); end
+
+  def bright_green_on_green(text); end
+
+  def bright_green_on_magenta(text); end
+
+  def bright_green_on_purple(text); end
+
+  def bright_green_on_red(text); end
+
+  def bright_green_on_white(text); end
+
+  def bright_green_on_yellow(text); end
+
+  def bright_magenta(text); end
+
+  def bright_magenta_on_black(text); end
+
+  def bright_magenta_on_blue(text); end
+
+  def bright_magenta_on_cyan(text); end
+
+  def bright_magenta_on_green(text); end
+
+  def bright_magenta_on_magenta(text); end
+
+  def bright_magenta_on_purple(text); end
+
+  def bright_magenta_on_red(text); end
+
+  def bright_magenta_on_white(text); end
+
+  def bright_magenta_on_yellow(text); end
+
+  def bright_purple(text); end
+
+  def bright_purple_on_black(text); end
+
+  def bright_purple_on_blue(text); end
+
+  def bright_purple_on_cyan(text); end
+
+  def bright_purple_on_green(text); end
+
+  def bright_purple_on_magenta(text); end
+
+  def bright_purple_on_purple(text); end
+
+  def bright_purple_on_red(text); end
+
+  def bright_purple_on_white(text); end
+
+  def bright_purple_on_yellow(text); end
+
+  def bright_red(text); end
+
+  def bright_red_on_black(text); end
+
+  def bright_red_on_blue(text); end
+
+  def bright_red_on_cyan(text); end
+
+  def bright_red_on_green(text); end
+
+  def bright_red_on_magenta(text); end
+
+  def bright_red_on_purple(text); end
+
+  def bright_red_on_red(text); end
+
+  def bright_red_on_white(text); end
+
+  def bright_red_on_yellow(text); end
+
+  def bright_white(text); end
+
+  def bright_white_on_black(text); end
+
+  def bright_white_on_blue(text); end
+
+  def bright_white_on_cyan(text); end
+
+  def bright_white_on_green(text); end
+
+  def bright_white_on_magenta(text); end
+
+  def bright_white_on_purple(text); end
+
+  def bright_white_on_red(text); end
+
+  def bright_white_on_white(text); end
+
+  def bright_white_on_yellow(text); end
+
+  def bright_yellow(text); end
+
+  def bright_yellow_on_black(text); end
+
+  def bright_yellow_on_blue(text); end
+
+  def bright_yellow_on_cyan(text); end
+
+  def bright_yellow_on_green(text); end
+
+  def bright_yellow_on_magenta(text); end
+
+  def bright_yellow_on_purple(text); end
+
+  def bright_yellow_on_red(text); end
+
+  def bright_yellow_on_white(text); end
+
+  def bright_yellow_on_yellow(text); end
+
+  def cyan(text); end
+
+  def cyan_on_black(text); end
+
+  def cyan_on_blue(text); end
+
+  def cyan_on_cyan(text); end
+
+  def cyan_on_green(text); end
+
+  def cyan_on_magenta(text); end
+
+  def cyan_on_purple(text); end
+
+  def cyan_on_red(text); end
+
+  def cyan_on_white(text); end
+
+  def cyan_on_yellow(text); end
+
+  def default(text); end
+
+  def green(text); end
+
+  def green_on_black(text); end
+
+  def green_on_blue(text); end
+
+  def green_on_cyan(text); end
+
+  def green_on_green(text); end
+
+  def green_on_magenta(text); end
+
+  def green_on_purple(text); end
+
+  def green_on_red(text); end
+
+  def green_on_white(text); end
+
+  def green_on_yellow(text); end
+
+  def indent(text, chars); end
+
+  def magenta(text); end
+
+  def magenta_on_black(text); end
+
+  def magenta_on_blue(text); end
+
+  def magenta_on_cyan(text); end
+
+  def magenta_on_green(text); end
+
+  def magenta_on_magenta(text); end
+
+  def magenta_on_purple(text); end
+
+  def magenta_on_red(text); end
+
+  def magenta_on_white(text); end
+
+  def magenta_on_yellow(text); end
+
+  def no_color(); end
+
+  def no_pager(); end
+
+  def purple(text); end
+
+  def purple_on_black(text); end
+
+  def purple_on_blue(text); end
+
+  def purple_on_cyan(text); end
+
+  def purple_on_green(text); end
+
+  def purple_on_magenta(text); end
+
+  def purple_on_purple(text); end
+
+  def purple_on_red(text); end
+
+  def purple_on_white(text); end
+
+  def purple_on_yellow(text); end
+
+  def red(text); end
+
+  def red_on_black(text); end
+
+  def red_on_blue(text); end
+
+  def red_on_cyan(text); end
+
+  def red_on_green(text); end
+
+  def red_on_magenta(text); end
+
+  def red_on_purple(text); end
+
+  def red_on_red(text); end
+
+  def red_on_white(text); end
+
+  def red_on_yellow(text); end
+
+  def strip_color(text); end
+
+  def white(text); end
+
+  def white_on_black(text); end
+
+  def white_on_blue(text); end
+
+  def white_on_cyan(text); end
+
+  def white_on_green(text); end
+
+  def white_on_magenta(text); end
+
+  def white_on_purple(text); end
+
+  def white_on_red(text); end
+
+  def white_on_white(text); end
+
+  def white_on_yellow(text); end
+
+  def with_line_numbers(text, offset, color=T.unsafe(nil)); end
+
+  def yellow(text); end
+
+  def yellow_on_black(text); end
+
+  def yellow_on_blue(text); end
+
+  def yellow_on_cyan(text); end
+
+  def yellow_on_green(text); end
+
+  def yellow_on_magenta(text); end
+
+  def yellow_on_purple(text); end
+
+  def yellow_on_red(text); end
+
+  def yellow_on_white(text); end
+
+  def yellow_on_yellow(text); end
+  COLORS = ::T.let(nil, ::T.untyped)
+end
+
+module Pry::Helpers::Text
+  extend ::Pry::Helpers::Text
+end
+
+module Pry::Helpers
+  def self.tablify(things, line_length, config=T.unsafe(nil)); end
+
+  def self.tablify_or_one_line(heading, things, config=T.unsafe(nil)); end
+
+  def self.tablify_to_screen_width(things, options, config=T.unsafe(nil)); end
+end
+
+class Pry::History
+  def <<(line); end
+
+  def clear(); end
+
+  def clearer(); end
+
+  def clearer=(clearer); end
+
+  def filter(history); end
+
+  def history_line_count(); end
+
+  def initialize(options=T.unsafe(nil)); end
+
+  def load(); end
+
+  def loader(); end
+
+  def loader=(loader); end
+
+  def original_lines(); end
+
+  def push(line); end
+
+  def pusher(); end
+
+  def pusher=(pusher); end
+
+  def restore_default_behavior(); end
+
+  def saver(); end
+
+  def saver=(saver); end
+
+  def session_line_count(); end
+
+  def to_a(); end
+end
+
+class Pry::History
+end
+
+class Pry::Hooks
+  def add_hook(event_name, hook_name, callable=T.unsafe(nil), &block); end
+
+  def clear_event_hooks(event_name); end
+
+  def delete_hook(event_name, hook_name); end
+
+  def errors(); end
+
+  def exec_hook(event_name, *args, &block); end
+
+  def get_hook(event_name, hook_name); end
+
+  def get_hooks(event_name); end
+
+  def hook_count(event_name); end
+
+  def hook_exists?(event_name, hook_name); end
+
+  def hooks(); end
+
+  def merge(other); end
+
+  def merge!(other); end
+end
+
+class Pry::Hooks
+end
+
+class Pry::Indent
+  include ::Pry::Helpers::BaseHelpers
+  def correct_indentation(prompt, code, overhang=T.unsafe(nil)); end
+
+  def current_prefix(); end
+
+  def end_of_statement?(last_token, last_kind); end
+
+  def in_string?(); end
+
+  def indent(input); end
+
+  def indent_level(); end
+
+  def indentation_delta(tokens); end
+
+  def module_nesting(); end
+
+  def open_delimiters(); end
+
+  def open_delimiters_line(); end
+
+  def reset(); end
+
+  def stack(); end
+
+  def tokenize(string); end
+
+  def track_delimiter(token); end
+
+  def track_module_nesting(token, kind); end
+
+  def track_module_nesting_end(token, kind=T.unsafe(nil)); end
+  IGNORE_TOKENS = ::T.let(nil, ::T.untyped)
+  MIDWAY_TOKENS = ::T.let(nil, ::T.untyped)
+  OPEN_TOKENS = ::T.let(nil, ::T.untyped)
+  OPTIONAL_DO_TOKENS = ::T.let(nil, ::T.untyped)
+  SINGLELINE_TOKENS = ::T.let(nil, ::T.untyped)
+  SPACES = ::T.let(nil, ::T.untyped)
+  STATEMENT_END_TOKENS = ::T.let(nil, ::T.untyped)
+end
+
+class Pry::Indent::UnparseableNestingError
+end
+
+class Pry::Indent::UnparseableNestingError
+end
+
+class Pry::Indent
+  def self.indent(str); end
+
+  def self.nesting_at(str, line_number); end
+end
+
+class Pry::InputLock
+  def __with_ownership(&block); end
+
+  def enter_interruptible_region(); end
+
+  def interruptible_region(&block); end
+
+  def leave_interruptible_region(); end
+
+  def with_ownership(&block); end
+end
+
+class Pry::InputLock::Interrupt
+end
+
+class Pry::InputLock::Interrupt
+end
+
+class Pry::InputLock
+  def self.for(input); end
+
+  def self.global_lock(); end
+
+  def self.global_lock=(global_lock); end
+
+  def self.input_locks(); end
+
+  def self.input_locks=(input_locks); end
+end
+
+class Pry::Inspector
+  MAP = ::T.let(nil, ::T.untyped)
+end
+
+class Pry::Inspector
+end
+
+class Pry::LastException
+  def bt_index(); end
+
+  def bt_index=(bt_index); end
+
+  def bt_source_location_for(index); end
+
+  def file(); end
+
+  def inc_bt_index(); end
+
+  def initialize(e); end
+
+  def line(); end
+
+  def method_missing(name, *args, &block); end
+
+  def wrapped_exception(); end
+end
+
+class Pry::LastException
+end
+
+class Pry::Method
+  include ::Pry::Helpers::BaseHelpers
+  include ::Pry::Helpers::DocumentationHelpers
+  include ::Pry::CodeObject::Helpers
+  def ==(obj); end
+
+  def alias?(); end
+
+  def aliases(); end
+
+  def bound_method?(); end
+
+  def comment(); end
+
+  def doc(); end
+
+  def dynamically_defined?(); end
+
+  def initialize(method, known_info=T.unsafe(nil)); end
+
+  def is_a?(klass); end
+
+  def kind_of?(klass); end
+
+  def method_missing(method_name, *args, &block); end
+
+  def name(); end
+
+  def name_with_owner(); end
+
+  def original_name(); end
+
+  def pry_method?(); end
+
+  def redefine(source); end
+
+  def respond_to?(method_name, include_all=T.unsafe(nil)); end
+
+  def signature(); end
+
+  def singleton_method?(); end
+
+  def source(); end
+
+  def source?(); end
+
+  def source_file(); end
+
+  def source_line(); end
+
+  def source_range(); end
+
+  def source_type(); end
+
+  def super(times=T.unsafe(nil)); end
+
+  def unbound_method?(); end
+
+  def undefined?(); end
+
+  def visibility(); end
+
+  def wrapped(); end
+
+  def wrapped_owner(); end
+end
+
+class Pry::Method::Disowned
+  def initialize(receiver, method_name); end
+
+  def method_missing(meth_name, *args, &block); end
+
+  def owner(); end
+
+  def receiver(); end
+end
+
+class Pry::Method::Disowned
+end
+
+class Pry::Method::Patcher
+  def initialize(method); end
+
+  def method(); end
+
+  def method=(method); end
+
+  def patch_in_ram(source); end
+end
+
+class Pry::Method::Patcher
+  def self.code_for(filename); end
+end
+
+class Pry::Method::WeirdMethodLocator
+  def get_method(); end
+
+  def initialize(method, target); end
+
+  def lost_method?(); end
+
+  def method(); end
+
+  def method=(method); end
+
+  def target(); end
+
+  def target=(target); end
+end
+
+class Pry::Method::WeirdMethodLocator
+  def self.normal_method?(method, b); end
+
+  def self.weird_method?(method, b); end
+end
+
+class Pry::Method
+  extend ::Pry::Helpers::BaseHelpers
+  def self.all_from_class(klass, include_super=T.unsafe(nil)); end
+
+  def self.all_from_common(obj, _method_type=T.unsafe(nil), include_super=T.unsafe(nil)); end
+
+  def self.all_from_obj(obj, include_super=T.unsafe(nil)); end
+
+  def self.from_binding(b); end
+
+  def self.from_class(klass, name, target=T.unsafe(nil)); end
+
+  def self.from_module(klass, name, target=T.unsafe(nil)); end
+
+  def self.from_obj(obj, name, target=T.unsafe(nil)); end
+
+  def self.from_str(name, target=T.unsafe(nil), options=T.unsafe(nil)); end
+
+  def self.instance_method_definition?(name, definition_line); end
+
+  def self.instance_resolution_order(klass); end
+
+  def self.lookup_method_via_binding(obj, method_name, method_type, target=T.unsafe(nil)); end
+
+  def self.method_definition?(name, definition_line); end
+
+  def self.resolution_order(obj); end
+
+  def self.singleton_class_of(obj); end
+
+  def self.singleton_class_resolution_order(klass); end
+
+  def self.singleton_method_definition?(name, definition_line); end
+end
+
+class Pry::MethodNotFound
+end
+
+class Pry::MethodNotFound
+end
+
+class Pry::NoCommandError
+  def initialize(match, owner); end
+end
+
+class Pry::NoCommandError
+end
+
+class Pry::ObjectPath
+  def initialize(path_string, current_stack); end
+
+  def resolve(); end
+  SPECIAL_TERMS = ::T.let(nil, ::T.untyped)
+end
+
+class Pry::ObjectPath
+end
+
+class Pry::ObsoleteError
+end
+
+class Pry::ObsoleteError
+end
+
+class Pry::Output
+  def <<(*objs); end
+
+  def _pry_(); end
+
+  def decolorize_maybe(str); end
+
+  def initialize(_pry_); end
+
+  def method_missing(name, *args, &block); end
+
+  def print(*objs); end
+
+  def puts(*objs); end
+
+  def tty?(); end
+
+  def write(*objs); end
+end
+
+class Pry::Output
+end
+
+class Pry::Pager
+  def _pry_(); end
+
+  def initialize(_pry_); end
+
+  def open(); end
+
+  def page(text); end
+end
+
+class Pry::Pager::NullPager
+  def <<(str); end
+
+  def close(); end
+
+  def initialize(out); end
+
+  def print(str); end
+
+  def puts(str); end
+
+  def write(str); end
+end
+
+class Pry::Pager::NullPager
+end
+
+class Pry::Pager::PageTracker
+  def initialize(rows, cols); end
+
+  def page?(); end
+
+  def record(str); end
+
+  def reset(); end
+end
+
+class Pry::Pager::PageTracker
+end
+
+class Pry::Pager::SimplePager
+  def initialize(*_); end
+end
+
+class Pry::Pager::SimplePager
+end
+
+class Pry::Pager::StopPaging
+end
+
+class Pry::Pager::StopPaging
+end
+
+class Pry::Pager::SystemPager
+  def initialize(*_); end
+end
+
+class Pry::Pager::SystemPager
+  def self.available?(); end
+
+  def self.default_pager(); end
+end
+
+class Pry::Pager
+end
+
+class Pry::PluginManager
+  def load_plugins(); end
+
+  def locate_plugins(); end
+
+  def plugins(); end
+  PRY_PLUGIN_PREFIX = ::T.let(nil, ::T.untyped)
+end
+
+class Pry::PluginManager::NoPlugin
+  def initialize(name); end
+
+  def method_missing(*_args); end
+end
+
+class Pry::PluginManager::NoPlugin
+end
+
+class Pry::PluginManager::Plugin
+  def activate!(); end
+
+  def active(); end
+
+  def active=(active); end
+
+  def active?(); end
+
+  def disable!(); end
+
+  def enable!(); end
+
+  def enabled(); end
+
+  def enabled=(enabled); end
+
+  def enabled?(); end
+
+  def gem_name(); end
+
+  def gem_name=(gem_name); end
+
+  def initialize(name, gem_name, spec, enabled); end
+
+  def load_cli_options(); end
+
+  def name(); end
+
+  def name=(name); end
+
+  def spec(); end
+
+  def spec=(spec); end
+
+  def supported?(); end
+end
+
+class Pry::PluginManager::Plugin
+end
+
+class Pry::PluginManager
+end
+
+module Pry::Prompt
+  DEFAULT_NAME = ::T.let(nil, ::T.untyped)
+  SAFE_CONTEXTS = ::T.let(nil, ::T.untyped)
+end
+
+module Pry::Prompt
+  def self.[](prompt_name); end
+
+  def self.add(prompt_name, description=T.unsafe(nil), separators=T.unsafe(nil)); end
+
+  def self.all(); end
+end
+
+class Pry::REPL
+  def initialize(pry, options=T.unsafe(nil)); end
+
+  def input(*args, &block); end
+
+  def output(*args, &block); end
+
+  def pry(); end
+
+  def pry=(pry); end
+
+  def start(); end
+end
+
+class Pry::REPL
+  extend ::Pry::Forwardable
+  extend ::Forwardable
+  def self.start(options); end
+end
+
+module Pry::RescuableException
+end
+
+module Pry::RescuableException
+  def self.===(exception); end
+end
+
+class Pry::Result
+  def command?(); end
+
+  def initialize(is_command, retval=T.unsafe(nil)); end
+
+  def retval(); end
+
+  def void_command?(); end
+end
+
+class Pry::Result
+end
+
+class Pry::Ring
+  def <<(value); end
+
+  def [](index); end
+
+  def clear(); end
+
+  def count(); end
+
+  def initialize(max_size); end
+
+  def max_size(); end
+
+  def size(); end
+
+  def to_a(); end
+end
+
+class Pry::Ring
+end
+
+module Pry::Rubygem
+end
+
+module Pry::Rubygem
+  def self.complete(so_far); end
+
+  def self.install(name); end
+
+  def self.installed?(name); end
+
+  def self.list(pattern=T.unsafe(nil)); end
+
+  def self.spec(name); end
+end
+
+class Pry::Slop
+  include ::Enumerable
+  def [](key); end
+
+  def add_callback(label, &block); end
+
+  def banner(banner=T.unsafe(nil)); end
+
+  def banner=(banner); end
+
+  def command(command, options=T.unsafe(nil), &block); end
+
+  def config(); end
+
+  def description(desc=T.unsafe(nil)); end
+
+  def description=(desc); end
+
+  def each(&block); end
+
+  def fetch_command(command); end
+
+  def fetch_option(key); end
+
+  def get(key); end
+
+  def help(); end
+
+  def initialize(config=T.unsafe(nil), &block); end
+
+  def missing(); end
+
+  def on(*objects, &block); end
+
+  def opt(*objects, &block); end
+
+  def option(*objects, &block); end
+
+  def options(); end
+
+  def parse(items=T.unsafe(nil), &block); end
+
+  def parse!(items=T.unsafe(nil), &block); end
+
+  def present?(*keys); end
+
+  def run(callable=T.unsafe(nil), &block); end
+
+  def separator(text); end
+
+  def strict?(); end
+
+  def to_h(include_commands=T.unsafe(nil)); end
+
+  def to_hash(include_commands=T.unsafe(nil)); end
+  DEFAULT_OPTIONS = ::T.let(nil, ::T.untyped)
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+class Pry::Slop::Commands
+  include ::Enumerable
+  def [](key); end
+
+  def arguments(); end
+
+  def banner(banner=T.unsafe(nil)); end
+
+  def banner=(banner); end
+
+  def commands(); end
+
+  def config(); end
+
+  def default(config=T.unsafe(nil), &block); end
+
+  def each(&block); end
+
+  def get(key); end
+
+  def global(config=T.unsafe(nil), &block); end
+
+  def help(); end
+
+  def initialize(config=T.unsafe(nil), &block); end
+
+  def on(command, config=T.unsafe(nil), &block); end
+
+  def parse(items=T.unsafe(nil)); end
+
+  def parse!(items=T.unsafe(nil)); end
+
+  def present?(key); end
+
+  def to_hash(); end
+end
+
+class Pry::Slop::Commands
+end
+
+class Pry::Slop::Error
+end
+
+class Pry::Slop::Error
+end
+
+class Pry::Slop::InvalidArgumentError
+end
+
+class Pry::Slop::InvalidArgumentError
+end
+
+class Pry::Slop::InvalidCommandError
+end
+
+class Pry::Slop::InvalidCommandError
+end
+
+class Pry::Slop::InvalidOptionError
+end
+
+class Pry::Slop::InvalidOptionError
+end
+
+class Pry::Slop::MissingArgumentError
+end
+
+class Pry::Slop::MissingArgumentError
+end
+
+class Pry::Slop::MissingOptionError
+end
+
+class Pry::Slop::MissingOptionError
+end
+
+class Pry::Slop::Option
+  def accepts_optional_argument?(); end
+
+  def argument?(); end
+
+  def argument_in_value(); end
+
+  def argument_in_value=(argument_in_value); end
+
+  def as?(); end
+
+  def autocreated?(); end
+
+  def call(*objects); end
+
+  def callback?(); end
+
+  def config(); end
+
+  def count(); end
+
+  def count=(count); end
+
+  def default?(); end
+
+  def delimiter?(); end
+
+  def description(); end
+
+  def expects_argument?(); end
+
+  def help(); end
+
+  def initialize(slop, short, long, description, config=T.unsafe(nil), &block); end
+
+  def key(); end
+
+  def limit?(); end
+
+  def long(); end
+
+  def match?(); end
+
+  def optional?(); end
+
+  def optional_argument?(); end
+
+  def required?(); end
+
+  def short(); end
+
+  def tail?(); end
+
+  def types(); end
+
+  def value(); end
+
+  def value=(new_value); end
+  DEFAULT_OPTIONS = ::T.let(nil, ::T.untyped)
+end
+
+class Pry::Slop::Option
+end
+
+class Pry::Slop
+  def self.optspec(string, config=T.unsafe(nil)); end
+
+  def self.parse(items=T.unsafe(nil), config=T.unsafe(nil), &block); end
+
+  def self.parse!(items=T.unsafe(nil), config=T.unsafe(nil), &block); end
+end
+
+class Pry::Terminal
+end
+
+class Pry::Terminal
+  def self.actual_screen_size(); end
+
+  def self.height!(); end
+
+  def self.screen_size(); end
+
+  def self.screen_size_according_to_ansicon_env(); end
+
+  def self.screen_size_according_to_env(); end
+
+  def self.screen_size_according_to_io_console(); end
+
+  def self.screen_size_according_to_readline(); end
+
+  def self.size!(default=T.unsafe(nil)); end
+
+  def self.width!(); end
+end
+
+module Pry::TooSafeException
+end
+
+module Pry::TooSafeException
+  def self.===(exception); end
+end
+
+module Pry::UserError
+end
+
+module Pry::UserError
+end
+
+class Pry::WrappedModule
+  include ::Pry::Helpers::BaseHelpers
+  include ::Pry::CodeObject::Helpers
+  def candidate(rank); end
+
+  def candidates(); end
+
+  def class?(); end
+
+  def constants(inherit=T.unsafe(nil)); end
+
+  def doc(); end
+
+  def file(); end
+
+  def initialize(mod); end
+
+  def line(); end
+
+  def method_missing(method_name, *args, &block); end
+
+  def method_prefix(); end
+
+  def module?(); end
+
+  def nonblank_name(); end
+
+  def number_of_candidates(); end
+
+  def respond_to?(method_name, include_all=T.unsafe(nil)); end
+
+  def singleton_class?(); end
+
+  def singleton_instance(); end
+
+  def source(); end
+
+  def source_file(); end
+
+  def source_line(); end
+
+  def source_location(); end
+
+  def super(times=T.unsafe(nil)); end
+
+  def wrapped(); end
+
+  def yard_doc(); end
+
+  def yard_docs?(); end
+
+  def yard_file(); end
+
+  def yard_line(); end
+end
+
+class Pry::WrappedModule::Candidate
+  include ::Pry::Helpers::DocumentationHelpers
+  include ::Pry::CodeObject::Helpers
+  def class?(*args, &block); end
+
+  def doc(); end
+
+  def file(); end
+
+  def initialize(wrapper, rank); end
+
+  def line(); end
+
+  def module?(*args, &block); end
+
+  def nonblank_name(*args, &block); end
+
+  def number_of_candidates(*args, &block); end
+
+  def source(); end
+
+  def source_file(); end
+
+  def source_line(); end
+
+  def source_location(); end
+
+  def wrapped(*args, &block); end
+end
+
+class Pry::WrappedModule::Candidate
+  extend ::Pry::Forwardable
+  extend ::Forwardable
+end
+
+class Pry::WrappedModule
+  def self.from_str(mod_name, target=T.unsafe(nil)); end
+end
+
+class Pry
+  extend ::Pry::Config::Convenience
+  def self.Code(obj); end
+
+  def self.Method(obj); end
+
+  def self.WrappedModule(obj); end
+
+  def self.auto_resize!(); end
+
+  def self.binding_for(target); end
+
+  def self.cli(); end
+
+  def self.cli=(cli); end
+
+  def self.color(); end
+
+  def self.color=(value); end
+
+  def self.commands(); end
+
+  def self.commands=(value); end
+
+  def self.config(); end
+
+  def self.config=(config); end
+
+  def self.configure(); end
+
+  def self.critical_section(); end
+
+  def self.current(); end
+
+  def self.current_line(); end
+
+  def self.current_line=(current_line); end
+
+  def self.custom_completions(); end
+
+  def self.custom_completions=(custom_completions); end
+
+  def self.default_editor_for_platform(); end
+
+  def self.editor(); end
+
+  def self.editor=(value); end
+
+  def self.eval_path(); end
+
+  def self.eval_path=(eval_path); end
+
+  def self.exception_handler(); end
+
+  def self.exception_handler=(value); end
+
+  def self.extra_sticky_locals(); end
+
+  def self.extra_sticky_locals=(value); end
+
+  def self.final_session_setup(); end
+
+  def self.history(); end
+
+  def self.history=(history); end
+
+  def self.hooks(); end
+
+  def self.hooks=(value); end
+
+  def self.in_critical_section?(); end
+
+  def self.init(); end
+
+  def self.initial_session?(); end
+
+  def self.initial_session_setup(); end
+
+  def self.input(); end
+
+  def self.input=(value); end
+
+  def self.last_internal_error(); end
+
+  def self.last_internal_error=(last_internal_error); end
+
+  def self.lazy(&block); end
+
+  def self.line_buffer(); end
+
+  def self.line_buffer=(line_buffer); end
+
+  def self.load_file_at_toplevel(file); end
+
+  def self.load_file_through_repl(file_name); end
+
+  def self.load_history(); end
+
+  def self.load_plugins(*args, &block); end
+
+  def self.load_rc_files(); end
+
+  def self.load_requires(); end
+
+  def self.load_traps(); end
+
+  def self.load_win32console(); end
+
+  def self.locate_plugins(*args, &block); end
+
+  def self.main(); end
+
+  def self.memory_size(); end
+
+  def self.memory_size=(value); end
+
+  def self.output(); end
+
+  def self.output=(value); end
+
+  def self.pager(); end
+
+  def self.pager=(value); end
+
+  def self.plugins(*args, &block); end
+
+  def self.print(); end
+
+  def self.print=(value); end
+
+  def self.prompt(); end
+
+  def self.prompt=(value); end
+
+  def self.quiet(); end
+
+  def self.quiet=(quiet); end
+
+  def self.rc_files_to_load(); end
+
+  def self.real_path_to(file); end
+
+  def self.reset_defaults(); end
+
+  def self.run_command(command_string, options=T.unsafe(nil)); end
+
+  def self.start(target=T.unsafe(nil), options=T.unsafe(nil)); end
+
+  def self.start_with_pry_byebug(target=T.unsafe(nil), options=T.unsafe(nil)); end
+
+  def self.start_without_pry_byebug(target=T.unsafe(nil), options=T.unsafe(nil)); end
+
+  def self.toplevel_binding(); end
+
+  def self.toplevel_binding=(binding); end
+
+  def self.view_clip(obj, options=T.unsafe(nil)); end
+end
+
+module PryByebug
+  def current_remote_server(); end
+
+  def current_remote_server=(current_remote_server); end
+end
+
+class PryByebug::BacktraceCommand
+  include ::PryByebug::Helpers::Navigation
+end
+
+class PryByebug::BacktraceCommand
+end
+
+class PryByebug::BreakCommand
+  include ::PryByebug::Helpers::Breakpoints
+  include ::PryByebug::Helpers::Location
+  include ::PryByebug::Helpers::Multiline
+end
+
+class PryByebug::BreakCommand
+end
+
+class PryByebug::ContinueCommand
+  include ::PryByebug::Helpers::Navigation
+  include ::PryByebug::Helpers::Breakpoints
+  include ::PryByebug::Helpers::Location
+end
+
+class PryByebug::ContinueCommand
+end
+
+class PryByebug::DownCommand
+  include ::PryByebug::Helpers::Navigation
+end
+
+class PryByebug::DownCommand
+end
+
+class PryByebug::ExitAllCommand
+end
+
+class PryByebug::ExitAllCommand
+end
+
+class PryByebug::FinishCommand
+  include ::PryByebug::Helpers::Navigation
+end
+
+class PryByebug::FinishCommand
+end
+
+class PryByebug::FrameCommand
+  include ::PryByebug::Helpers::Navigation
+end
+
+class PryByebug::FrameCommand
+end
+
+module PryByebug::Helpers
+end
+
+module PryByebug::Helpers::Breakpoints
+  def bold_puts(msg); end
+
+  def breakpoints(); end
+
+  def max_width(); end
+
+  def print_breakpoints_header(); end
+
+  def print_full_breakpoint(breakpoint); end
+
+  def print_short_breakpoint(breakpoint); end
+end
+
+module PryByebug::Helpers::Breakpoints
+end
+
+module PryByebug::Helpers::Location
+end
+
+module PryByebug::Helpers::Location
+  def self.current_file(source=T.unsafe(nil)); end
+end
+
+module PryByebug::Helpers::Multiline
+  def check_multiline_context(); end
+end
+
+module PryByebug::Helpers::Multiline
+end
+
+module PryByebug::Helpers::Navigation
+  def breakout_navigation(action, options=T.unsafe(nil)); end
+end
+
+module PryByebug::Helpers::Navigation
+end
+
+module PryByebug::Helpers
+end
+
+class PryByebug::NextCommand
+  include ::PryByebug::Helpers::Navigation
+  include ::PryByebug::Helpers::Multiline
+end
+
+class PryByebug::NextCommand
+end
+
+class PryByebug::StepCommand
+  include ::PryByebug::Helpers::Navigation
+end
+
+class PryByebug::StepCommand
+end
+
+class PryByebug::UpCommand
+  include ::PryByebug::Helpers::Navigation
+end
+
+class PryByebug::UpCommand
+end
+
+module PryByebug
+  def self.check_file_context(target, msg=T.unsafe(nil)); end
+
+  def self.file_context?(target); end
+end
+
+module Psych
+  LIBYAML_VERSION = ::T.let(nil, ::T.untyped)
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+class Psych::BadAlias
+end
+
+class Psych::BadAlias
+end
+
+class Psych::ClassLoader
+  def big_decimal(); end
+
+  def complex(); end
+
+  def date(); end
+
+  def date_time(); end
+
+  def exception(); end
+
+  def load(klassname); end
+
+  def object(); end
+
+  def psych_omap(); end
+
+  def psych_set(); end
+
+  def range(); end
+
+  def rational(); end
+
+  def regexp(); end
+
+  def struct(); end
+
+  def symbol(); end
+
+  def symbolize(sym); end
+  BIG_DECIMAL = ::T.let(nil, ::T.untyped)
+  CACHE = ::T.let(nil, ::T.untyped)
+  COMPLEX = ::T.let(nil, ::T.untyped)
+  DATE = ::T.let(nil, ::T.untyped)
+  DATE_TIME = ::T.let(nil, ::T.untyped)
+  EXCEPTION = ::T.let(nil, ::T.untyped)
+  OBJECT = ::T.let(nil, ::T.untyped)
+  PSYCH_OMAP = ::T.let(nil, ::T.untyped)
+  PSYCH_SET = ::T.let(nil, ::T.untyped)
+  RANGE = ::T.let(nil, ::T.untyped)
+  RATIONAL = ::T.let(nil, ::T.untyped)
+  REGEXP = ::T.let(nil, ::T.untyped)
+  STRUCT = ::T.let(nil, ::T.untyped)
+  SYMBOL = ::T.let(nil, ::T.untyped)
+end
+
+class Psych::ClassLoader::Restricted
+  def initialize(classes, symbols); end
+end
+
+class Psych::ClassLoader::Restricted
+end
+
+class Psych::ClassLoader
+end
+
+class Psych::Coder
+  def [](k); end
+
+  def []=(k, v); end
+
+  def add(k, v); end
+
+  def implicit(); end
+
+  def implicit=(implicit); end
+
+  def initialize(tag); end
+
+  def map(tag=T.unsafe(nil), style=T.unsafe(nil)); end
+
+  def map=(map); end
+
+  def object(); end
+
+  def object=(object); end
+
+  def represent_map(tag, map); end
+
+  def represent_object(tag, obj); end
+
+  def represent_scalar(tag, value); end
+
+  def represent_seq(tag, list); end
+
+  def scalar(*args); end
+
+  def scalar=(value); end
+
+  def seq(); end
+
+  def seq=(list); end
+
+  def style(); end
+
+  def style=(style); end
+
+  def tag(); end
+
+  def tag=(tag); end
+
+  def type(); end
+end
+
+class Psych::Coder
+end
+
+class Psych::DisallowedClass
+  def initialize(klass_name); end
+end
+
+class Psych::DisallowedClass
+end
+
+class Psych::Emitter
+  def alias(_); end
+
+  def canonical(); end
+
+  def canonical=(canonical); end
+
+  def end_document(_); end
+
+  def indentation(); end
+
+  def indentation=(indentation); end
+
+  def initialize(*_); end
+
+  def line_width(); end
+
+  def line_width=(line_width); end
+
+  def scalar(_, _1, _2, _3, _4, _5); end
+
+  def start_document(_, _1, _2); end
+
+  def start_mapping(_, _1, _2, _3); end
+
+  def start_sequence(_, _1, _2, _3); end
+
+  def start_stream(_); end
+end
+
+class Psych::Emitter
+end
+
+class Psych::Exception
+end
+
+class Psych::Exception
+end
+
+class Psych::Handler
+  def alias(anchor); end
+
+  def empty(); end
+
+  def end_document(implicit); end
+
+  def end_mapping(); end
+
+  def end_sequence(); end
+
+  def end_stream(); end
+
+  def event_location(start_line, start_column, end_line, end_column); end
+
+  def scalar(value, anchor, tag, plain, quoted, style); end
+
+  def start_document(version, tag_directives, implicit); end
+
+  def start_mapping(anchor, tag, implicit, style); end
+
+  def start_sequence(anchor, tag, implicit, style); end
+
+  def start_stream(encoding); end
+
+  def streaming?(); end
+  EVENTS = ::T.let(nil, ::T.untyped)
+  OPTIONS = ::T.let(nil, ::T.untyped)
+end
+
+class Psych::Handler::DumperOptions
+  def canonical(); end
+
+  def canonical=(canonical); end
+
+  def indentation(); end
+
+  def indentation=(indentation); end
+
+  def line_width(); end
+
+  def line_width=(line_width); end
+end
+
+class Psych::Handler::DumperOptions
+end
+
+class Psych::Handler
+end
+
+module Psych::Handlers
+end
+
+class Psych::Handlers::DocumentStream
+  def initialize(&block); end
+end
+
+class Psych::Handlers::DocumentStream
+end
+
+module Psych::Handlers
+end
+
+module Psych::JSON
+end
+
+module Psych::JSON::RubyEvents
+  def visit_DateTime(o); end
+
+  def visit_String(o); end
+
+  def visit_Symbol(o); end
+
+  def visit_Time(o); end
+end
+
+module Psych::JSON::RubyEvents
+end
+
+class Psych::JSON::Stream
+  include ::Psych::Streaming
+end
+
+class Psych::JSON::Stream::Emitter
+  include ::Psych::JSON::YAMLEvents
+end
+
+class Psych::JSON::Stream::Emitter
+end
+
+class Psych::JSON::Stream
+  extend ::Psych::Streaming::ClassMethods
+end
+
+class Psych::JSON::TreeBuilder
+  include ::Psych::JSON::YAMLEvents
+end
+
+class Psych::JSON::TreeBuilder
+end
+
+module Psych::JSON::YAMLEvents
+  def end_document(implicit_end=T.unsafe(nil)); end
+
+  def scalar(value, anchor, tag, plain, quoted, style); end
+
+  def start_document(version, tag_directives, implicit); end
+
+  def start_mapping(anchor, tag, implicit, style); end
+
+  def start_sequence(anchor, tag, implicit, style); end
+end
+
+module Psych::JSON::YAMLEvents
+end
+
+module Psych::JSON
+end
+
+module Psych::Nodes
+end
+
+class Psych::Nodes::Alias
+  def anchor(); end
+
+  def anchor=(anchor); end
+
+  def initialize(anchor); end
+end
+
+class Psych::Nodes::Alias
+end
+
+class Psych::Nodes::Document
+  def implicit(); end
+
+  def implicit=(implicit); end
+
+  def implicit_end(); end
+
+  def implicit_end=(implicit_end); end
+
+  def initialize(version=T.unsafe(nil), tag_directives=T.unsafe(nil), implicit=T.unsafe(nil)); end
+
+  def root(); end
+
+  def tag_directives(); end
+
+  def tag_directives=(tag_directives); end
+
+  def version(); end
+
+  def version=(version); end
+end
+
+class Psych::Nodes::Document
+end
+
+class Psych::Nodes::Mapping
+  def anchor(); end
+
+  def anchor=(anchor); end
+
+  def implicit(); end
+
+  def implicit=(implicit); end
+
+  def initialize(anchor=T.unsafe(nil), tag=T.unsafe(nil), implicit=T.unsafe(nil), style=T.unsafe(nil)); end
+
+  def style(); end
+
+  def style=(style); end
+
+  def tag=(tag); end
+  ANY = ::T.let(nil, ::T.untyped)
+  BLOCK = ::T.let(nil, ::T.untyped)
+  FLOW = ::T.let(nil, ::T.untyped)
+end
+
+class Psych::Nodes::Mapping
+end
+
+class Psych::Nodes::Node
+  include ::Enumerable
+  def alias?(); end
+
+  def children(); end
+
+  def document?(); end
+
+  def each(&block); end
+
+  def end_column(); end
+
+  def end_column=(end_column); end
+
+  def end_line(); end
+
+  def end_line=(end_line); end
+
+  def mapping?(); end
+
+  def scalar?(); end
+
+  def sequence?(); end
+
+  def start_column(); end
+
+  def start_column=(start_column); end
+
+  def start_line(); end
+
+  def start_line=(start_line); end
+
+  def stream?(); end
+
+  def tag(); end
+
+  def to_ruby(); end
+
+  def to_yaml(io=T.unsafe(nil), options=T.unsafe(nil)); end
+
+  def transform(); end
+
+  def yaml(io=T.unsafe(nil), options=T.unsafe(nil)); end
+end
+
+class Psych::Nodes::Node
+end
+
+class Psych::Nodes::Scalar
+  def anchor(); end
+
+  def anchor=(anchor); end
+
+  def initialize(value, anchor=T.unsafe(nil), tag=T.unsafe(nil), plain=T.unsafe(nil), quoted=T.unsafe(nil), style=T.unsafe(nil)); end
+
+  def plain(); end
+
+  def plain=(plain); end
+
+  def quoted(); end
+
+  def quoted=(quoted); end
+
+  def style(); end
+
+  def style=(style); end
+
+  def tag=(tag); end
+
+  def value(); end
+
+  def value=(value); end
+  ANY = ::T.let(nil, ::T.untyped)
+  DOUBLE_QUOTED = ::T.let(nil, ::T.untyped)
+  FOLDED = ::T.let(nil, ::T.untyped)
+  LITERAL = ::T.let(nil, ::T.untyped)
+  PLAIN = ::T.let(nil, ::T.untyped)
+  SINGLE_QUOTED = ::T.let(nil, ::T.untyped)
+end
+
+class Psych::Nodes::Scalar
+end
+
+class Psych::Nodes::Sequence
+  def anchor(); end
+
+  def anchor=(anchor); end
+
+  def implicit(); end
+
+  def implicit=(implicit); end
+
+  def initialize(anchor=T.unsafe(nil), tag=T.unsafe(nil), implicit=T.unsafe(nil), style=T.unsafe(nil)); end
+
+  def style(); end
+
+  def style=(style); end
+
+  def tag=(tag); end
+  ANY = ::T.let(nil, ::T.untyped)
+  BLOCK = ::T.let(nil, ::T.untyped)
+  FLOW = ::T.let(nil, ::T.untyped)
+end
+
+class Psych::Nodes::Sequence
+end
+
+class Psych::Nodes::Stream
+  def encoding(); end
+
+  def encoding=(encoding); end
+
+  def initialize(encoding=T.unsafe(nil)); end
+  ANY = ::T.let(nil, ::T.untyped)
+  UTF16BE = ::T.let(nil, ::T.untyped)
+  UTF16LE = ::T.let(nil, ::T.untyped)
+  UTF8 = ::T.let(nil, ::T.untyped)
+end
+
+class Psych::Nodes::Stream
+end
+
+module Psych::Nodes
+end
+
+class Psych::Omap
+end
+
+class Psych::Omap
+end
+
+class Psych::Parser
+  def external_encoding=(external_encoding); end
+
+  def handler(); end
+
+  def handler=(handler); end
+
+  def initialize(handler=T.unsafe(nil)); end
+
+  def mark(); end
+
+  def parse(*_); end
+  ANY = ::T.let(nil, ::T.untyped)
+  UTF16BE = ::T.let(nil, ::T.untyped)
+  UTF16LE = ::T.let(nil, ::T.untyped)
+  UTF8 = ::T.let(nil, ::T.untyped)
+end
+
+class Psych::Parser::Mark
+end
+
+class Psych::Parser::Mark
+end
+
+class Psych::Parser
+end
+
+class Psych::ScalarScanner
+  def class_loader(); end
+
+  def initialize(class_loader); end
+
+  def parse_int(string); end
+
+  def parse_time(string); end
+
+  def tokenize(string); end
+  FLOAT = ::T.let(nil, ::T.untyped)
+  INTEGER = ::T.let(nil, ::T.untyped)
+  TIME = ::T.let(nil, ::T.untyped)
+end
+
+class Psych::ScalarScanner
+end
+
+class Psych::Set
+end
+
+class Psych::Set
+end
+
+class Psych::Stream
+  include ::Psych::Streaming
+end
+
+class Psych::Stream::Emitter
+  def end_document(implicit_end=T.unsafe(nil)); end
+end
+
+class Psych::Stream::Emitter
+end
+
+class Psych::Stream
+  extend ::Psych::Streaming::ClassMethods
+end
+
+module Psych::Streaming
+  def start(encoding=T.unsafe(nil)); end
+end
+
+module Psych::Streaming::ClassMethods
+  def new(io); end
+end
+
+module Psych::Streaming::ClassMethods
+end
+
+module Psych::Streaming
+end
+
+class Psych::SyntaxError
+  def column(); end
+
+  def context(); end
+
+  def file(); end
+
+  def initialize(file, line, col, offset, problem, context); end
+
+  def line(); end
+
+  def offset(); end
+
+  def problem(); end
+end
+
+class Psych::SyntaxError
+end
+
+class Psych::TreeBuilder
+  def end_document(implicit_end=T.unsafe(nil)); end
+
+  def root(); end
+end
+
+class Psych::TreeBuilder
+end
+
+module Psych::Visitors
+end
+
+class Psych::Visitors::DepthFirst
+  def initialize(block); end
+end
+
+class Psych::Visitors::DepthFirst
+end
+
+class Psych::Visitors::Emitter
+  def initialize(io, options=T.unsafe(nil)); end
+
+  def visit_Psych_Nodes_Alias(o); end
+
+  def visit_Psych_Nodes_Document(o); end
+
+  def visit_Psych_Nodes_Mapping(o); end
+
+  def visit_Psych_Nodes_Scalar(o); end
+
+  def visit_Psych_Nodes_Sequence(o); end
+
+  def visit_Psych_Nodes_Stream(o); end
+end
+
+class Psych::Visitors::Emitter
+end
+
+class Psych::Visitors::JSONTree
+  include ::Psych::JSON::RubyEvents
+end
+
+class Psych::Visitors::JSONTree
+  def self.create(options=T.unsafe(nil)); end
+end
+
+class Psych::Visitors::NoAliasRuby
+end
+
+class Psych::Visitors::NoAliasRuby
+end
+
+class Psych::Visitors::ToRuby
+  def class_loader(); end
+
+  def initialize(ss, class_loader); end
+
+  def visit_Psych_Nodes_Alias(o); end
+
+  def visit_Psych_Nodes_Document(o); end
+
+  def visit_Psych_Nodes_Mapping(o); end
+
+  def visit_Psych_Nodes_Scalar(o); end
+
+  def visit_Psych_Nodes_Sequence(o); end
+
+  def visit_Psych_Nodes_Stream(o); end
+  SHOVEL = ::T.let(nil, ::T.untyped)
+end
+
+class Psych::Visitors::ToRuby
+  def self.create(); end
+end
+
+class Psych::Visitors::Visitor
+  def accept(target); end
+  DISPATCH = ::T.let(nil, ::T.untyped)
+end
+
+class Psych::Visitors::Visitor
+end
+
+class Psych::Visitors::YAMLTree
+  def <<(object); end
+
+  def finish(); end
+
+  def finished(); end
+
+  def finished?(); end
+
+  def initialize(emitter, ss, options); end
+
+  def push(object); end
+
+  def start(encoding=T.unsafe(nil)); end
+
+  def started(); end
+
+  def started?(); end
+
+  def tree(); end
+
+  def visit_Array(o); end
+
+  def visit_BasicObject(o); end
+
+  def visit_BigDecimal(o); end
+
+  def visit_Class(o); end
+
+  def visit_Complex(o); end
+
+  def visit_Date(o); end
+
+  def visit_DateTime(o); end
+
+  def visit_Delegator(o); end
+
+  def visit_Encoding(o); end
+
+  def visit_Enumerator(o); end
+
+  def visit_Exception(o); end
+
+  def visit_FalseClass(o); end
+
+  def visit_Float(o); end
+
+  def visit_Hash(o); end
+
+  def visit_Integer(o); end
+
+  def visit_Module(o); end
+
+  def visit_NameError(o); end
+
+  def visit_NilClass(o); end
+
+  def visit_Object(o); end
+
+  def visit_Psych_Omap(o); end
+
+  def visit_Psych_Set(o); end
+
+  def visit_Range(o); end
+
+  def visit_Rational(o); end
+
+  def visit_Regexp(o); end
+
+  def visit_String(o); end
+
+  def visit_Struct(o); end
+
+  def visit_Symbol(o); end
+
+  def visit_Time(o); end
+
+  def visit_TrueClass(o); end
+end
+
+class Psych::Visitors::YAMLTree
+  def self.create(options=T.unsafe(nil), emitter=T.unsafe(nil)); end
+end
+
+module Psych::Visitors
+end
+
+module Psych
+  def self.add_builtin_type(type_tag, &block); end
+
+  def self.add_domain_type(domain, type_tag, &block); end
+
+  def self.add_tag(tag, klass); end
+
+  def self.domain_types(); end
+
+  def self.domain_types=(domain_types); end
+
+  def self.dump(o, io=T.unsafe(nil), options=T.unsafe(nil)); end
+
+  def self.dump_stream(*objects); end
+
+  def self.dump_tags(); end
+
+  def self.dump_tags=(dump_tags); end
+
+  def self.libyaml_version(); end
+
+  def self.load(yaml, legacy_filename=T.unsafe(nil), filename: T.unsafe(nil), fallback: T.unsafe(nil), symbolize_names: T.unsafe(nil)); end
+
+  def self.load_file(filename, fallback: T.unsafe(nil)); end
+
+  def self.load_stream(yaml, legacy_filename=T.unsafe(nil), filename: T.unsafe(nil), fallback: T.unsafe(nil)); end
+
+  def self.load_tags(); end
+
+  def self.load_tags=(load_tags); end
+
+  def self.parse(yaml, legacy_filename=T.unsafe(nil), filename: T.unsafe(nil), fallback: T.unsafe(nil)); end
+
+  def self.parse_file(filename, fallback: T.unsafe(nil)); end
+
+  def self.parse_stream(yaml, legacy_filename=T.unsafe(nil), filename: T.unsafe(nil), &block); end
+
+  def self.parser(); end
+
+  def self.remove_type(type_tag); end
+
+  def self.safe_load(yaml, legacy_permitted_classes=T.unsafe(nil), legacy_permitted_symbols=T.unsafe(nil), legacy_aliases=T.unsafe(nil), legacy_filename=T.unsafe(nil), permitted_classes: T.unsafe(nil), permitted_symbols: T.unsafe(nil), aliases: T.unsafe(nil), filename: T.unsafe(nil), fallback: T.unsafe(nil), symbolize_names: T.unsafe(nil)); end
+
+  def self.to_json(object); end
 end
 
 module Racc
@@ -6203,8 +13730,1048 @@ module RbConfig
   def self.ruby(); end
 end
 
+module Readline
+  FILENAME_COMPLETION_PROC = ::T.let(nil, ::T.untyped)
+  HISTORY = ::T.let(nil, ::T.untyped)
+  USERNAME_COMPLETION_PROC = ::T.let(nil, ::T.untyped)
+  VERSION = ::T.let(nil, ::T.untyped)
+end
+
+module Readline
+  def self.basic_quote_characters(); end
+
+  def self.basic_quote_characters=(basic_quote_characters); end
+
+  def self.basic_word_break_characters(); end
+
+  def self.basic_word_break_characters=(basic_word_break_characters); end
+
+  def self.completer_quote_characters(); end
+
+  def self.completer_quote_characters=(completer_quote_characters); end
+
+  def self.completer_word_break_characters(); end
+
+  def self.completer_word_break_characters=(completer_word_break_characters); end
+
+  def self.completion_append_character(); end
+
+  def self.completion_append_character=(completion_append_character); end
+
+  def self.completion_case_fold(); end
+
+  def self.completion_case_fold=(completion_case_fold); end
+
+  def self.completion_proc(); end
+
+  def self.completion_proc=(completion_proc); end
+
+  def self.completion_quote_character(); end
+
+  def self.delete_text(*_); end
+
+  def self.emacs_editing_mode(); end
+
+  def self.emacs_editing_mode?(); end
+
+  def self.filename_quote_characters(); end
+
+  def self.filename_quote_characters=(filename_quote_characters); end
+
+  def self.get_screen_size(); end
+
+  def self.input=(input); end
+
+  def self.insert_text(_); end
+
+  def self.line_buffer(); end
+
+  def self.output=(output); end
+
+  def self.point(); end
+
+  def self.point=(point); end
+
+  def self.pre_input_hook(); end
+
+  def self.pre_input_hook=(pre_input_hook); end
+
+  def self.quoting_detection_proc(); end
+
+  def self.quoting_detection_proc=(quoting_detection_proc); end
+
+  def self.redisplay(); end
+
+  def self.refresh_line(); end
+
+  def self.set_screen_size(_, _1); end
+
+  def self.special_prefixes(); end
+
+  def self.special_prefixes=(special_prefixes); end
+
+  def self.vi_editing_mode(); end
+
+  def self.vi_editing_mode?(); end
+end
+
 class Regexp
   def match?(*_); end
+end
+
+class RubyLex
+  include ::RubyToken
+  def Fail(err=T.unsafe(nil), *rest); end
+
+  def Raise(err=T.unsafe(nil), *rest); end
+
+  def char_no(); end
+
+  def each_top_level_statement(); end
+
+  def eof?(); end
+
+  def exception_on_syntax_error(); end
+
+  def exception_on_syntax_error=(exception_on_syntax_error); end
+
+  def get_readed(); end
+
+  def getc(); end
+
+  def getc_of_rests(); end
+
+  def gets(); end
+
+  def identify_comment(); end
+
+  def identify_gvar(); end
+
+  def identify_here_document(); end
+
+  def identify_identifier(); end
+
+  def identify_number(); end
+
+  def identify_quotation(); end
+
+  def identify_string(ltype, quoted=T.unsafe(nil)); end
+
+  def identify_string_dvar(); end
+
+  def indent(); end
+
+  def initialize_input(); end
+
+  def lex(); end
+
+  def lex_init(); end
+
+  def lex_int2(); end
+
+  def line_no(); end
+
+  def peek(i=T.unsafe(nil)); end
+
+  def peek_equal?(str); end
+
+  def peek_match?(regexp); end
+
+  def prompt(); end
+
+  def read_escape(); end
+
+  def readed_auto_clean_up(); end
+
+  def readed_auto_clean_up=(readed_auto_clean_up); end
+
+  def seek(); end
+
+  def set_input(io, p=T.unsafe(nil), &block); end
+
+  def set_prompt(p=T.unsafe(nil), &block); end
+
+  def skip_space(); end
+
+  def skip_space=(skip_space); end
+
+  def token(); end
+
+  def ungetc(c=T.unsafe(nil)); end
+  DEINDENT_CLAUSE = ::T.let(nil, ::T.untyped)
+  DLtype2Token = ::T.let(nil, ::T.untyped)
+  ENINDENT_CLAUSE = ::T.let(nil, ::T.untyped)
+  Ltype2Token = ::T.let(nil, ::T.untyped)
+  PERCENT_LTYPE = ::T.let(nil, ::T.untyped)
+  PERCENT_PAREN = ::T.let(nil, ::T.untyped)
+end
+
+class RubyLex::AlreadyDefinedToken
+end
+
+class RubyLex::AlreadyDefinedToken
+end
+
+class RubyLex::SyntaxError
+end
+
+class RubyLex::SyntaxError
+end
+
+class RubyLex::TerminateLineInput
+end
+
+class RubyLex::TerminateLineInput
+end
+
+class RubyLex::TkReading2TokenDuplicateError
+end
+
+class RubyLex::TkReading2TokenDuplicateError
+end
+
+class RubyLex::TkReading2TokenNoKey
+end
+
+class RubyLex::TkReading2TokenNoKey
+end
+
+class RubyLex::TkSymbol2TokenNoKey
+end
+
+class RubyLex::TkSymbol2TokenNoKey
+end
+
+class RubyLex
+  extend ::Exception2MessageMapper
+  def self.debug?(); end
+
+  def self.debug_level(); end
+
+  def self.debug_level=(debug_level); end
+
+  def self.included(mod); end
+end
+
+module RubyToken
+  def Token(token, value=T.unsafe(nil)); end
+  EXPR_ARG = ::T.let(nil, ::T.untyped)
+  EXPR_BEG = ::T.let(nil, ::T.untyped)
+  EXPR_CLASS = ::T.let(nil, ::T.untyped)
+  EXPR_DOT = ::T.let(nil, ::T.untyped)
+  EXPR_END = ::T.let(nil, ::T.untyped)
+  EXPR_FNAME = ::T.let(nil, ::T.untyped)
+  EXPR_MID = ::T.let(nil, ::T.untyped)
+  TkReading2Token = ::T.let(nil, ::T.untyped)
+  TkSymbol2Token = ::T.let(nil, ::T.untyped)
+  TokenDefinitions = ::T.let(nil, ::T.untyped)
+end
+
+class RubyToken::TkALIAS
+end
+
+class RubyToken::TkALIAS
+end
+
+class RubyToken::TkAMPER
+end
+
+class RubyToken::TkAMPER
+end
+
+class RubyToken::TkAND
+end
+
+class RubyToken::TkAND
+end
+
+class RubyToken::TkANDOP
+end
+
+class RubyToken::TkANDOP
+end
+
+class RubyToken::TkAREF
+end
+
+class RubyToken::TkAREF
+end
+
+class RubyToken::TkASET
+end
+
+class RubyToken::TkASET
+end
+
+class RubyToken::TkASSIGN
+end
+
+class RubyToken::TkASSIGN
+end
+
+class RubyToken::TkASSOC
+end
+
+class RubyToken::TkASSOC
+end
+
+class RubyToken::TkAT
+end
+
+class RubyToken::TkAT
+end
+
+class RubyToken::TkBACKQUOTE
+end
+
+class RubyToken::TkBACKQUOTE
+end
+
+class RubyToken::TkBACKSLASH
+end
+
+class RubyToken::TkBACKSLASH
+end
+
+class RubyToken::TkBACK_REF
+end
+
+class RubyToken::TkBACK_REF
+end
+
+class RubyToken::TkBEGIN
+end
+
+class RubyToken::TkBEGIN
+end
+
+class RubyToken::TkBITAND
+end
+
+class RubyToken::TkBITAND
+end
+
+class RubyToken::TkBITNOT
+end
+
+class RubyToken::TkBITNOT
+end
+
+class RubyToken::TkBITOR
+end
+
+class RubyToken::TkBITOR
+end
+
+class RubyToken::TkBITXOR
+end
+
+class RubyToken::TkBITXOR
+end
+
+class RubyToken::TkBREAK
+end
+
+class RubyToken::TkBREAK
+end
+
+class RubyToken::TkCASE
+end
+
+class RubyToken::TkCASE
+end
+
+class RubyToken::TkCLASS
+end
+
+class RubyToken::TkCLASS
+end
+
+class RubyToken::TkCMP
+end
+
+class RubyToken::TkCMP
+end
+
+class RubyToken::TkCOLON
+end
+
+class RubyToken::TkCOLON
+end
+
+class RubyToken::TkCOLON2
+end
+
+class RubyToken::TkCOLON2
+end
+
+class RubyToken::TkCOLON3
+end
+
+class RubyToken::TkCOLON3
+end
+
+class RubyToken::TkCOMMA
+end
+
+class RubyToken::TkCOMMA
+end
+
+class RubyToken::TkCOMMENT
+end
+
+class RubyToken::TkCOMMENT
+end
+
+class RubyToken::TkCONSTANT
+end
+
+class RubyToken::TkCONSTANT
+end
+
+class RubyToken::TkCVAR
+end
+
+class RubyToken::TkCVAR
+end
+
+class RubyToken::TkDEF
+end
+
+class RubyToken::TkDEF
+end
+
+class RubyToken::TkDEFINED
+end
+
+class RubyToken::TkDEFINED
+end
+
+class RubyToken::TkDIV
+end
+
+class RubyToken::TkDIV
+end
+
+class RubyToken::TkDO
+end
+
+class RubyToken::TkDO
+end
+
+class RubyToken::TkDOLLAR
+end
+
+class RubyToken::TkDOLLAR
+end
+
+class RubyToken::TkDOT
+end
+
+class RubyToken::TkDOT
+end
+
+class RubyToken::TkDOT2
+end
+
+class RubyToken::TkDOT2
+end
+
+class RubyToken::TkDOT3
+end
+
+class RubyToken::TkDOT3
+end
+
+class RubyToken::TkDREGEXP
+end
+
+class RubyToken::TkDREGEXP
+end
+
+class RubyToken::TkDSTRING
+end
+
+class RubyToken::TkDSTRING
+end
+
+class RubyToken::TkDXSTRING
+end
+
+class RubyToken::TkDXSTRING
+end
+
+class RubyToken::TkELSE
+end
+
+class RubyToken::TkELSE
+end
+
+class RubyToken::TkELSIF
+end
+
+class RubyToken::TkELSIF
+end
+
+class RubyToken::TkEND
+end
+
+class RubyToken::TkEND
+end
+
+class RubyToken::TkEND_OF_SCRIPT
+end
+
+class RubyToken::TkEND_OF_SCRIPT
+end
+
+class RubyToken::TkENSURE
+end
+
+class RubyToken::TkENSURE
+end
+
+class RubyToken::TkEQ
+end
+
+class RubyToken::TkEQ
+end
+
+class RubyToken::TkEQQ
+end
+
+class RubyToken::TkEQQ
+end
+
+class RubyToken::TkError
+end
+
+class RubyToken::TkError
+end
+
+class RubyToken::TkFALSE
+end
+
+class RubyToken::TkFALSE
+end
+
+class RubyToken::TkFID
+end
+
+class RubyToken::TkFID
+end
+
+class RubyToken::TkFLOAT
+end
+
+class RubyToken::TkFLOAT
+end
+
+class RubyToken::TkFOR
+end
+
+class RubyToken::TkFOR
+end
+
+class RubyToken::TkGEQ
+end
+
+class RubyToken::TkGEQ
+end
+
+class RubyToken::TkGT
+end
+
+class RubyToken::TkGT
+end
+
+class RubyToken::TkGVAR
+end
+
+class RubyToken::TkGVAR
+end
+
+class RubyToken::TkIDENTIFIER
+end
+
+class RubyToken::TkIDENTIFIER
+end
+
+class RubyToken::TkIF
+end
+
+class RubyToken::TkIF
+end
+
+class RubyToken::TkIF_MOD
+end
+
+class RubyToken::TkIF_MOD
+end
+
+class RubyToken::TkIN
+end
+
+class RubyToken::TkIN
+end
+
+class RubyToken::TkINTEGER
+end
+
+class RubyToken::TkINTEGER
+end
+
+class RubyToken::TkIVAR
+end
+
+class RubyToken::TkIVAR
+end
+
+class RubyToken::TkId
+  def initialize(seek, line_no, char_no, name); end
+
+  def name(); end
+end
+
+class RubyToken::TkId
+end
+
+class RubyToken::TkLBRACE
+end
+
+class RubyToken::TkLBRACE
+end
+
+class RubyToken::TkLBRACK
+end
+
+class RubyToken::TkLBRACK
+end
+
+class RubyToken::TkLEQ
+end
+
+class RubyToken::TkLEQ
+end
+
+class RubyToken::TkLPAREN
+end
+
+class RubyToken::TkLPAREN
+end
+
+class RubyToken::TkLSHFT
+end
+
+class RubyToken::TkLSHFT
+end
+
+class RubyToken::TkLT
+end
+
+class RubyToken::TkLT
+end
+
+class RubyToken::TkMATCH
+end
+
+class RubyToken::TkMATCH
+end
+
+class RubyToken::TkMINUS
+end
+
+class RubyToken::TkMINUS
+end
+
+class RubyToken::TkMOD
+end
+
+class RubyToken::TkMOD
+end
+
+class RubyToken::TkMODULE
+end
+
+class RubyToken::TkMODULE
+end
+
+class RubyToken::TkMULT
+end
+
+class RubyToken::TkMULT
+end
+
+class RubyToken::TkNEQ
+end
+
+class RubyToken::TkNEQ
+end
+
+class RubyToken::TkNEXT
+end
+
+class RubyToken::TkNEXT
+end
+
+class RubyToken::TkNIL
+end
+
+class RubyToken::TkNIL
+end
+
+class RubyToken::TkNL
+end
+
+class RubyToken::TkNL
+end
+
+class RubyToken::TkNMATCH
+end
+
+class RubyToken::TkNMATCH
+end
+
+class RubyToken::TkNOT
+end
+
+class RubyToken::TkNOT
+end
+
+class RubyToken::TkNOTOP
+end
+
+class RubyToken::TkNOTOP
+end
+
+class RubyToken::TkNTH_REF
+end
+
+class RubyToken::TkNTH_REF
+end
+
+class RubyToken::TkNode
+  def node(); end
+end
+
+class RubyToken::TkNode
+end
+
+class RubyToken::TkOPASGN
+  def initialize(seek, line_no, char_no, op); end
+
+  def op(); end
+end
+
+class RubyToken::TkOPASGN
+end
+
+class RubyToken::TkOR
+end
+
+class RubyToken::TkOR
+end
+
+class RubyToken::TkOROP
+end
+
+class RubyToken::TkOROP
+end
+
+class RubyToken::TkOp
+  def name(); end
+
+  def name=(name); end
+end
+
+class RubyToken::TkOp
+end
+
+class RubyToken::TkPLUS
+end
+
+class RubyToken::TkPLUS
+end
+
+class RubyToken::TkPOW
+end
+
+class RubyToken::TkPOW
+end
+
+class RubyToken::TkQUESTION
+end
+
+class RubyToken::TkQUESTION
+end
+
+class RubyToken::TkRBRACE
+end
+
+class RubyToken::TkRBRACE
+end
+
+class RubyToken::TkRBRACK
+end
+
+class RubyToken::TkRBRACK
+end
+
+class RubyToken::TkRD_COMMENT
+end
+
+class RubyToken::TkRD_COMMENT
+end
+
+class RubyToken::TkREDO
+end
+
+class RubyToken::TkREDO
+end
+
+class RubyToken::TkREGEXP
+end
+
+class RubyToken::TkREGEXP
+end
+
+class RubyToken::TkRESCUE
+end
+
+class RubyToken::TkRESCUE
+end
+
+class RubyToken::TkRETRY
+end
+
+class RubyToken::TkRETRY
+end
+
+class RubyToken::TkRETURN
+end
+
+class RubyToken::TkRETURN
+end
+
+class RubyToken::TkRPAREN
+end
+
+class RubyToken::TkRPAREN
+end
+
+class RubyToken::TkRSHFT
+end
+
+class RubyToken::TkRSHFT
+end
+
+class RubyToken::TkSELF
+end
+
+class RubyToken::TkSELF
+end
+
+class RubyToken::TkSEMICOLON
+end
+
+class RubyToken::TkSEMICOLON
+end
+
+class RubyToken::TkSPACE
+end
+
+class RubyToken::TkSPACE
+end
+
+class RubyToken::TkSTAR
+end
+
+class RubyToken::TkSTAR
+end
+
+class RubyToken::TkSTRING
+end
+
+class RubyToken::TkSTRING
+end
+
+class RubyToken::TkSUPER
+end
+
+class RubyToken::TkSUPER
+end
+
+class RubyToken::TkSYMBEG
+end
+
+class RubyToken::TkSYMBEG
+end
+
+class RubyToken::TkSYMBOL
+end
+
+class RubyToken::TkSYMBOL
+end
+
+class RubyToken::TkTHEN
+end
+
+class RubyToken::TkTHEN
+end
+
+class RubyToken::TkTRUE
+end
+
+class RubyToken::TkTRUE
+end
+
+class RubyToken::TkUMINUS
+end
+
+class RubyToken::TkUMINUS
+end
+
+class RubyToken::TkUNDEF
+end
+
+class RubyToken::TkUNDEF
+end
+
+class RubyToken::TkUNLESS
+end
+
+class RubyToken::TkUNLESS
+end
+
+class RubyToken::TkUNLESS_MOD
+end
+
+class RubyToken::TkUNLESS_MOD
+end
+
+class RubyToken::TkUNTIL
+end
+
+class RubyToken::TkUNTIL
+end
+
+class RubyToken::TkUNTIL_MOD
+end
+
+class RubyToken::TkUNTIL_MOD
+end
+
+class RubyToken::TkUPLUS
+end
+
+class RubyToken::TkUPLUS
+end
+
+class RubyToken::TkUnknownChar
+  def initialize(seek, line_no, char_no, id); end
+
+  def name(); end
+end
+
+class RubyToken::TkUnknownChar
+end
+
+class RubyToken::TkVal
+  def initialize(seek, line_no, char_no, value=T.unsafe(nil)); end
+
+  def value(); end
+end
+
+class RubyToken::TkVal
+end
+
+class RubyToken::TkWHEN
+end
+
+class RubyToken::TkWHEN
+end
+
+class RubyToken::TkWHILE
+end
+
+class RubyToken::TkWHILE
+end
+
+class RubyToken::TkWHILE_MOD
+end
+
+class RubyToken::TkWHILE_MOD
+end
+
+class RubyToken::TkXSTRING
+end
+
+class RubyToken::TkXSTRING
+end
+
+class RubyToken::TkYIELD
+end
+
+class RubyToken::TkYIELD
+end
+
+class RubyToken::Tk__FILE__
+end
+
+class RubyToken::Tk__FILE__
+end
+
+class RubyToken::Tk__LINE__
+end
+
+class RubyToken::Tk__LINE__
+end
+
+class RubyToken::TkfLBRACE
+end
+
+class RubyToken::TkfLBRACE
+end
+
+class RubyToken::TkfLBRACK
+end
+
+class RubyToken::TkfLBRACK
+end
+
+class RubyToken::TkfLPAREN
+end
+
+class RubyToken::TkfLPAREN
+end
+
+class RubyToken::TklBEGIN
+end
+
+class RubyToken::TklBEGIN
+end
+
+class RubyToken::TklEND
+end
+
+class RubyToken::TklEND
+end
+
+class RubyToken::Token
+  def char_no(); end
+
+  def initialize(seek, line_no, char_no); end
+
+  def line_no(); end
+
+  def seek(); end
+end
+
+class RubyToken::Token
+end
+
+module RubyToken
+  def self.def_token(token_n, super_token=T.unsafe(nil), reading=T.unsafe(nil), *opts); end
 end
 
 module RubyVM::AbstractSyntaxTree
@@ -6220,6 +14787,8 @@ class RubyVM::AbstractSyntaxTree::Node
   def last_column(); end
 
   def last_lineno(); end
+
+  def pretty_print_children(q, names=T.unsafe(nil)); end
 
   def type(); end
 end
@@ -6298,6 +14867,8 @@ class RubyVM
   def self.stat(*_); end
 end
 
+ScanError = StringScanner::Error
+
 class Set
   def ==(other); end
 
@@ -6346,6 +14917,20 @@ class SignalException
   def signo(); end
 end
 
+module SingleForwardable
+  def def_delegator(accessor, method, ali=T.unsafe(nil)); end
+
+  def def_delegators(accessor, *methods); end
+
+  def def_single_delegator(accessor, method, ali=T.unsafe(nil)); end
+
+  def def_single_delegators(accessor, *methods); end
+
+  def delegate(hash); end
+
+  def single_delegate(hash); end
+end
+
 module Singleton
   def _dump(depth=T.unsafe(nil)); end
 
@@ -6362,6 +14947,188 @@ end
 
 module Singleton
   def self.__init__(klass); end
+end
+
+class Socket
+  AF_CCITT = ::T.let(nil, ::T.untyped)
+  AF_CHAOS = ::T.let(nil, ::T.untyped)
+  AF_CNT = ::T.let(nil, ::T.untyped)
+  AF_COIP = ::T.let(nil, ::T.untyped)
+  AF_DATAKIT = ::T.let(nil, ::T.untyped)
+  AF_DLI = ::T.let(nil, ::T.untyped)
+  AF_E164 = ::T.let(nil, ::T.untyped)
+  AF_ECMA = ::T.let(nil, ::T.untyped)
+  AF_HYLINK = ::T.let(nil, ::T.untyped)
+  AF_IMPLINK = ::T.let(nil, ::T.untyped)
+  AF_ISO = ::T.let(nil, ::T.untyped)
+  AF_LAT = ::T.let(nil, ::T.untyped)
+  AF_LINK = ::T.let(nil, ::T.untyped)
+  AF_NATM = ::T.let(nil, ::T.untyped)
+  AF_NDRV = ::T.let(nil, ::T.untyped)
+  AF_NETBIOS = ::T.let(nil, ::T.untyped)
+  AF_NS = ::T.let(nil, ::T.untyped)
+  AF_OSI = ::T.let(nil, ::T.untyped)
+  AF_PPP = ::T.let(nil, ::T.untyped)
+  AF_PUP = ::T.let(nil, ::T.untyped)
+  AF_SIP = ::T.let(nil, ::T.untyped)
+  AF_SYSTEM = ::T.let(nil, ::T.untyped)
+  AI_DEFAULT = ::T.let(nil, ::T.untyped)
+  AI_MASK = ::T.let(nil, ::T.untyped)
+  AI_V4MAPPED_CFG = ::T.let(nil, ::T.untyped)
+  EAI_BADHINTS = ::T.let(nil, ::T.untyped)
+  EAI_MAX = ::T.let(nil, ::T.untyped)
+  EAI_PROTOCOL = ::T.let(nil, ::T.untyped)
+  IFF_ALTPHYS = ::T.let(nil, ::T.untyped)
+  IFF_LINK0 = ::T.let(nil, ::T.untyped)
+  IFF_LINK1 = ::T.let(nil, ::T.untyped)
+  IFF_LINK2 = ::T.let(nil, ::T.untyped)
+  IFF_OACTIVE = ::T.let(nil, ::T.untyped)
+  IFF_SIMPLEX = ::T.let(nil, ::T.untyped)
+  IPPROTO_EON = ::T.let(nil, ::T.untyped)
+  IPPROTO_GGP = ::T.let(nil, ::T.untyped)
+  IPPROTO_HELLO = ::T.let(nil, ::T.untyped)
+  IPPROTO_MAX = ::T.let(nil, ::T.untyped)
+  IPPROTO_ND = ::T.let(nil, ::T.untyped)
+  IPPROTO_XTP = ::T.let(nil, ::T.untyped)
+  IPV6_DONTFRAG = ::T.let(nil, ::T.untyped)
+  IPV6_PATHMTU = ::T.let(nil, ::T.untyped)
+  IPV6_RECVPATHMTU = ::T.let(nil, ::T.untyped)
+  IPV6_USE_MIN_MTU = ::T.let(nil, ::T.untyped)
+  IP_PORTRANGE = ::T.let(nil, ::T.untyped)
+  IP_RECVDSTADDR = ::T.let(nil, ::T.untyped)
+  IP_RECVIF = ::T.let(nil, ::T.untyped)
+  LOCAL_PEERCRED = ::T.let(nil, ::T.untyped)
+  MSG_EOF = ::T.let(nil, ::T.untyped)
+  MSG_FLUSH = ::T.let(nil, ::T.untyped)
+  MSG_HAVEMORE = ::T.let(nil, ::T.untyped)
+  MSG_HOLD = ::T.let(nil, ::T.untyped)
+  MSG_RCVMORE = ::T.let(nil, ::T.untyped)
+  MSG_SEND = ::T.let(nil, ::T.untyped)
+  PF_CCITT = ::T.let(nil, ::T.untyped)
+  PF_CHAOS = ::T.let(nil, ::T.untyped)
+  PF_CNT = ::T.let(nil, ::T.untyped)
+  PF_COIP = ::T.let(nil, ::T.untyped)
+  PF_DATAKIT = ::T.let(nil, ::T.untyped)
+  PF_DLI = ::T.let(nil, ::T.untyped)
+  PF_ECMA = ::T.let(nil, ::T.untyped)
+  PF_HYLINK = ::T.let(nil, ::T.untyped)
+  PF_IMPLINK = ::T.let(nil, ::T.untyped)
+  PF_ISO = ::T.let(nil, ::T.untyped)
+  PF_LAT = ::T.let(nil, ::T.untyped)
+  PF_LINK = ::T.let(nil, ::T.untyped)
+  PF_NATM = ::T.let(nil, ::T.untyped)
+  PF_NDRV = ::T.let(nil, ::T.untyped)
+  PF_NETBIOS = ::T.let(nil, ::T.untyped)
+  PF_NS = ::T.let(nil, ::T.untyped)
+  PF_OSI = ::T.let(nil, ::T.untyped)
+  PF_PIP = ::T.let(nil, ::T.untyped)
+  PF_PPP = ::T.let(nil, ::T.untyped)
+  PF_PUP = ::T.let(nil, ::T.untyped)
+  PF_RTIP = ::T.let(nil, ::T.untyped)
+  PF_SIP = ::T.let(nil, ::T.untyped)
+  PF_SYSTEM = ::T.let(nil, ::T.untyped)
+  PF_XTP = ::T.let(nil, ::T.untyped)
+  SCM_CREDS = ::T.let(nil, ::T.untyped)
+  SO_DONTTRUNC = ::T.let(nil, ::T.untyped)
+  SO_NKE = ::T.let(nil, ::T.untyped)
+  SO_NOSIGPIPE = ::T.let(nil, ::T.untyped)
+  SO_NREAD = ::T.let(nil, ::T.untyped)
+  SO_USELOOPBACK = ::T.let(nil, ::T.untyped)
+  SO_WANTMORE = ::T.let(nil, ::T.untyped)
+  SO_WANTOOBFLAG = ::T.let(nil, ::T.untyped)
+  TCP_NOOPT = ::T.let(nil, ::T.untyped)
+  TCP_NOPUSH = ::T.let(nil, ::T.untyped)
+end
+
+module Socket::Constants
+  AF_CCITT = ::T.let(nil, ::T.untyped)
+  AF_CHAOS = ::T.let(nil, ::T.untyped)
+  AF_CNT = ::T.let(nil, ::T.untyped)
+  AF_COIP = ::T.let(nil, ::T.untyped)
+  AF_DATAKIT = ::T.let(nil, ::T.untyped)
+  AF_DLI = ::T.let(nil, ::T.untyped)
+  AF_E164 = ::T.let(nil, ::T.untyped)
+  AF_ECMA = ::T.let(nil, ::T.untyped)
+  AF_HYLINK = ::T.let(nil, ::T.untyped)
+  AF_IMPLINK = ::T.let(nil, ::T.untyped)
+  AF_ISO = ::T.let(nil, ::T.untyped)
+  AF_LAT = ::T.let(nil, ::T.untyped)
+  AF_LINK = ::T.let(nil, ::T.untyped)
+  AF_NATM = ::T.let(nil, ::T.untyped)
+  AF_NDRV = ::T.let(nil, ::T.untyped)
+  AF_NETBIOS = ::T.let(nil, ::T.untyped)
+  AF_NS = ::T.let(nil, ::T.untyped)
+  AF_OSI = ::T.let(nil, ::T.untyped)
+  AF_PPP = ::T.let(nil, ::T.untyped)
+  AF_PUP = ::T.let(nil, ::T.untyped)
+  AF_SIP = ::T.let(nil, ::T.untyped)
+  AF_SYSTEM = ::T.let(nil, ::T.untyped)
+  AI_DEFAULT = ::T.let(nil, ::T.untyped)
+  AI_MASK = ::T.let(nil, ::T.untyped)
+  AI_V4MAPPED_CFG = ::T.let(nil, ::T.untyped)
+  EAI_BADHINTS = ::T.let(nil, ::T.untyped)
+  EAI_MAX = ::T.let(nil, ::T.untyped)
+  EAI_PROTOCOL = ::T.let(nil, ::T.untyped)
+  IFF_ALTPHYS = ::T.let(nil, ::T.untyped)
+  IFF_LINK0 = ::T.let(nil, ::T.untyped)
+  IFF_LINK1 = ::T.let(nil, ::T.untyped)
+  IFF_LINK2 = ::T.let(nil, ::T.untyped)
+  IFF_OACTIVE = ::T.let(nil, ::T.untyped)
+  IFF_SIMPLEX = ::T.let(nil, ::T.untyped)
+  IPPROTO_EON = ::T.let(nil, ::T.untyped)
+  IPPROTO_GGP = ::T.let(nil, ::T.untyped)
+  IPPROTO_HELLO = ::T.let(nil, ::T.untyped)
+  IPPROTO_MAX = ::T.let(nil, ::T.untyped)
+  IPPROTO_ND = ::T.let(nil, ::T.untyped)
+  IPPROTO_XTP = ::T.let(nil, ::T.untyped)
+  IPV6_DONTFRAG = ::T.let(nil, ::T.untyped)
+  IPV6_PATHMTU = ::T.let(nil, ::T.untyped)
+  IPV6_RECVPATHMTU = ::T.let(nil, ::T.untyped)
+  IPV6_USE_MIN_MTU = ::T.let(nil, ::T.untyped)
+  IP_PORTRANGE = ::T.let(nil, ::T.untyped)
+  IP_RECVDSTADDR = ::T.let(nil, ::T.untyped)
+  IP_RECVIF = ::T.let(nil, ::T.untyped)
+  LOCAL_PEERCRED = ::T.let(nil, ::T.untyped)
+  MSG_EOF = ::T.let(nil, ::T.untyped)
+  MSG_FLUSH = ::T.let(nil, ::T.untyped)
+  MSG_HAVEMORE = ::T.let(nil, ::T.untyped)
+  MSG_HOLD = ::T.let(nil, ::T.untyped)
+  MSG_RCVMORE = ::T.let(nil, ::T.untyped)
+  MSG_SEND = ::T.let(nil, ::T.untyped)
+  PF_CCITT = ::T.let(nil, ::T.untyped)
+  PF_CHAOS = ::T.let(nil, ::T.untyped)
+  PF_CNT = ::T.let(nil, ::T.untyped)
+  PF_COIP = ::T.let(nil, ::T.untyped)
+  PF_DATAKIT = ::T.let(nil, ::T.untyped)
+  PF_DLI = ::T.let(nil, ::T.untyped)
+  PF_ECMA = ::T.let(nil, ::T.untyped)
+  PF_HYLINK = ::T.let(nil, ::T.untyped)
+  PF_IMPLINK = ::T.let(nil, ::T.untyped)
+  PF_ISO = ::T.let(nil, ::T.untyped)
+  PF_LAT = ::T.let(nil, ::T.untyped)
+  PF_LINK = ::T.let(nil, ::T.untyped)
+  PF_NATM = ::T.let(nil, ::T.untyped)
+  PF_NDRV = ::T.let(nil, ::T.untyped)
+  PF_NETBIOS = ::T.let(nil, ::T.untyped)
+  PF_NS = ::T.let(nil, ::T.untyped)
+  PF_OSI = ::T.let(nil, ::T.untyped)
+  PF_PIP = ::T.let(nil, ::T.untyped)
+  PF_PPP = ::T.let(nil, ::T.untyped)
+  PF_PUP = ::T.let(nil, ::T.untyped)
+  PF_RTIP = ::T.let(nil, ::T.untyped)
+  PF_SIP = ::T.let(nil, ::T.untyped)
+  PF_SYSTEM = ::T.let(nil, ::T.untyped)
+  PF_XTP = ::T.let(nil, ::T.untyped)
+  SCM_CREDS = ::T.let(nil, ::T.untyped)
+  SO_DONTTRUNC = ::T.let(nil, ::T.untyped)
+  SO_NKE = ::T.let(nil, ::T.untyped)
+  SO_NOSIGPIPE = ::T.let(nil, ::T.untyped)
+  SO_NREAD = ::T.let(nil, ::T.untyped)
+  SO_USELOOPBACK = ::T.let(nil, ::T.untyped)
+  SO_WANTMORE = ::T.let(nil, ::T.untyped)
+  SO_WANTOOBFLAG = ::T.let(nil, ::T.untyped)
+  TCP_NOOPT = ::T.let(nil, ::T.untyped)
+  TCP_NOPUSH = ::T.let(nil, ::T.untyped)
 end
 
 class Sorbet::Private::ConstantLookupCache
@@ -6780,8 +15547,33 @@ class SorbetAutoTyper::Configuration
   def self.inherited(s); end
 end
 
-class SorbetAutoTyper::Param
+class SorbetAutoTyper::Error
+end
+
+class SorbetAutoTyper::Error
+end
+
+class SorbetAutoTyper::InvalidConfigurationError
+end
+
+class SorbetAutoTyper::InvalidConfigurationError
+end
+
+class SorbetAutoTyper::MethodTrace::Param
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
+end
+
+class SorbetAutoTyper::MethodTrace
+  extend ::T::Private::Methods::MethodHooks
+  extend ::T::Private::Methods::SingletonMethodHooks
   def self.inherited(s); end
+end
+
+class SorbetAutoTyper::MissingConfigurationError
+end
+
+class SorbetAutoTyper::MissingConfigurationError
 end
 
 class SorbetAutoTyper::SourceRewriter
@@ -6790,18 +15582,21 @@ class SorbetAutoTyper::SourceRewriter
   extend ::T::Private::Methods::SingletonMethodHooks
 end
 
-class SorbetAutoTyper::Trace
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
+class SorbetAutoTyper::TracerAlreadyRunning
 end
 
-class SorbetAutoTyper::Tracer
-  extend ::T::Private::Methods::MethodHooks
-  extend ::T::Private::Methods::SingletonMethodHooks
+class SorbetAutoTyper::TracerAlreadyRunning
 end
 
 module SorbetAutoTyper
   extend ::T::Private::Methods::SingletonMethodHooks
+  def self.configure(*args, &blk); end
+
+  def self.reset!(*args, &blk); end
+
+  def self.start!(*args, &blk); end
+
+  def self.stop!(*args, &blk); end
 end
 
 class SortedSet
@@ -6865,6 +15660,100 @@ class StringIO
   def length(); end
 
   def truncate(_); end
+end
+
+class StringScanner
+  def <<(_); end
+
+  def [](_); end
+
+  def beginning_of_line?(); end
+
+  def bol?(); end
+
+  def captures(); end
+
+  def charpos(); end
+
+  def check(_); end
+
+  def check_until(_); end
+
+  def clear(); end
+
+  def concat(_); end
+
+  def empty?(); end
+
+  def exist?(_); end
+
+  def get_byte(); end
+
+  def getbyte(); end
+
+  def initialize(*_); end
+
+  def match?(_); end
+
+  def matched(); end
+
+  def matched?(); end
+
+  def matched_size(); end
+
+  def peek(_); end
+
+  def peep(_); end
+
+  def pointer(); end
+
+  def pointer=(pointer); end
+
+  def pos(); end
+
+  def pos=(pos); end
+
+  def post_match(); end
+
+  def pre_match(); end
+
+  def reset(); end
+
+  def rest(); end
+
+  def rest?(); end
+
+  def rest_size(); end
+
+  def restsize(); end
+
+  def scan_full(_, _1, _2); end
+
+  def scan_until(_); end
+
+  def search_full(_, _1, _2); end
+
+  def size(); end
+
+  def skip(_); end
+
+  def skip_until(_); end
+
+  def string(); end
+
+  def string=(string); end
+
+  def terminate(); end
+
+  def unscan(); end
+
+  def values_at(*_); end
+  Id = ::T.let(nil, ::T.untyped)
+  Version = ::T.let(nil, ::T.untyped)
+end
+
+class StringScanner
+  def self.must_C_version(); end
 end
 
 class Struct
@@ -7090,6 +15979,8 @@ module URI
 end
 
 class UnboundMethod
+  include ::MethodSource::SourceLocation::UnboundMethodExtensions
+  include ::MethodSource::MethodExtensions
   def clone(); end
 
   def original_name(); end
@@ -7113,4 +16004,326 @@ end
 
 module Warning
   extend ::Warning
+end
+
+YAML = Psych
+
+module Zlib
+  ASCII = ::T.let(nil, ::T.untyped)
+  BEST_COMPRESSION = ::T.let(nil, ::T.untyped)
+  BEST_SPEED = ::T.let(nil, ::T.untyped)
+  BINARY = ::T.let(nil, ::T.untyped)
+  DEFAULT_COMPRESSION = ::T.let(nil, ::T.untyped)
+  DEFAULT_STRATEGY = ::T.let(nil, ::T.untyped)
+  DEF_MEM_LEVEL = ::T.let(nil, ::T.untyped)
+  FILTERED = ::T.let(nil, ::T.untyped)
+  FINISH = ::T.let(nil, ::T.untyped)
+  FIXED = ::T.let(nil, ::T.untyped)
+  FULL_FLUSH = ::T.let(nil, ::T.untyped)
+  HUFFMAN_ONLY = ::T.let(nil, ::T.untyped)
+  MAX_MEM_LEVEL = ::T.let(nil, ::T.untyped)
+  MAX_WBITS = ::T.let(nil, ::T.untyped)
+  NO_COMPRESSION = ::T.let(nil, ::T.untyped)
+  NO_FLUSH = ::T.let(nil, ::T.untyped)
+  OS_AMIGA = ::T.let(nil, ::T.untyped)
+  OS_ATARI = ::T.let(nil, ::T.untyped)
+  OS_CODE = ::T.let(nil, ::T.untyped)
+  OS_CPM = ::T.let(nil, ::T.untyped)
+  OS_MACOS = ::T.let(nil, ::T.untyped)
+  OS_MSDOS = ::T.let(nil, ::T.untyped)
+  OS_OS2 = ::T.let(nil, ::T.untyped)
+  OS_QDOS = ::T.let(nil, ::T.untyped)
+  OS_RISCOS = ::T.let(nil, ::T.untyped)
+  OS_TOPS20 = ::T.let(nil, ::T.untyped)
+  OS_UNIX = ::T.let(nil, ::T.untyped)
+  OS_UNKNOWN = ::T.let(nil, ::T.untyped)
+  OS_VMCMS = ::T.let(nil, ::T.untyped)
+  OS_VMS = ::T.let(nil, ::T.untyped)
+  OS_WIN32 = ::T.let(nil, ::T.untyped)
+  OS_ZSYSTEM = ::T.let(nil, ::T.untyped)
+  RLE = ::T.let(nil, ::T.untyped)
+  SYNC_FLUSH = ::T.let(nil, ::T.untyped)
+  TEXT = ::T.let(nil, ::T.untyped)
+  UNKNOWN = ::T.let(nil, ::T.untyped)
+  VERSION = ::T.let(nil, ::T.untyped)
+  ZLIB_VERSION = ::T.let(nil, ::T.untyped)
+end
+
+class Zlib::BufError
+end
+
+class Zlib::BufError
+end
+
+class Zlib::DataError
+end
+
+class Zlib::DataError
+end
+
+class Zlib::Deflate
+  def <<(_); end
+
+  def deflate(*_); end
+
+  def flush(*_); end
+
+  def initialize(*_); end
+
+  def params(_, _1); end
+
+  def set_dictionary(_); end
+end
+
+class Zlib::Deflate
+  def self.deflate(*_); end
+end
+
+class Zlib::Error
+end
+
+class Zlib::Error
+end
+
+class Zlib::GzipFile
+  def close(); end
+
+  def closed?(); end
+
+  def comment(); end
+
+  def crc(); end
+
+  def finish(); end
+
+  def level(); end
+
+  def mtime(); end
+
+  def orig_name(); end
+
+  def os_code(); end
+
+  def sync(); end
+
+  def sync=(sync); end
+
+  def to_io(); end
+end
+
+class Zlib::GzipFile::CRCError
+end
+
+class Zlib::GzipFile::CRCError
+end
+
+class Zlib::GzipFile::Error
+  def input(); end
+end
+
+class Zlib::GzipFile::Error
+end
+
+class Zlib::GzipFile::LengthError
+end
+
+class Zlib::GzipFile::LengthError
+end
+
+class Zlib::GzipFile::NoFooter
+end
+
+class Zlib::GzipFile::NoFooter
+end
+
+class Zlib::GzipFile
+  def self.wrap(*_); end
+end
+
+class Zlib::GzipReader
+  include ::Enumerable
+  def bytes(); end
+
+  def each(*_, &blk); end
+
+  def each_byte(); end
+
+  def each_char(); end
+
+  def each_line(*_); end
+
+  def eof(); end
+
+  def eof?(); end
+
+  def external_encoding(); end
+
+  def getbyte(); end
+
+  def getc(); end
+
+  def initialize(*_); end
+
+  def lineno(); end
+
+  def lineno=(lineno); end
+
+  def lines(*_); end
+
+  def pos(); end
+
+  def read(*_); end
+
+  def readbyte(); end
+
+  def readchar(); end
+
+  def readpartial(*_); end
+
+  def rewind(); end
+
+  def tell(); end
+
+  def ungetbyte(_); end
+
+  def ungetc(_); end
+
+  def unused(); end
+end
+
+class Zlib::GzipReader
+end
+
+class Zlib::GzipWriter
+  def <<(_); end
+
+  def comment=(comment); end
+
+  def flush(*_); end
+
+  def initialize(*_); end
+
+  def mtime=(mtime); end
+
+  def orig_name=(orig_name); end
+
+  def pos(); end
+
+  def tell(); end
+
+  def write(*_); end
+end
+
+class Zlib::GzipWriter
+end
+
+class Zlib::Inflate
+  def <<(_); end
+
+  def add_dictionary(_); end
+
+  def inflate(_); end
+
+  def initialize(*_); end
+
+  def set_dictionary(_); end
+
+  def sync(_); end
+
+  def sync_point?(); end
+end
+
+class Zlib::Inflate
+  def self.inflate(_); end
+end
+
+class Zlib::MemError
+end
+
+class Zlib::MemError
+end
+
+class Zlib::NeedDict
+end
+
+class Zlib::NeedDict
+end
+
+class Zlib::StreamEnd
+end
+
+class Zlib::StreamEnd
+end
+
+class Zlib::StreamError
+end
+
+class Zlib::StreamError
+end
+
+class Zlib::VersionError
+end
+
+class Zlib::VersionError
+end
+
+class Zlib::ZStream
+  def adler(); end
+
+  def avail_in(); end
+
+  def avail_out(); end
+
+  def avail_out=(avail_out); end
+
+  def close(); end
+
+  def closed?(); end
+
+  def data_type(); end
+
+  def end(); end
+
+  def ended?(); end
+
+  def finish(); end
+
+  def finished?(); end
+
+  def flush_next_in(); end
+
+  def flush_next_out(); end
+
+  def reset(); end
+
+  def stream_end?(); end
+
+  def total_in(); end
+
+  def total_out(); end
+end
+
+class Zlib::ZStream
+end
+
+module Zlib
+  def self.adler32(*_); end
+
+  def self.adler32_combine(_, _1, _2); end
+
+  def self.crc32(*_); end
+
+  def self.crc32_combine(_, _1, _2); end
+
+  def self.crc_table(); end
+
+  def self.deflate(*_); end
+
+  def self.gunzip(_); end
+
+  def self.gzip(*_); end
+
+  def self.inflate(_); end
+
+  def self.zlib_version(); end
 end
